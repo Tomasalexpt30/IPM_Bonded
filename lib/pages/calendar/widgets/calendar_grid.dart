@@ -19,9 +19,9 @@ class CalendarGrid extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
         boxShadow: [
           BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.35),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.blueGrey.withOpacity(0.25),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -31,14 +31,20 @@ class CalendarGrid extends StatelessWidget {
         children: [
           const _DaysRow(),
           const SizedBox(height: 10),
-          _ScrollableHours(controller: controller),
+
+          SizedBox(
+            height: 360,
+            child: _ScrollableHours(controller: controller),
+          ),
         ],
       ),
     );
   }
 }
 
-// ---------------------- Days Row ---------------------------
+// -------------------------------------------------------------------------
+// HEADER DOS DIAS
+// -------------------------------------------------------------------------
 class _DaysRow extends StatelessWidget {
   const _DaysRow();
 
@@ -47,27 +53,27 @@ class _DaysRow extends StatelessWidget {
     final days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
     return Padding(
-      padding: const EdgeInsets.only(left: 52),
+      padding: const EdgeInsets.only(left: 48),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(days.length, (i) {
-          final isWeekend = i >= 5;
-
-          return Text(
-            days[i],
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
-          );
-        }),
+        children: days
+            .map((d) => Text(
+          d,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ))
+            .toList(),
       ),
     );
   }
 }
 
-// ---------------------- Hours Scroll ---------------------------
+// -------------------------------------------------------------------------
+// SCROLLABLE HOURS + LINHA VERMELHA
+// -------------------------------------------------------------------------
 class _ScrollableHours extends StatelessWidget {
   final CalendarGridController controller;
 
@@ -80,82 +86,123 @@ class _ScrollableHours extends StatelessWidget {
       return (label, List.filled(7, ""));
     });
 
-    return SizedBox(
-      height: 360,
-      child: SingleChildScrollView(
-        controller: controller.scrollController,
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: entries.map((e) {
-            return _HourRow(
-              hourLabel: e.$1,
-              events: e.$2,
-            );
-          }).toList(),
-        ),
+    return SingleChildScrollView(
+      controller: controller.scrollController,
+      physics: const BouncingScrollPhysics(),
+      child: Stack(
+        children: [
+          Column(
+            children: List.generate(entries.length, (i) {
+              final e = entries[i];
+              return _HourRow(
+                hourLabel: e.$1,
+                events: e.$2,
+                isLastRow: i == entries.length - 1, // 🔥 ÚLTIMA LINHA
+              );
+            }),
+          ),
+
+          // 🔥 Linha da hora atual — SEMPRE no topo
+          AnimatedBuilder(
+            animation: controller,
+            builder: (context, _) {
+              final offset = controller.getCurrentHourOffset();
+              return Positioned(
+                top: offset,
+                left: 0,
+                right: 0,
+                child: const _CurrentTimeIndicator(),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
 }
 
-// ---------------------- Hour Row ---------------------------
+// -------------------------------------------------------------------------
+// UMA LINHA DO CALENDÁRIO (HOUR + GRID EM 7 COLUNAS)
+// -------------------------------------------------------------------------
 class _HourRow extends StatelessWidget {
   final String hourLabel;
   final List<String?> events;
+  final bool isLastRow;
 
   const _HourRow({
     super.key,
     required this.hourLabel,
     required this.events,
+    required this.isLastRow,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SizedBox(
+      height: CalendarGridController.rowHeight,
+      child: Stack(
         children: [
-          // Hour label
-          SizedBox(
-            width: 48,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                hourLabel,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+          // ---------- GRELHA ----------
+          Row(
+            children: [
+              const SizedBox(width: 48), // espaço da hora
+
+              Expanded(
+                child: Row(
+                  children: List.generate(7, (index) {
+                    final activity = events[index];
+
+                    return Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.zero,
+
+                          // 🔥 APENAS LINHAS INTERNAS
+                          border: Border(
+                            right: index < 6
+                                ? BorderSide(
+                              color: Colors.white.withOpacity(0.55),
+                              width: 1.2,
+                            )
+                                : BorderSide.none,
+
+                            // 🔥 Remover a ÚLTIMA linha horizontal
+                            bottom: !isLastRow
+                                ? BorderSide(
+                              color: Colors.white.withOpacity(0.55),
+                              width: 1.2,
+                            )
+                                : BorderSide.none,
+                          ),
+
+                          color: Colors.transparent,
+                        ),
+
+                        child: activity == null || activity.isEmpty
+                            ? null
+                            : _ActivityBlock(title: activity),
+                      ),
+                    );
+                  }),
                 ),
               ),
-            ),
+            ],
           ),
 
-          Expanded(
-            child: Row(
-              children: List.generate(7, (index) {
-                final activity = events[index];
-                return Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    height: 52,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.25),
-                        width: 1,
-                      ),
-                      color: activity == null || activity.isEmpty
-                          ? Colors.white.withOpacity(0.10)
-                          : null,
-                    ),
-                    child: activity == null || activity.isEmpty
-                        ? null
-                        : _ActivityBlock(title: activity),
-                  ),
-                );
-              }),
+          // ---------- TEXTO DA HORA ----------
+          Positioned(
+            left: 0,
+            top: 0,
+            child: SizedBox(
+              width: 48,
+              child: Text(
+                hourLabel,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black.withOpacity(0.75),
+                ),
+              ),
             ),
           ),
         ],
@@ -164,7 +211,9 @@ class _HourRow extends StatelessWidget {
   }
 }
 
-// ---------------------- Activity Block ---------------------------
+// -------------------------------------------------------------------------
+// ACTIVIDADE (MANTÉM DESIGN ORIGINAL)
+// -------------------------------------------------------------------------
 class _ActivityBlock extends StatelessWidget {
   final String title;
 
@@ -201,6 +250,42 @@ class _ActivityBlock extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
+      ),
+    );
+  }
+}
+
+// -------------------------------------------------------------------------
+// LINHA VERMELHA DA HORA ATUAL (ALINHADA COM A GRELHA)
+// -------------------------------------------------------------------------
+class _CurrentTimeIndicator extends StatelessWidget {
+  const _CurrentTimeIndicator();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 40), // começa após o texto da hora
+      child: Row(
+        children: [
+          // BOLA
+          Container(
+            width: 10,
+            height: 10,
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 6),
+
+          // LINHA
+          Expanded(
+            child: Container(
+              height: 2,
+              color: Colors.red.withOpacity(0.8),
+            ),
+          ),
+        ],
       ),
     );
   }
