@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/home/home_page.dart';
+import 'pages/calendar/calendar_page.dart';   // 👈 ADICIONADO
 import 'bondie/widget/animated_bondie_widget.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class BondedApp extends StatelessWidget {
 }
 
 // =====================================
-// MAIN SCREEN
+// MAIN SCREEN (BOTTOM NAVIGATION)
 // =====================================
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -43,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
 
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
-    const Center(child: Text('📅 Calendar Page')),
+    const CalendarPage(),                 // 👈 CALENDAR PAGE REAL
     const Center(child: Text('💬 Messages')),
     const Center(child: Text('👤 Profile')),
   ];
@@ -60,6 +61,8 @@ class _MainScreenState extends State<MainScreen> {
       body: Stack(
         children: [
           _pages[_selectedIndex],
+
+          // Bondie flutuante 🎉
           const Positioned(
             right: 12,
             top: 60,
@@ -67,6 +70,10 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
+
+      // ============================
+      //  🔻 Bottom Navigation Bar
+      // ============================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
