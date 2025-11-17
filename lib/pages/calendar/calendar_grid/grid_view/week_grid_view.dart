@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
-import '../controller/calendar_grid_controller.dart';
+import '../calendar_grid_controller.dart';
+import 'package:intl/intl.dart';
 
-class CalendarGrid extends StatelessWidget {
+class WeekGridView extends StatelessWidget {
   final CalendarGridController controller;
+  final DateTime date;
 
-  const CalendarGrid({super.key, required this.controller});
+  const WeekGridView({
+    super.key,
+    required this.controller,
+    required this.date,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // 🔹 Encontrar a segunda-feira da semana onde está a "date"
+    final int weekday = date.weekday; // Monday=1 ... Sunday=7
+    final DateTime monday = date.subtract(Duration(days: weekday - 1));
+
+    // 🔹 Lista de 7 dias reais
+    final List<DateTime> weekDays = List.generate(
+      7,
+          (i) => monday.add(Duration(days: i)),
+    );
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -29,9 +45,8 @@ class CalendarGrid extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _DaysRow(),
+          _DaysRow(weekDays: weekDays),
           const SizedBox(height: 10),
-
           SizedBox(
             height: 360,
             child: _ScrollableHours(controller: controller),
@@ -43,29 +58,49 @@ class CalendarGrid extends StatelessWidget {
 }
 
 // -------------------------------------------------------------------------
-// HEADER DOS DIAS
+// HEADER DINÂMICO DOS DIAS DA SEMANA
 // -------------------------------------------------------------------------
 class _DaysRow extends StatelessWidget {
-  const _DaysRow();
+  final List<DateTime> weekDays;
+  const _DaysRow({required this.weekDays});
 
   @override
   Widget build(BuildContext context) {
-    final days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
     return Padding(
       padding: const EdgeInsets.only(left: 48),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: days
-            .map((d) => Text(
-          d,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
-        ))
-            .toList(),
+        children: weekDays.map((day) {
+          final bool isToday = DateUtils.isSameDay(day, DateTime.now());
+
+          return Column(
+            children: [
+              Text(
+                DateFormat("E").format(day), // Mon, Tue, Wed...
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 3),
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: isToday ? Colors.blueAccent : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  "${day.day}",
+                  style: TextStyle(
+                    color: isToday ? Colors.white : Colors.black87,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              )
+            ],
+          );
+        }).toList(),
       ),
     );
   }
@@ -97,12 +132,11 @@ class _ScrollableHours extends StatelessWidget {
               return _HourRow(
                 hourLabel: e.$1,
                 events: e.$2,
-                isLastRow: i == entries.length - 1, // 🔥 ÚLTIMA LINHA
+                isLastRow: i == entries.length - 1,
               );
             }),
           ),
 
-          // 🔥 Linha da hora atual — SEMPRE no topo
           AnimatedBuilder(
             animation: controller,
             builder: (context, _) {
@@ -122,7 +156,7 @@ class _ScrollableHours extends StatelessWidget {
 }
 
 // -------------------------------------------------------------------------
-// UMA LINHA DO CALENDÁRIO (HOUR + GRID EM 7 COLUNAS)
+// UMA LINHA DE HORA
 // -------------------------------------------------------------------------
 class _HourRow extends StatelessWidget {
   final String hourLabel;
@@ -142,10 +176,9 @@ class _HourRow extends StatelessWidget {
       height: CalendarGridController.rowHeight,
       child: Stack(
         children: [
-          // ---------- GRELHA ----------
           Row(
             children: [
-              const SizedBox(width: 48), // espaço da hora
+              const SizedBox(width: 48),
 
               Expanded(
                 child: Row(
@@ -155,9 +188,6 @@ class _HourRow extends StatelessWidget {
                     return Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.zero,
-
-                          // 🔥 APENAS LINHAS INTERNAS
                           border: Border(
                             right: index < 6
                                 ? BorderSide(
@@ -165,8 +195,6 @@ class _HourRow extends StatelessWidget {
                               width: 1.2,
                             )
                                 : BorderSide.none,
-
-                            // 🔥 Remover a ÚLTIMA linha horizontal
                             bottom: !isLastRow
                                 ? BorderSide(
                               color: Colors.white.withOpacity(0.55),
@@ -174,10 +202,7 @@ class _HourRow extends StatelessWidget {
                             )
                                 : BorderSide.none,
                           ),
-
-                          color: Colors.transparent,
                         ),
-
                         child: activity == null || activity.isEmpty
                             ? null
                             : _ActivityBlock(title: activity),
@@ -189,7 +214,6 @@ class _HourRow extends StatelessWidget {
             ],
           ),
 
-          // ---------- TEXTO DA HORA ----------
           Positioned(
             left: 0,
             top: 0,
@@ -212,7 +236,7 @@ class _HourRow extends StatelessWidget {
 }
 
 // -------------------------------------------------------------------------
-// ACTIVIDADE (MANTÉM DESIGN ORIGINAL)
+// ACTIVITY BLOCK
 // -------------------------------------------------------------------------
 class _ActivityBlock extends StatelessWidget {
   final String title;
@@ -256,7 +280,7 @@ class _ActivityBlock extends StatelessWidget {
 }
 
 // -------------------------------------------------------------------------
-// LINHA VERMELHA DA HORA ATUAL (ALINHADA COM A GRELHA)
+// LINHA VERMELHA
 // -------------------------------------------------------------------------
 class _CurrentTimeIndicator extends StatelessWidget {
   const _CurrentTimeIndicator();
@@ -264,10 +288,9 @@ class _CurrentTimeIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 40), // começa após o texto da hora
+      padding: const EdgeInsets.only(left: 40),
       child: Row(
         children: [
-          // BOLA
           Container(
             width: 10,
             height: 10,
@@ -277,8 +300,6 @@ class _CurrentTimeIndicator extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 6),
-
-          // LINHA
           Expanded(
             child: Container(
               height: 2,

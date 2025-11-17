@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../controller/calendar_header_controller.dart';
+import 'calendar_header_controller.dart';
 
 class CalendarHeader extends StatelessWidget {
   final CalendarHeaderController controller;

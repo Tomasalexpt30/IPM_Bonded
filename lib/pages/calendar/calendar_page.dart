@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'widgets/calendar_header.dart';
-import 'widgets/calendar_grid.dart';
-import 'widgets/calendar_footer.dart';
-import 'controller/calendar_header_controller.dart';
-import 'controller/calendar_grid_controller.dart';
+
+import 'calendar_header/calendar_header.dart';
+import 'calendar_header/calendar_header_controller.dart';
+
+import 'calendar_grid/calendar_grid.dart';
+import 'calendar_grid/calendar_grid_controller.dart';
+
+import 'calendar_footer/calendar_footer.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -20,11 +23,9 @@ class _CalendarPageState extends State<CalendarPage> {
   void initState() {
     super.initState();
 
-    // Criar controllers apenas UMA vez
     headerController = CalendarHeaderController();
     gridController = CalendarGridController();
 
-    // Fazer scroll automático para a hora atual
     WidgetsBinding.instance.addPostFrameCallback((_) {
       gridController.scrollToCurrentHour();
     });
@@ -49,7 +50,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 🔹 Title
+                    // TITLE
                     const Padding(
                       padding: EdgeInsets.only(bottom: 30),
                       child: Text(
@@ -62,15 +63,19 @@ class _CalendarPageState extends State<CalendarPage> {
                       ),
                     ),
 
-                    // 🔹 HEADER (Sort + Week)
+                    // HEADER CONTROLS
                     CalendarHeader(controller: headerController),
                     const SizedBox(height: 22),
 
-                    // 🔹 GRID (Hours + Days)
-                    CalendarGrid(controller: gridController),
+                    // GRID VIEW (DAY/WEEK/MONTH/YEAR)
+                    CalendarGrid(
+                      controller: gridController,
+                      headerController: headerController,
+                    ),
+
                     const SizedBox(height: 22),
 
-                    // 🔹 FOOTER (Filters + Add Activity)
+                    // FOOTER
                     const CalendarFooter(),
                   ],
                 ),
@@ -83,7 +88,7 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   // ============================================================
-  // BACKGROUND — igual à Home
+  // BACKGROUND DECORATION
   // ============================================================
   Widget _buildBackground() {
     return Stack(
@@ -131,7 +136,7 @@ class _CalendarPageState extends State<CalendarPage> {
 }
 
 // ============================================================
-// Heart painter (igual ao da Home)
+// Heart painter
 // ============================================================
 class _HeartPainterCalendar extends CustomPainter {
   final Color color;
