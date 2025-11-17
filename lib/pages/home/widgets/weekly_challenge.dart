@@ -9,10 +9,7 @@ class WeeklyChallengeCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [
-            Color(0xFFE9EBFD),
-            Color(0xFFB9A7FB),
-          ],
+          colors: [Color(0xFFDBEAFE), Color(0xFF96D5FD)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
