@@ -93,7 +93,7 @@ class CalendarHeader extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 14.5,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF2595DA),
+                              color: Color(0xFF4E8EF6),
                             ),
                           ),
                         ],

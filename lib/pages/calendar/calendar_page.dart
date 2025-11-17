@@ -63,19 +63,18 @@ class _CalendarPageState extends State<CalendarPage> {
                       ),
                     ),
 
-                    // HEADER CONTROLS
+                    // HEADER (Day / Week / Month / Year)
                     CalendarHeader(controller: headerController),
                     const SizedBox(height: 22),
 
-                    // GRID VIEW (DAY/WEEK/MONTH/YEAR)
+                    // GRID VIEW
                     CalendarGrid(
                       controller: gridController,
                       headerController: headerController,
                     ),
-
                     const SizedBox(height: 22),
 
-                    // FOOTER
+                    // FOOTER — APENAS "Add Activity"
                     const CalendarFooter(),
                   ],
                 ),
