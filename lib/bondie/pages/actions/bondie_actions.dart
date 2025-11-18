@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import '../recommendations/recommendations_page.dart';
+import '../stats/bondie_stats_controller.dart';
 
 class BondieActions extends StatelessWidget {
-  const BondieActions({super.key});
+  final BondieStatsController controller;
+
+  const BondieActions({
+    super.key,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -10,16 +17,28 @@ class BondieActions extends StatelessWidget {
         _actionCard(
           title: "Recommendations",
           icon: Icons.lightbulb_outline_rounded,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => RecommendationsPage(controller: controller),
+              ),
+            );
+          },
         ),
         const SizedBox(height: 18),
+
         _actionCard(
           title: "Insights",
           icon: Icons.insights_rounded,
+          onTap: () {},
         ),
         const SizedBox(height: 18),
+
         _actionCard(
           title: "Bondie Shop",
           icon: Icons.storefront_rounded,
+          onTap: () {},
         ),
       ],
     );
@@ -28,9 +47,10 @@ class BondieActions extends StatelessWidget {
   Widget _actionCard({
     required String title,
     required IconData icon,
+    required VoidCallback onTap,
   }) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
         width: double.infinity,

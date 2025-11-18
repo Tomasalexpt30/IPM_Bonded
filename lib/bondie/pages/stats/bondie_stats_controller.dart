@@ -6,9 +6,9 @@ class BondieStatsController {
   double affection;
 
   BondieStatsController({
-    this.bond = 0.8,
-    this.energy = 0.8,
-    this.affection = 0.8,
+    this.bond = 0.1,
+    this.energy = 0.1,
+    this.affection = 0.1,
   });
 
   // Atualiza valores futuramente (Firebase, lógica do app, etc)
