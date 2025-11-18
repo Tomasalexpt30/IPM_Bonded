@@ -100,55 +100,10 @@ class ChallengesPage extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // BONDIE HEADER
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 38),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.12),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          AnimatedBondieWidget(controller: controller),
-                          const SizedBox(width: 14),
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Bondie’s Weekly Tasks",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  "Fun and meaningful challenges designed to strengthen your relationship weekly.",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                    height: 1.35,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // ================================
+                    // CHALLENGE CARDS (Bondie removido)
+                    // ================================
 
-                    const SizedBox(height: 27),
-
-                    // CHALLENGE CARDS
                     _buildCard(
                       icon: Icons.restaurant_menu_rounded,
                       title: "Cook Together",
@@ -274,19 +229,23 @@ class ChallengesPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    )),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(description,
-                    style: const TextStyle(
-                      fontSize: 13.5,
-                      color: Colors.black54,
-                      height: 1.3,
-                    )),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 13.5,
+                    color: Colors.black54,
+                    height: 1.3,
+                  ),
+                ),
               ],
             ),
           ),

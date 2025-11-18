@@ -1,7 +1,15 @@
+import 'package:bondedapp/bondie/pages/recommendations/real_world_dates/options/lisbon_christmas_lights_page.dart';
+import 'package:bondedapp/bondie/pages/recommendations/real_world_dates/options/omakase_wa_page.dart';
+import 'package:bondedapp/bondie/pages/recommendations/real_world_dates/options/tile_museum_page.dart';
 import 'package:flutter/material.dart';
 import '../../../widget/animated_bondie_widget.dart';
 import '../../stats/bondie_stats_controller.dart';
 import '../../../../main.dart';
+
+// KEEPING YOUR ORIGINAL IMPORTS (even if unused)
+import 'options/zero_latency_page.dart';
+import 'options/escape_room_page.dart';
+import 'options/gulbenkian_page.dart';
 
 class RealWorldDatesPage extends StatelessWidget {
   final BondieStatsController controller;
@@ -14,7 +22,7 @@ class RealWorldDatesPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF8F9FD),
 
       // ===========================================================
-      // BOTTOM NAVIGATION BAR — igual ao Recommendations
+      // BOTTOM NAVIGATION BAR
       // ===========================================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -52,22 +60,10 @@ class RealWorldDatesPage extends StatelessWidget {
             );
           },
           items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month_rounded),
-              label: "Calendar",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline_rounded),
-              label: "Messages",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              label: "Profile",
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded), label: "Calendar"),
+            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline_rounded), label: "Messages"),
+            BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "Profile"),
           ],
         ),
       ),
@@ -89,7 +85,7 @@ class RealWorldDatesPage extends StatelessWidget {
                     const SizedBox(height: 6),
 
                     // ===========================================================
-                    // HEADER — alinhado com Recommendations
+                    // HEADER
                     // ===========================================================
                     SizedBox(
                       height: 40,
@@ -112,7 +108,7 @@ class RealWorldDatesPage extends StatelessWidget {
                           ),
 
                           const Text(
-                            "Real-World Dates",
+                            "Real-World Date Ideas",
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
@@ -126,114 +122,102 @@ class RealWorldDatesPage extends StatelessWidget {
                     const SizedBox(height: 20),
 
                     // ===========================================================
-                    // BONDIE HEADER — igual estrutura
+                    // DATE LIST (ENGLISH)
                     // ===========================================================
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 18,
-                        vertical: 38,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.12),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          AnimatedBondieWidget(controller: controller),
-                          const SizedBox(width: 14),
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Plan Something Special",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  "Bondie selected real-life activities to make your moments together unforgettable.",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                    height: 1.35,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
 
-                    const SizedBox(height: 27),
-
-                    // ===========================================================
-                    // LISTA DE IDEIAS — espaçamentos iguais aos do Recommendations
-                    // ===========================================================
                     _buildDateCard(
-                      icon: Icons.local_cafe_rounded,
-                      title: "Coffee Date",
-                      description: "Enjoy each other’s company with warm drinks and slow conversation.",
+                      icon: Icons.videogame_asset_rounded,
+                      title: "Zero Latency",
+                      description: "A fully immersive and cooperative VR adventure.",
                       color: const Color(0xFF7AB6F6),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ZeroLatencyPage(controller: controller),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
 
                     _buildDateCard(
                       icon: Icons.park_rounded,
-                      title: "Picnic in the Park",
-                      description: "Snacks, fresh air and your favourite person — simple and perfect.",
-                      color: const Color(0xFFA17BF6),
-                    ),
-                    const SizedBox(height: 20),
-
-                    _buildDateCard(
-                      icon: Icons.wb_sunny_rounded,
-                      title: "Sunset Walk",
-                      description: "Walk hand-in-hand while watching the colors fade into the night.",
+                      title: "Gulbenkian Garden",
+                      description: "A peaceful, romantic stroll through a beautiful Lisbon garden.",
                       color: const Color(0xFFF6A56D),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => GulbenkianGardenPage(controller: controller)
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
 
                     _buildDateCard(
-                      icon: Icons.movie_rounded,
-                      title: "Movie Night Out",
-                      description: "Choose a film you both enjoy and share the big-screen experience.",
-                      color: const Color(0xFFF69AB4),
+                      icon: Icons.lock_outline_rounded,
+                      title: "Escape Room",
+                      description: "Solve clues together and escape before time runs out.",
+                      color: const Color(0xFFA17BF6),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => EscapeRoomPage(controller: controller)
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 20),
+
+                    _buildDateCard(
+                      icon: Icons.museum_rounded,
+                      title: "Tile Museum",
+                      description: "Explore the history and beauty of Portuguese tile art.",
+                      color: const Color(0xFF8EC6FF),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => TileMuseumPage(controller: controller)
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
 
                     _buildDateCard(
                       icon: Icons.restaurant_rounded,
-                      title: "Dinner Date",
-                      description: "Try a new restaurant or surprise your partner with their favorite place.",
+                      title: "Omakase WA",
+                      description: "An intimate Japanese tasting experience with elegant dishes.",
                       color: const Color(0xFF5EC8A7),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => OmakaseWaPage(controller: controller)
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
 
                     _buildDateCard(
-                      icon: Icons.menu_book_rounded,
-                      title: "Bookstore Date",
-                      description: "Pick a book for each other and explore cozy shelves together.",
-                      color: const Color(0xFF8EC6FF),
-                    ),
-                    const SizedBox(height: 20),
-
-                    _buildDateCard(
-                      icon: Icons.sports_esports_rounded,
-                      title: "Playful Activity",
-                      description: "Bowling, mini-golf, arcade games — anything that brings laughter.",
-                      color: const Color(0xFFC58AF9),
+                      icon: Icons.church_rounded,
+                      title: "Lisbon Christmas Lights",
+                      description: "Walk through the magical holiday lights and Christmas markets.",
+                      color: const Color(0xFFF69AB4),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => LisbonChristmasLightsPage(controller: controller)
+                          ),
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 40),
@@ -248,7 +232,7 @@ class RealWorldDatesPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // BACKGROUND — igual ao Recommendations
+  // BACKGROUND
   // ===========================================================
   Widget _buildBackground() {
     return Stack(
@@ -284,71 +268,75 @@ class RealWorldDatesPage extends StatelessWidget {
   );
 
   // ===========================================================
-  // DATE CARD — mesma estrutura dos category cards
+  // DATE CARD
   // ===========================================================
   Widget _buildDateCard({
     required IconData icon,
     required String title,
     required String description,
     required Color color,
+    required VoidCallback onTap,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.10),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            height: 55,
-            width: 55,
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(16),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(22),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.blueGrey.withOpacity(0.10),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
             ),
-            child: Icon(icon, size: 28, color: color),
-          ),
-          const SizedBox(width: 18),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontSize: 13.5,
-                    color: Colors.black54,
-                    height: 1.3,
-                  ),
-                ),
-              ],
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: 55,
+              width: 55,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(icon, size: 28, color: color),
             ),
-          ),
-        ],
+            const SizedBox(width: 18),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 13.5,
+                      color: Colors.black54,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 // ===========================================================
-// HEART PAINTER — igual
+// HEART PAINTER
 // ===========================================================
 class _HeartPainter extends CustomPainter {
   final Color color;
@@ -373,5 +361,5 @@ class _HeartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(_) => false;
 }

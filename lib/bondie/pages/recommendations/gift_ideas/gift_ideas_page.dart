@@ -14,7 +14,7 @@ class GiftIdeasPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF8F9FD),
 
       // ===========================================================
-      // BOTTOM NAV BAR — igual a todas as páginas
+      // BOTTOM NAV BAR
       // ===========================================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -90,10 +90,15 @@ class GiftIdeasPage extends StatelessWidget {
                               onTap: () => Navigator.pop(context),
                               child: const Padding(
                                 padding: EdgeInsets.only(left: 4),
-                                child: Icon(Icons.arrow_back_rounded, size: 26, color: Colors.black87),
+                                child: Icon(
+                                  Icons.arrow_back_rounded,
+                                  size: 26,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           ),
+
                           const Text(
                             "Gift Ideas",
                             style: TextStyle(
@@ -109,58 +114,9 @@ class GiftIdeasPage extends StatelessWidget {
                     const SizedBox(height: 20),
 
                     // ===========================================================
-                    // BONDIE HEADER
+                    // GIFT CARDS (Bondie header removido)
                     // ===========================================================
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 38),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.12),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          AnimatedBondieWidget(controller: controller),
-                          const SizedBox(width: 14),
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Thoughtful Surprises",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  "Bondie gathered small but meaningful gift ideas to brighten your partner’s day.",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                    height: 1.35,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
 
-                    const SizedBox(height: 27),
-
-                    // ===========================================================
-                    // GIFT CARDS
-                    // ===========================================================
                     _buildCard(
                       icon: Icons.photo_album_rounded,
                       title: "Memory Photo Book",
@@ -220,7 +176,7 @@ class GiftIdeasPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // BACKGROUND — igual a todas as páginas
+  // BACKGROUND
   // ===========================================================
   Widget _buildBackground() {
     return Stack(
@@ -253,7 +209,7 @@ class GiftIdeasPage extends StatelessWidget {
       CustomPaint(size: Size(size, size), painter: _HeartPainter(color));
 
   // ===========================================================
-  // GIFT CARD TEMPLATE — igual às outras páginas
+  // CARD TEMPLATE
   // ===========================================================
   Widget _buildCard({
     required IconData icon,
@@ -313,7 +269,7 @@ class GiftIdeasPage extends StatelessWidget {
 }
 
 // ===========================================================
-// HEART PAINTER — igual às outras páginas
+// HEART PAINTER
 // ===========================================================
 class _HeartPainter extends CustomPainter {
   final Color color;

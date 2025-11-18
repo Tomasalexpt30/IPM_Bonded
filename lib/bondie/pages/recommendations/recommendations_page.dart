@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../main.dart';
 import '../stats/bondie_stats_controller.dart';
-import '../../widget/animated_bondie_widget.dart';
 
 // IMPORTA AS NOVAS PÁGINAS
 import 'real_world_dates/real_world_dates_page.dart';
@@ -134,7 +133,7 @@ class RecommendationsPage extends StatelessWidget {
                     const SizedBox(height: 20),
 
                     // ===========================================================
-                    // BONDIE HEADER
+                    // BONDIE HEADER (AGORA COM IMAGEM FIXA)
                     // ===========================================================
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -154,7 +153,10 @@ class RecommendationsPage extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          AnimatedBondieWidget(controller: controller),
+                          Image.asset(
+                            "assets/images/bondie_icons/bondie_talking.png",
+                            height: 100,
+                          ),
                           const SizedBox(width: 14),
                           const Expanded(
                             child: Column(
@@ -184,10 +186,10 @@ class RecommendationsPage extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 27),
+                    const SizedBox(height: 22),
 
                     // ===========================================================
-                    // CATEGORY CARDS — COM TODAS AS CONEXÕES
+                    // CATEGORY CARDS
                     // ===========================================================
 
                     // REAL WORLD DATES

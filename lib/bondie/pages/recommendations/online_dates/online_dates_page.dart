@@ -100,55 +100,10 @@ class OnlineDatesPage extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // BONDIE HEADER
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 38),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.12),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          AnimatedBondieWidget(controller: controller),
-                          const SizedBox(width: 14),
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Virtual Quality Time",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  "Bondie picked cozy online date ideas to keep your connection strong even from afar.",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                    height: 1.35,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // =======================================
+                    // CARDS (Bondie header removido)
+                    // =======================================
 
-                    const SizedBox(height: 27),
-
-                    // CARDS
                     _buildCard(
                       icon: Icons.movie_filter_rounded,
                       title: "Virtual Movie Night",
@@ -186,6 +141,15 @@ class OnlineDatesPage extends StatelessWidget {
                       title: "Virtual Museum Tour",
                       description: "Explore art and culture together from anywhere.",
                       color: const Color(0xFF64D4A7),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    _buildCard(
+                      icon: Icons.music_note_rounded,
+                      title: "Shared Playlist Night",
+                      description: "Create a playlist together and enjoy music while chatting.",
+                      color: const Color(0xFF7EC8E3),
                     ),
 
                     const SizedBox(height: 40),
@@ -266,19 +230,23 @@ class OnlineDatesPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    )),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(description,
-                    style: const TextStyle(
-                      fontSize: 13.5,
-                      color: Colors.black54,
-                      height: 1.3,
-                    )),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 13.5,
+                    color: Colors.black54,
+                    height: 1.3,
+                  ),
+                ),
               ],
             ),
           ),
