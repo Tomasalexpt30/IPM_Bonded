@@ -52,7 +52,7 @@ class CoupleSection extends StatelessWidget {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.bolt, color: Color(0xFF2595DA), size: 22),
+                  Icon(Icons.favorite_rounded, color: Color(0xFF2595DA), size: 22),
                   SizedBox(width: 6),
                   Text(
                     "Bond Level: 82%",

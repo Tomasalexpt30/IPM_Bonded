@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import '../pages/stats/bondie_stats_controller.dart';
 
 class AnimatedBondieWidget extends StatefulWidget {
-  const AnimatedBondieWidget({super.key});
+  final BondieStatsController controller;
+
+  const AnimatedBondieWidget({
+    super.key,
+    required this.controller,
+  });
 
   @override
   State<AnimatedBondieWidget> createState() => _AnimatedBondieWidgetState();
@@ -9,12 +15,14 @@ class AnimatedBondieWidget extends StatefulWidget {
 
 class _AnimatedBondieWidgetState extends State<AnimatedBondieWidget>
     with SingleTickerProviderStateMixin {
+
   late AnimationController _controller;
   late Animation<double> _floatAnimation;
 
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -42,7 +50,7 @@ class _AnimatedBondieWidgetState extends State<AnimatedBondieWidget>
         );
       },
       child: Image.asset(
-        'assets/images/bondie_logo.png',
+        widget.controller.bondieImage,     // ← usa agora o controller externo
         width: 85,
         height: 85,
         fit: BoxFit.contain,

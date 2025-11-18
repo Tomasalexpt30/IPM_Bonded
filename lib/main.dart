@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'pages/home/home_page.dart';
-import 'pages/calendar/calendar_page.dart';   // 👈 ADICIONADO
+import 'pages/calendar/calendar_page.dart';
 import 'bondie/widget/animated_bondie_widget.dart';
+import 'bondie/pages/bondie_page.dart';
+import 'bondie/pages/stats/bondie_stats_controller.dart';
 
 void main() {
   runApp(const BondedApp());
@@ -33,21 +35,33 @@ class BondedApp extends StatelessWidget {
 // MAIN SCREEN (BOTTOM NAVIGATION)
 // =====================================
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final int initialIndex;
+  const MainScreen({super.key, this.initialIndex = 0});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
-  static final List<Widget> _pages = <Widget>[
-    const HomePage(),
-    const CalendarPage(),                 // 👈 CALENDAR PAGE REAL
-    const Center(child: Text('💬 Messages')),
-    const Center(child: Text('👤 Profile')),
-  ];
+  // 🩵 Controller PARTILHADO — usa os defaults definidos no BondieStatsController
+  final BondieStatsController bondieStats = BondieStatsController();
+
+  late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+
+    _pages = [
+      HomePage(bondieStats: bondieStats),
+      const CalendarPage(),
+      const Center(child: Text("💬 Messages")),
+      const Center(child: Text("👤 Profile")),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -62,18 +76,34 @@ class _MainScreenState extends State<MainScreen> {
         children: [
           _pages[_selectedIndex],
 
-          // Bondie flutuante 🎉
-          const Positioned(
+          // ===============================================
+          // Bondie Flutuante (usa o mesmo controller global)
+          // ===============================================
+          Positioned(
             right: 12,
             top: 60,
-            child: AnimatedBondieWidget(),
+            child: GestureDetector(
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        BondiePage(statsController: bondieStats),
+                  ),
+                );
+
+                // Atualiza quando volta (caso as stats mudem)
+                setState(() {});
+              },
+              child: AnimatedBondieWidget(controller: bondieStats),
+            ),
           ),
         ],
       ),
 
-      // ============================
-      //  🔻 Bottom Navigation Bar
-      // ============================
+      // ===============================================
+      // Bottom Navigation Bar
+      // ===============================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
@@ -123,5 +153,18 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
     );
+  }
+}
+
+// =====================================
+// Helper — abrir MainScreen com índice
+// =====================================
+class MainScreenWithIndex extends StatelessWidget {
+  final int index;
+  const MainScreenWithIndex({super.key, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return MainScreen(initialIndex: index);
   }
 }

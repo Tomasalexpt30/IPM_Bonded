@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import '../../../bondie/pages/stats/bondie_stats_controller.dart';
+
 import 'widgets/couple_section.dart';
 import 'widgets/daily_activity.dart';
 import 'widgets/time_capsule.dart';
 import 'widgets/weekly_challenge.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final BondieStatsController bondieStats;
+
+  const HomePage({
+    super.key,
+    required this.bondieStats,
+  });
 
   @override
   Widget build(BuildContext context) {
