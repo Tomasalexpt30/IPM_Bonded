@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../main.dart';
 import 'bondie_shop_header.dart';
 import 'bondie_shop_grid.dart';
 import 'bondie_shop_sheets.dart';
@@ -112,6 +113,10 @@ class _BondieShopPageState extends State<BondieShopPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
+
+      // ⭐ ADICIONADO AQUI — Bottom Navigation Bar igual à da BondiePage
+      bottomNavigationBar: _buildBottomNavBar(),
+
       body: Stack(
         children: [
           _buildBackground(),
@@ -186,7 +191,64 @@ class _BondieShopPageState extends State<BondieShopPage> {
     );
   }
 
-  // Background + decorative hearts
+  // ⭐ BOTTOM NAV BAR — IGUALZINHA À DA BONDIEPAGE
+  Widget _buildBottomNavBar() {
+    return Container(
+      padding: const EdgeInsets.only(top: 10, bottom: 14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blueGrey.withOpacity(0.15),
+            blurRadius: 12,
+            offset: const Offset(0, -3),
+          ),
+        ],
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(26),
+          topRight: Radius.circular(26),
+        ),
+      ),
+      child: BottomNavigationBar(
+        currentIndex: 0,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        selectedItemColor: Colors.grey[500],
+        unselectedItemColor: Colors.grey[500],
+        iconSize: 30,
+        selectedFontSize: 13,
+        unselectedFontSize: 13,
+        onTap: (index) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (_) => MainScreenWithIndex(index: index),
+            ),
+                (_) => false,
+          );
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_rounded),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month_rounded),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border), label: "Favorites"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_rounded),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
+  }
+
+  // BACKGROUND
   Widget _buildBackground() {
     return Stack(
       children: [
@@ -206,14 +268,17 @@ class _BondieShopPageState extends State<BondieShopPage> {
 
   List<Widget> _hearts() {
     return [
-      Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent)),
-      Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent)),
-      Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue)),
-      Positioned(top: 200, left: 220, child: _heart(50, Colors.blue)),
-      Positioned(top: 300, left: 180, child: _heart(90, Colors.blue)),
-      Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent)),
-      Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue)),
-      Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue)),
+      Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
+      Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
+      Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
+      Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08))),
+      Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08))),
+      Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
+      Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
+      Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
+      Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
+      Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
+      Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
     ];
   }
 

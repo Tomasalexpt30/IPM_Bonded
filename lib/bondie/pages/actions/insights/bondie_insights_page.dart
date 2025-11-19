@@ -390,27 +390,24 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
             ),
           ),
         ),
-        ..._hearts(),
+        Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
+        Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
+        Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
+        Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08))),
+        Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08))),
+        Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
+        Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
+        Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
+        Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
+        Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
+        Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
       ],
     );
   }
 
-  List<Widget> _hearts() {
-    return [
-      Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent)),
-      Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent)),
-      Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue)),
-      Positioned(top: 200, left: 220, child: _heart(50, Colors.blue)),
-      Positioned(top: 300, left: 180, child: _heart(90, Colors.blue)),
-      Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent)),
-      Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue)),
-      Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue)),
-    ];
-  }
-
   static Widget _heart(double size, Color color) => CustomPaint(
     size: Size(size, size),
-    painter: _HeartPainter(color.withOpacity(0.08)),
+    painter: _HeartPainter(color),
   );
 }
 

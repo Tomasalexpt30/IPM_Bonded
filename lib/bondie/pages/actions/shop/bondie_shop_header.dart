@@ -44,20 +44,39 @@ class BondieShopHeader extends StatelessWidget {
   // TOP BAR
   // ============================================================
   Widget _buildTopBar(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: const Icon(Icons.arrow_back_rounded, size: 26),
-        ),
-        const SizedBox(width: 12),
-        const Text(
-          "Bondie Shop",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
-        ),
-        const Spacer(),
-        _buildCoinsChip(),
-      ],
+    return SizedBox(
+      height: 44,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // SETA À ESQUERDA
+          Align(
+            alignment: Alignment.centerLeft,
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: const Icon(Icons.arrow_back_rounded, size: 26),
+            ),
+          ),
+
+          // TÍTULO CENTRADO
+          const Align(
+            alignment: Alignment.center,
+            child: Text(
+              "Bondie Shop",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+
+          // MOEDAS À DIREITA
+          Align(
+            alignment: Alignment.centerRight,
+            child: _buildCoinsChip(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -78,14 +97,20 @@ class BondieShopHeader extends StatelessWidget {
           ],
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.monetization_on_rounded,
-                size: 18, color: Colors.amber[600]),
+            Icon(
+              Icons.monetization_on_rounded,
+              size: 18,
+              color: Colors.amber[600],
+            ),
             const SizedBox(width: 6),
             Text(
               coins.toString(),
               style: const TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w600),
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -103,9 +128,8 @@ class BondieShopHeader extends StatelessWidget {
         ? "assets/images/bondie_icons/bondie_talking.png"
         : skins[equippedIndex!]["asset"];
 
-    final String previewName = isDefault
-        ? "Default Bondie"
-        : skins[equippedIndex!]["name"];
+    final String previewName =
+    isDefault ? "Default Bondie" : skins[equippedIndex!]["name"];
 
     final String previewDesc = isDefault
         ? "The original and cozy version of Bondie."
@@ -229,8 +253,7 @@ class BondieShopHeader extends StatelessWidget {
   Widget _buildFilterChip() {
     final bool hasFilter = selectedFilter != "All";
 
-    final Color dotColor =
-    selectedFilter == "Default"
+    final Color dotColor = selectedFilter == "Default"
         ? Colors.black54
         : hasFilter
         ? rarityColor(selectedFilter)
