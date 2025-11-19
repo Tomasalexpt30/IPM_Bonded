@@ -141,10 +141,7 @@ class _MainScreenState extends State<MainScreen> {
               icon: Icon(Icons.calendar_month_rounded),
               label: 'Calendar',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline_rounded),
-              label: 'Messages',
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "Favorites"),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_rounded),
               label: 'Profile',
