@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 import 'stats/bondie_stats.dart';
 import 'stats/bondie_stats_controller.dart';
-import 'actions/bondie_actions.dart';
+import 'actions/bondie_actions_page.dart';
 
 class BondiePage extends StatefulWidget {
   final BondieStatsController statsController;

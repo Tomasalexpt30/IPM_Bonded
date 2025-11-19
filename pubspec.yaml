@@ -36,6 +36,17 @@ flutter:
     - assets/images/bondie_icons/bondie_super_happy.png
     - assets/images/bondie_icons/bondie_talking.png
 
+    # Bondie Skins
+    - assets/images/bondie_skins/bondie_cook.png
+    - assets/images/bondie_skins/bondie_cop.png
+    - assets/images/bondie_skins/bondie_doctor.png
+    - assets/images/bondie_skins/bondie_firefighter.png
+    - assets/images/bondie_skins/bondie_nerd.png
+    - assets/images/bondie_skins/bondie_pirate.png
+    - assets/images/bondie_skins/bondie_santa.png
+    - assets/images/bondie_skins/bondie_soccer.png
+    - assets/images/bondie_skins/bondie_thief.png
+
     # Recommendations
     - assets/images/recommendations/zero_latency_logo.webp
     - assets/images/recommendations/game_over_logo.png
@@ -43,3 +54,4 @@ flutter:
     - assets/images/recommendations/lisbon_christmas_lights.jpg
     - assets/images/recommendations/omakase_wa.jpeg
     - assets/images/recommendations/tile_museum.jpg
+

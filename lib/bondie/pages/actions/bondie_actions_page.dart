@@ -1,6 +1,8 @@
+import 'package:bondedapp/bondie/pages/actions/shop/bondie_shop_page.dart';
 import 'package:flutter/material.dart';
 import '../actions/recommendations/recommendations_page.dart';
 import '../stats/bondie_stats_controller.dart';
+import 'insights/bondie_insights_page.dart';
 
 class BondieActions extends StatelessWidget {
   final BondieStatsController controller;
@@ -31,14 +33,28 @@ class BondieActions extends StatelessWidget {
         _actionCard(
           title: "Insights",
           icon: Icons.insights_rounded,
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BondieInsightsPage(),
+              ),
+            );
+          },
         ),
         const SizedBox(height: 18),
 
         _actionCard(
           title: "Bondie Shop",
           icon: Icons.storefront_rounded,
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BondieShopPage(),
+              ),
+            );
+          },
         ),
       ],
     );
