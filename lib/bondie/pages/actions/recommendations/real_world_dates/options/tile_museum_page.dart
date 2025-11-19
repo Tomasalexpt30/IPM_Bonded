@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../widget/animated_bondie_widget.dart';
-import '../../../stats/bondie_stats_controller.dart';
-import '../../../../../main.dart';
+import '../../../../../widget/animated_bondie_widget.dart';
+import '../../../../stats/bondie_stats_controller.dart';
+import '../../../../../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OmakaseWaPage extends StatelessWidget {
+class TileMuseumPage extends StatelessWidget {
   final BondieStatsController controller;
 
-  const OmakaseWaPage({super.key, required this.controller});
+  const TileMuseumPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,9 @@ class OmakaseWaPage extends StatelessWidget {
                   children: [
                     const SizedBox(height: 6),
 
+                    // ============================
                     // HEADER
+                    // ============================
                     SizedBox(
                       height: 40,
                       child: Stack(
@@ -48,7 +50,7 @@ class OmakaseWaPage extends StatelessWidget {
                           ),
 
                           const Text(
-                            "Omakase WA",
+                            "Tile Museum",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 22,
@@ -108,9 +110,9 @@ class OmakaseWaPage extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 16 / 9,
               child: Image.asset(
-                "assets/images/recommendations/omakase_wa.jpeg",
+                "assets/images/recommendations/tile_museum.jpg",
                 fit: BoxFit.cover,
-                alignment: const Alignment(0, 0), // shows more of the table / sushi
+                alignment: const Alignment(0, -0.1), // slightly lower focus
               ),
             ),
           ),
@@ -118,10 +120,10 @@ class OmakaseWaPage extends StatelessWidget {
           const SizedBox(height: 14),
 
           const Text(
-            "Omakase WA delivers an intimate, curated Japanese tasting experience. "
-                "Each dish is handcrafted by the chef before your eyes, blending precision, tradition "
-                "and modern creativity. A sophisticated and romantic date for couples who appreciate "
-                "fine dining and unforgettable flavors.",
+            "The Tile Museum (Museu Nacional do Azulejo) is one of Lisbon’s "
+                "most iconic cultural experiences. Discover centuries of beautiful "
+                "Portuguese tilework, hidden stories, and breathtaking corridors — "
+                "a perfect date for calm exploration, art appreciation, and deep conversation.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -140,7 +142,7 @@ class OmakaseWaPage extends StatelessWidget {
                   label: "Website",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://omakasewa.pt/"),
+                    Uri.parse("https://www.museudoazulejo.gov.pt/en/"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -152,7 +154,7 @@ class OmakaseWaPage extends StatelessWidget {
                   label: "Location",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://maps.google.com/?q=Omakase+WA+Lisboa"),
+                    Uri.parse("https://maps.google.com/?q=Museu+Nacional+do+Azulejo"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -168,7 +170,7 @@ class OmakaseWaPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // REUSABLE BUTTON
+  // BUTTON
   // ===========================================================
   Widget _iconButton({
     required IconData icon,
@@ -263,7 +265,7 @@ class OmakaseWaPage extends StatelessWidget {
               Icon(Icons.lightbulb_rounded, color: Color(0xFF3B82F6)),
               SizedBox(width: 8),
               Text(
-                "Tips for the Perfect Experience",
+                "Tips to Appreciate It More",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -276,22 +278,22 @@ class OmakaseWaPage extends StatelessWidget {
 
           _tipCard(
             number: "1",
-            title: "Let the chef guide you",
-            subtitle: "Omakase means 'I leave it up to you' — trust the flow.",
+            title: "Take your time",
+            subtitle: "There are centuries of history — don’t rush it.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "2",
-            title: "Go slow and appreciate each bite",
-            subtitle: "The tasting sequence is intentional — savor it.",
+            title: "Explore the cloister",
+            subtitle: "One of the most beautiful hidden gems in Lisbon.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "3",
-            title: "Book well in advance",
-            subtitle: "Seats are extremely limited and fill up quickly.",
+            title: "Go early",
+            subtitle: "You avoid crowds and enjoy the rooms in peace.",
           ),
         ],
       ),
@@ -385,9 +387,9 @@ class OmakaseWaPage extends StatelessWidget {
               ],
             ),
             child: const Text(
-              "Sharing an omakase experience is deeply intimate. "
-                  "You discover new flavors together, enjoy quiet moments, "
-                  "and connect over a beautifully crafted meal.",
+              "Art and culture make conversations deeper and more meaningful. "
+                  "Exploring beautiful tilework together helps you connect, share perspectives, "
+                  "and create inspiring memories.",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,
@@ -406,15 +408,15 @@ class OmakaseWaPage extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: _smallSquare(Icons.schedule_rounded, "Duration", "1–2h"),
+          child: _smallSquare(Icons.schedule_rounded, "Visit Time", "1–2h"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.euro_rounded, "Price", "€€€"),
+          child: _smallSquare(Icons.euro_rounded, "Price", "6–10€"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.restaurant_rounded, "Vibe", "Intimate"),
+          child: _smallSquare(Icons.museum_rounded, "Vibe", "Cultural"),
         ),
       ],
     );

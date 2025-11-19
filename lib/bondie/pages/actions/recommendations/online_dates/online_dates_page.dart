@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../widget/animated_bondie_widget.dart';
-import '../../stats/bondie_stats_controller.dart';
-import '../../../../main.dart';
+import '../../../../widget/animated_bondie_widget.dart';
+import '../../../stats/bondie_stats_controller.dart';
+import '../../../../../main.dart';
 
 class OnlineDatesPage extends StatelessWidget {
   final BondieStatsController controller;

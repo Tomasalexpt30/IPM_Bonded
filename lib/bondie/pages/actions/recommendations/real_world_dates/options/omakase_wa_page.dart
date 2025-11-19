@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../widget/animated_bondie_widget.dart';
-import '../../../stats/bondie_stats_controller.dart';
-import '../../../../../main.dart';
+import '../../../../../widget/animated_bondie_widget.dart';
+import '../../../../stats/bondie_stats_controller.dart';
+import '../../../../../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class LisbonChristmasLightsPage extends StatelessWidget {
+class OmakaseWaPage extends StatelessWidget {
   final BondieStatsController controller;
 
-  const LisbonChristmasLightsPage({super.key, required this.controller});
+  const OmakaseWaPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class LisbonChristmasLightsPage extends StatelessWidget {
                           ),
 
                           const Text(
-                            "Christmas Lights",
+                            "Omakase WA",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 22,
@@ -108,9 +108,9 @@ class LisbonChristmasLightsPage extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 16 / 9,
               child: Image.asset(
-                "assets/images/recommendations/lisbon_christmas_lights.jpg",
+                "assets/images/recommendations/omakase_wa.jpeg",
                 fit: BoxFit.cover,
-                alignment: const Alignment(0, -0.1), // shows more of the street
+                alignment: const Alignment(0, 0), // shows more of the table / sushi
               ),
             ),
           ),
@@ -118,9 +118,10 @@ class LisbonChristmasLightsPage extends StatelessWidget {
           const SizedBox(height: 14),
 
           const Text(
-            "Lisbon’s Christmas Lights transform the city into a magical winter wonderland. "
-                "Walk through sparkling streets, Christmas markets, and festive decorations — "
-                "a cozy date full of warmth, photos, and holiday charm.",
+            "Omakase WA delivers an intimate, curated Japanese tasting experience. "
+                "Each dish is handcrafted by the chef before your eyes, blending precision, tradition "
+                "and modern creativity. A sophisticated and romantic date for couples who appreciate "
+                "fine dining and unforgettable flavors.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -135,11 +136,11 @@ class LisbonChristmasLightsPage extends StatelessWidget {
             children: [
               Expanded(
                 child: _iconButton(
-                  icon: Icons.camera_alt_rounded,
-                  label: "Best Spots",
+                  icon: Icons.link_rounded,
+                  label: "Website",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://www.visitlisboa.com/"),
+                    Uri.parse("https://omakasewa.pt/"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -148,10 +149,10 @@ class LisbonChristmasLightsPage extends StatelessWidget {
               Expanded(
                 child: _iconButton(
                   icon: Icons.location_on_rounded,
-                  label: "Main Avenue",
+                  label: "Location",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://maps.google.com/?q=Avenida+da+Liberdade+Lisboa"),
+                    Uri.parse("https://maps.google.com/?q=Omakase+WA+Lisboa"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -205,7 +206,9 @@ class LisbonChristmasLightsPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================
   // ADD TO CALENDAR
+  // ===========================================================
   Widget _addToCalendarButton() {
     return GestureDetector(
       onTap: () {},
@@ -260,7 +263,7 @@ class LisbonChristmasLightsPage extends StatelessWidget {
               Icon(Icons.lightbulb_rounded, color: Color(0xFF3B82F6)),
               SizedBox(width: 8),
               Text(
-                "Tips to Enjoy Even More",
+                "Tips for the Perfect Experience",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -273,29 +276,31 @@ class LisbonChristmasLightsPage extends StatelessWidget {
 
           _tipCard(
             number: "1",
-            title: "Go after sunset",
-            subtitle: "Lights look magical around 18:00 onwards.",
+            title: "Let the chef guide you",
+            subtitle: "Omakase means 'I leave it up to you' — trust the flow.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "2",
-            title: "Visit the Christmas markets",
-            subtitle: "Hot chocolate and cozy snacks complete the date.",
+            title: "Go slow and appreciate each bite",
+            subtitle: "The tasting sequence is intentional — savor it.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "3",
-            title: "Walk through Avenida da Liberdade",
-            subtitle: "The most iconic lights and decorations in the city.",
+            title: "Book well in advance",
+            subtitle: "Seats are extremely limited and fill up quickly.",
           ),
         ],
       ),
     );
   }
 
+  // ===========================================================
   // TIP CARD
+  // ===========================================================
   Widget _tipCard({
     required String number,
     required String title,
@@ -380,9 +385,9 @@ class LisbonChristmasLightsPage extends StatelessWidget {
               ],
             ),
             child: const Text(
-              "Christmas lights bring out warmth and emotional connection. "
-                  "Walking together through magical streets naturally creates moments "
-                  "of closeness, shared wonder, and romantic memories.",
+              "Sharing an omakase experience is deeply intimate. "
+                  "You discover new flavors together, enjoy quiet moments, "
+                  "and connect over a beautifully crafted meal.",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,
@@ -401,15 +406,15 @@ class LisbonChristmasLightsPage extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: _smallSquare(Icons.calendar_today_rounded, "Season", "Nov–Jan"),
+          child: _smallSquare(Icons.schedule_rounded, "Duration", "1–2h"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.euro_rounded, "Cost", "Free"),
+          child: _smallSquare(Icons.euro_rounded, "Price", "€€€"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.favorite_rounded, "Vibe", "Magical"),
+          child: _smallSquare(Icons.restaurant_rounded, "Vibe", "Intimate"),
         ),
       ],
     );

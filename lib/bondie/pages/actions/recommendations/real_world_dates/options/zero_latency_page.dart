@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../widget/animated_bondie_widget.dart';
-import '../../../stats/bondie_stats_controller.dart';
-import '../../../../../main.dart';
+import '../../../../../widget/animated_bondie_widget.dart';
+import '../../../../stats/bondie_stats_controller.dart';
+import '../../../../../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class GulbenkianGardenPage extends StatelessWidget {
+class ZeroLatencyPage extends StatelessWidget {
   final BondieStatsController controller;
 
-  const GulbenkianGardenPage({super.key, required this.controller});
+  const ZeroLatencyPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,9 @@ class GulbenkianGardenPage extends StatelessWidget {
                   children: [
                     const SizedBox(height: 6),
 
+                    // ===========================================================
                     // HEADER
+                    // ===========================================================
                     SizedBox(
                       height: 40,
                       child: Stack(
@@ -39,17 +41,19 @@ class GulbenkianGardenPage extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: GestureDetector(
                               onTap: () => Navigator.pop(context),
-                              child: const Icon(
-                                Icons.arrow_back_rounded,
-                                size: 26,
-                                color: Colors.black87,
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 4),
+                                child: Icon(
+                                  Icons.arrow_back_rounded,
+                                  size: 26,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           ),
 
                           const Text(
-                            "Gulbenkian Garden",
-                            overflow: TextOverflow.ellipsis,
+                            "Zero Latency VR",
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
@@ -61,6 +65,7 @@ class GulbenkianGardenPage extends StatelessWidget {
                     ),
 
                     const SizedBox(height: 26),
+
                     _mainInfoBlock(context),
                     const SizedBox(height: 26),
 
@@ -104,22 +109,24 @@ class GulbenkianGardenPage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
+            child: Container(
+              height: 120,
+              width: double.infinity,
+              color: Colors.white,
               child: Image.asset(
-                "assets/images/recommendations/gulbenkian_garden.jpg",
-                fit: BoxFit.cover, alignment: Alignment(0, 1)
-
+                "assets/images/recommendations/zero_latency_logo.webp",
+                fit: BoxFit.contain,
               ),
             ),
           ),
 
-          const SizedBox(height: 14),
+          const SizedBox(height: 0),
 
           const Text(
-            "The Gulbenkian Garden is one of Lisbon’s most peaceful and romantic spots. "
-                "Filled with lakes, sculptures, and beautiful greenery, it’s the perfect place "
-                "for slow walks, deep conversations, or simply relaxing together in a calm setting.",
+            "Zero Latency is a next-generation virtual reality experience — "
+                "completely wireless and full-scale. You walk freely in a large physical space "
+                "while exploring highly immersive virtual worlds. "
+                "It’s one of the most intense, cooperative, and memorable date activities you can do!",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -138,7 +145,7 @@ class GulbenkianGardenPage extends StatelessWidget {
                   label: "Website",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://gulbenkian.pt/en/"),
+                    Uri.parse("https://zerolatencyvr.com/"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -150,7 +157,7 @@ class GulbenkianGardenPage extends StatelessWidget {
                   label: "Location",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://maps.google.com/?q=Jardim+Gulbenkian"),
+                    Uri.parse("https://maps.google.com/?q=Zero+Latency+Lisboa"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -159,6 +166,7 @@ class GulbenkianGardenPage extends StatelessWidget {
           ),
 
           const SizedBox(height: 16),
+
           _addToCalendarButton(),
         ],
       ),
@@ -166,7 +174,7 @@ class GulbenkianGardenPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // ICON BUTTON
+  // REUSABLE BUTTON
   // ===========================================================
   Widget _iconButton({
     required IconData icon,
@@ -179,7 +187,7 @@ class GulbenkianGardenPage extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.12),
+          color: color.withOpacity(0.11),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(
@@ -187,15 +195,12 @@ class GulbenkianGardenPage extends StatelessWidget {
           children: [
             Icon(icon, color: color),
             const SizedBox(width: 6),
-            Flexible(
-              child: Text(
-                label,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: color,
-                ),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: color,
               ),
             ),
           ],
@@ -205,20 +210,21 @@ class GulbenkianGardenPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // ADD TO CALENDAR
+  // ADD TO CALENDAR BUTTON
   // ===========================================================
   Widget _addToCalendarButton() {
     return GestureDetector(
       onTap: () {},
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           color: const Color(0xFF3B82F6).withOpacity(0.15),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Icon(Icons.event_available_rounded, color: Color(0xFF3B82F6)),
             SizedBox(width: 8),
             Text(
@@ -240,6 +246,7 @@ class GulbenkianGardenPage extends StatelessWidget {
   // ===========================================================
   Widget _tipsSection() {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -260,10 +267,11 @@ class GulbenkianGardenPage extends StatelessWidget {
               Icon(Icons.lightbulb_rounded, color: Color(0xFF3B82F6)),
               SizedBox(width: 8),
               Text(
-                "Tips to Enjoy Even More",
+                "Tips to Make It Even Better",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
+                  color: Colors.black87,
                 ),
               ),
             ],
@@ -273,24 +281,22 @@ class GulbenkianGardenPage extends StatelessWidget {
 
           _tipCard(
             number: "1",
-            title: "Bring a small picnic",
-            subtitle: "There are perfect shaded spots to sit and enjoy together.",
+            title: "Wear comfortable clothes",
+            subtitle: "You'll move a lot — comfort makes a big difference.",
           ),
-
           const SizedBox(height: 10),
 
           _tipCard(
             number: "2",
-            title: "Walk around the lake",
-            subtitle: "The reflections, bridges and wildlife create a dreamy vibe.",
+            title: "Pick cooperative games",
+            subtitle: "Playing together is far more fun and engaging.",
           ),
-
           const SizedBox(height: 10),
 
           _tipCard(
             number: "3",
-            title: "Go during golden hour",
-            subtitle: "Warm sunlight makes the garden magical and intimate.",
+            title: "Book in advance",
+            subtitle: "Slots fill up quickly, especially on weekends.",
           ),
         ],
       ),
@@ -298,7 +304,7 @@ class GulbenkianGardenPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // TIP CARD
+  // TIP CARD (GIANT NUMBER)
   // ===========================================================
   Widget _tipCard({
     required String number,
@@ -317,10 +323,10 @@ class GulbenkianGardenPage extends StatelessWidget {
           Text(
             number,
             style: const TextStyle(
-              fontSize: 28,
+              fontSize: 24,
               fontWeight: FontWeight.w800,
               color: Colors.black87,
-              height: 1,
+              height: 1.0,
             ),
           ),
 
@@ -356,16 +362,19 @@ class GulbenkianGardenPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // BONDIE SECTION
+  // BONDIE EXPLAINS
   // ===========================================================
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 60,
           width: 60,
-          child: Image.asset("assets/images/bondie_icons/bondie_talking.png"),
+          height: 60,
+          child: Image.asset(
+            "assets/images/bondie_icons/bondie_talking.png",
+            fit: BoxFit.contain,
+          ),
         ),
 
         const SizedBox(width: 10),
@@ -385,11 +394,13 @@ class GulbenkianGardenPage extends StatelessWidget {
               ],
             ),
             child: const Text(
-              "This garden is ideal for meaningful conversations and emotional connection. "
-                  "Walking through peaceful nature helps you relax, open up, and enjoy each other's company.",
+              "This experience is amazing for strengthening your connection! "
+                  "You’ll need to communicate, cooperate, make quick decisions together, "
+                  "and trust each other. It’s fun, intense, and creates unforgettable memories!",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,
+                color: Colors.black87,
               ),
             ),
           ),
@@ -399,29 +410,25 @@ class GulbenkianGardenPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // INFO SQUARES
+  // SMALL INFO SQUARES
   // ===========================================================
   Widget _smallInfoRow() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: _smallSquare(Icons.schedule_rounded, "Best Time", "Morning / Sunset"),
-        ),
+        Expanded(child: _smallSquare(Icons.schedule_rounded, "Duration", "30–45m")),
         const SizedBox(width: 12),
-        Expanded(
-          child: _smallSquare(Icons.euro_rounded, "Entry", "Free"),
-        ),
+        Expanded(child: _smallSquare(Icons.euro_rounded, "Price", "25–35€")),
         const SizedBox(width: 12),
-        Expanded(
-          child: _smallSquare(Icons.favorite_rounded, "Vibe", "Relaxing"),
-        ),
+        Expanded(child: _smallSquare(Icons.lock_person_rounded, "Age", "+13")),
       ],
     );
   }
 
   Widget _smallSquare(IconData icon, String title, String value) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      height: 110,
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
@@ -434,6 +441,7 @@ class GulbenkianGardenPage extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, size: 28, color: const Color(0xFF3B82F6)),
           const SizedBox(height: 10),
@@ -490,10 +498,7 @@ class GulbenkianGardenPage extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded), label: "Calendar"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline_rounded),
-            label: "Messages",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline_rounded), label: "Messages"),
           BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "Profile"),
         ],
       ),
@@ -501,7 +506,7 @@ class GulbenkianGardenPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // BACKGROUND (BLUE HEARTS)
+  // BACKGROUND
   // ===========================================================
   Widget _buildBackground() {
     return Stack(
@@ -509,7 +514,10 @@ class GulbenkianGardenPage extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
+              colors: [
+                Color(0xFFF8FAFF),
+                Color(0xFFE9F1FF),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

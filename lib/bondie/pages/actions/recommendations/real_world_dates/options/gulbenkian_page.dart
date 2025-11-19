@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../widget/animated_bondie_widget.dart';
-import '../../../stats/bondie_stats_controller.dart';
-import '../../../../../main.dart';
+import '../../../../../widget/animated_bondie_widget.dart';
+import '../../../../stats/bondie_stats_controller.dart';
+import '../../../../../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ZeroLatencyPage extends StatelessWidget {
+class GulbenkianGardenPage extends StatelessWidget {
   final BondieStatsController controller;
 
-  const ZeroLatencyPage({super.key, required this.controller});
+  const GulbenkianGardenPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,7 @@ class ZeroLatencyPage extends StatelessWidget {
                   children: [
                     const SizedBox(height: 6),
 
-                    // ===========================================================
                     // HEADER
-                    // ===========================================================
                     SizedBox(
                       height: 40,
                       child: Stack(
@@ -41,19 +39,17 @@ class ZeroLatencyPage extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: GestureDetector(
                               onTap: () => Navigator.pop(context),
-                              child: const Padding(
-                                padding: EdgeInsets.only(left: 4),
-                                child: Icon(
-                                  Icons.arrow_back_rounded,
-                                  size: 26,
-                                  color: Colors.black87,
-                                ),
+                              child: const Icon(
+                                Icons.arrow_back_rounded,
+                                size: 26,
+                                color: Colors.black87,
                               ),
                             ),
                           ),
 
                           const Text(
-                            "Zero Latency VR",
+                            "Gulbenkian Garden",
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
@@ -65,7 +61,6 @@ class ZeroLatencyPage extends StatelessWidget {
                     ),
 
                     const SizedBox(height: 26),
-
                     _mainInfoBlock(context),
                     const SizedBox(height: 26),
 
@@ -109,24 +104,22 @@ class ZeroLatencyPage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
-            child: Container(
-              height: 120,
-              width: double.infinity,
-              color: Colors.white,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
               child: Image.asset(
-                "assets/images/recommendations/zero_latency_logo.webp",
-                fit: BoxFit.contain,
+                "assets/images/recommendations/gulbenkian_garden.jpg",
+                fit: BoxFit.cover, alignment: Alignment(0, 1)
+
               ),
             ),
           ),
 
-          const SizedBox(height: 0),
+          const SizedBox(height: 14),
 
           const Text(
-            "Zero Latency is a next-generation virtual reality experience — "
-                "completely wireless and full-scale. You walk freely in a large physical space "
-                "while exploring highly immersive virtual worlds. "
-                "It’s one of the most intense, cooperative, and memorable date activities you can do!",
+            "The Gulbenkian Garden is one of Lisbon’s most peaceful and romantic spots. "
+                "Filled with lakes, sculptures, and beautiful greenery, it’s the perfect place "
+                "for slow walks, deep conversations, or simply relaxing together in a calm setting.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -145,7 +138,7 @@ class ZeroLatencyPage extends StatelessWidget {
                   label: "Website",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://zerolatencyvr.com/"),
+                    Uri.parse("https://gulbenkian.pt/en/"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -157,7 +150,7 @@ class ZeroLatencyPage extends StatelessWidget {
                   label: "Location",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://maps.google.com/?q=Zero+Latency+Lisboa"),
+                    Uri.parse("https://maps.google.com/?q=Jardim+Gulbenkian"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -166,7 +159,6 @@ class ZeroLatencyPage extends StatelessWidget {
           ),
 
           const SizedBox(height: 16),
-
           _addToCalendarButton(),
         ],
       ),
@@ -174,7 +166,7 @@ class ZeroLatencyPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // REUSABLE BUTTON
+  // ICON BUTTON
   // ===========================================================
   Widget _iconButton({
     required IconData icon,
@@ -187,7 +179,7 @@ class ZeroLatencyPage extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.11),
+          color: color.withOpacity(0.12),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(
@@ -195,12 +187,15 @@ class ZeroLatencyPage extends StatelessWidget {
           children: [
             Icon(icon, color: color),
             const SizedBox(width: 6),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: color,
+            Flexible(
+              child: Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: color,
+                ),
               ),
             ),
           ],
@@ -210,21 +205,20 @@ class ZeroLatencyPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // ADD TO CALENDAR BUTTON
+  // ADD TO CALENDAR
   // ===========================================================
   Widget _addToCalendarButton() {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           color: const Color(0xFF3B82F6).withOpacity(0.15),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.event_available_rounded, color: Color(0xFF3B82F6)),
             SizedBox(width: 8),
             Text(
@@ -246,7 +240,6 @@ class ZeroLatencyPage extends StatelessWidget {
   // ===========================================================
   Widget _tipsSection() {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -267,11 +260,10 @@ class ZeroLatencyPage extends StatelessWidget {
               Icon(Icons.lightbulb_rounded, color: Color(0xFF3B82F6)),
               SizedBox(width: 8),
               Text(
-                "Tips to Make It Even Better",
+                "Tips to Enjoy Even More",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: Colors.black87,
                 ),
               ),
             ],
@@ -281,22 +273,24 @@ class ZeroLatencyPage extends StatelessWidget {
 
           _tipCard(
             number: "1",
-            title: "Wear comfortable clothes",
-            subtitle: "You'll move a lot — comfort makes a big difference.",
+            title: "Bring a small picnic",
+            subtitle: "There are perfect shaded spots to sit and enjoy together.",
           ),
+
           const SizedBox(height: 10),
 
           _tipCard(
             number: "2",
-            title: "Pick cooperative games",
-            subtitle: "Playing together is far more fun and engaging.",
+            title: "Walk around the lake",
+            subtitle: "The reflections, bridges and wildlife create a dreamy vibe.",
           ),
+
           const SizedBox(height: 10),
 
           _tipCard(
             number: "3",
-            title: "Book in advance",
-            subtitle: "Slots fill up quickly, especially on weekends.",
+            title: "Go during golden hour",
+            subtitle: "Warm sunlight makes the garden magical and intimate.",
           ),
         ],
       ),
@@ -304,7 +298,7 @@ class ZeroLatencyPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // TIP CARD (GIANT NUMBER)
+  // TIP CARD
   // ===========================================================
   Widget _tipCard({
     required String number,
@@ -323,10 +317,10 @@ class ZeroLatencyPage extends StatelessWidget {
           Text(
             number,
             style: const TextStyle(
-              fontSize: 24,
+              fontSize: 28,
               fontWeight: FontWeight.w800,
               color: Colors.black87,
-              height: 1.0,
+              height: 1,
             ),
           ),
 
@@ -362,19 +356,16 @@ class ZeroLatencyPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // BONDIE EXPLAINS
+  // BONDIE SECTION
   // ===========================================================
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: 60,
           height: 60,
-          child: Image.asset(
-            "assets/images/bondie_icons/bondie_talking.png",
-            fit: BoxFit.contain,
-          ),
+          width: 60,
+          child: Image.asset("assets/images/bondie_icons/bondie_talking.png"),
         ),
 
         const SizedBox(width: 10),
@@ -394,13 +385,11 @@ class ZeroLatencyPage extends StatelessWidget {
               ],
             ),
             child: const Text(
-              "This experience is amazing for strengthening your connection! "
-                  "You’ll need to communicate, cooperate, make quick decisions together, "
-                  "and trust each other. It’s fun, intense, and creates unforgettable memories!",
+              "This garden is ideal for meaningful conversations and emotional connection. "
+                  "Walking through peaceful nature helps you relax, open up, and enjoy each other's company.",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,
-                color: Colors.black87,
               ),
             ),
           ),
@@ -410,25 +399,29 @@ class ZeroLatencyPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // SMALL INFO SQUARES
+  // INFO SQUARES
   // ===========================================================
   Widget _smallInfoRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: _smallSquare(Icons.schedule_rounded, "Duration", "30–45m")),
+        Expanded(
+          child: _smallSquare(Icons.schedule_rounded, "Best Time", "Morning / Sunset"),
+        ),
         const SizedBox(width: 12),
-        Expanded(child: _smallSquare(Icons.euro_rounded, "Price", "25–35€")),
+        Expanded(
+          child: _smallSquare(Icons.euro_rounded, "Entry", "Free"),
+        ),
         const SizedBox(width: 12),
-        Expanded(child: _smallSquare(Icons.lock_person_rounded, "Age", "+13")),
+        Expanded(
+          child: _smallSquare(Icons.favorite_rounded, "Vibe", "Relaxing"),
+        ),
       ],
     );
   }
 
   Widget _smallSquare(IconData icon, String title, String value) {
     return Container(
-      height: 110,
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
@@ -441,7 +434,6 @@ class ZeroLatencyPage extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, size: 28, color: const Color(0xFF3B82F6)),
           const SizedBox(height: 10),
@@ -498,7 +490,10 @@ class ZeroLatencyPage extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded), label: "Calendar"),
-          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline_rounded), label: "Messages"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline_rounded),
+            label: "Messages",
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "Profile"),
         ],
       ),
@@ -506,7 +501,7 @@ class ZeroLatencyPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // BACKGROUND
+  // BACKGROUND (BLUE HEARTS)
   // ===========================================================
   Widget _buildBackground() {
     return Stack(
@@ -514,10 +509,7 @@ class ZeroLatencyPage extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Color(0xFFF8FAFF),
-                Color(0xFFE9F1FF),
-              ],
+              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

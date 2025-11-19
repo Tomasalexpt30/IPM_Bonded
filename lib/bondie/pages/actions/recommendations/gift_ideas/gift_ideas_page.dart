@@ -1,20 +1,12 @@
-import 'package:bondedapp/bondie/pages/recommendations/real_world_dates/options/lisbon_christmas_lights_page.dart';
-import 'package:bondedapp/bondie/pages/recommendations/real_world_dates/options/omakase_wa_page.dart';
-import 'package:bondedapp/bondie/pages/recommendations/real_world_dates/options/tile_museum_page.dart';
 import 'package:flutter/material.dart';
-import '../../../widget/animated_bondie_widget.dart';
-import '../../stats/bondie_stats_controller.dart';
-import '../../../../main.dart';
+import '../../../../widget/animated_bondie_widget.dart';
+import '../../../stats/bondie_stats_controller.dart';
+import '../../../../../main.dart';
 
-// KEEPING YOUR ORIGINAL IMPORTS (even if unused)
-import 'options/zero_latency_page.dart';
-import 'options/escape_room_page.dart';
-import 'options/gulbenkian_page.dart';
-
-class RealWorldDatesPage extends StatelessWidget {
+class GiftIdeasPage extends StatelessWidget {
   final BondieStatsController controller;
 
-  const RealWorldDatesPage({super.key, required this.controller});
+  const GiftIdeasPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +14,7 @@ class RealWorldDatesPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF8F9FD),
 
       // ===========================================================
-      // BOTTOM NAVIGATION BAR
+      // BOTTOM NAV BAR
       // ===========================================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -69,7 +61,7 @@ class RealWorldDatesPage extends StatelessWidget {
       ),
 
       // ===========================================================
-      // PAGE BODY
+      // BODY
       // ===========================================================
       body: Stack(
         children: [
@@ -108,7 +100,7 @@ class RealWorldDatesPage extends StatelessWidget {
                           ),
 
                           const Text(
-                            "Real-World Date Ideas",
+                            "Gift Ideas",
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
@@ -122,102 +114,54 @@ class RealWorldDatesPage extends StatelessWidget {
                     const SizedBox(height: 20),
 
                     // ===========================================================
-                    // DATE LIST (ENGLISH)
+                    // GIFT CARDS (Bondie header removido)
                     // ===========================================================
 
-                    _buildDateCard(
-                      icon: Icons.videogame_asset_rounded,
-                      title: "Zero Latency",
-                      description: "A fully immersive and cooperative VR adventure.",
-                      color: const Color(0xFF7AB6F6),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => ZeroLatencyPage(controller: controller),
-                          ),
-                        );
-                      },
+                    _buildCard(
+                      icon: Icons.photo_album_rounded,
+                      title: "Memory Photo Book",
+                      description: "Create a small album with your favorite shared moments.",
+                      color: const Color(0xFF77B8F5),
                     ),
                     const SizedBox(height: 20),
 
-                    _buildDateCard(
-                      icon: Icons.park_rounded,
-                      title: "Gulbenkian Garden",
-                      description: "A peaceful, romantic stroll through a beautiful Lisbon garden.",
-                      color: const Color(0xFFF6A56D),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => GulbenkianGardenPage(controller: controller)
-                          ),
-                        );
-                      },
+                    _buildCard(
+                      icon: Icons.style_rounded,
+                      title: "Matching Bracelets",
+                      description: "Simple, meaningful accessories you both can wear daily.",
+                      color: const Color(0xFFA47DF6),
                     ),
                     const SizedBox(height: 20),
 
-                    _buildDateCard(
-                      icon: Icons.lock_outline_rounded,
-                      title: "Escape Room",
-                      description: "Solve clues together and escape before time runs out.",
-                      color: const Color(0xFFA17BF6),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => EscapeRoomPage(controller: controller)
-                          ),
-                        );
-                      },
+                    _buildCard(
+                      icon: Icons.edit_rounded,
+                      title: "Handwritten Letter",
+                      description: "A heartfelt message that becomes a keepsake forever.",
+                      color: const Color(0xFFF69AB2),
                     ),
                     const SizedBox(height: 20),
 
-                    _buildDateCard(
-                      icon: Icons.museum_rounded,
-                      title: "Tile Museum",
-                      description: "Explore the history and beauty of Portuguese tile art.",
+                    _buildCard(
+                      icon: Icons.coffee_rounded,
+                      title: "Favorite Treat",
+                      description: "Surprise them with their favorite snack or drink.",
+                      color: const Color(0xFFF6A67A),
+                    ),
+                    const SizedBox(height: 20),
+
+                    _buildCard(
+                      icon: Icons.redeem_rounded,
+                      title: "Mini Gift Box",
+                      description: "A curated box of small, meaningful items they’ll love.",
+                      color: const Color(0xFF64D4A7),
+                    ),
+                    const SizedBox(height: 20),
+
+                    _buildCard(
+                      icon: Icons.music_note_rounded,
+                      title: "Personal Playlist",
+                      description: "A playlist of songs that remind you of them.",
                       color: const Color(0xFF8EC6FF),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => TileMuseumPage(controller: controller)
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 20),
-
-                    _buildDateCard(
-                      icon: Icons.restaurant_rounded,
-                      title: "Omakase WA",
-                      description: "An intimate Japanese tasting experience with elegant dishes.",
-                      color: const Color(0xFF5EC8A7),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => OmakaseWaPage(controller: controller)
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 20),
-
-                    _buildDateCard(
-                      icon: Icons.church_rounded,
-                      title: "Lisbon Christmas Lights",
-                      description: "Walk through the magical holiday lights and Christmas markets.",
-                      color: const Color(0xFFF69AB4),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => LisbonChristmasLightsPage(controller: controller)
-                          ),
-                        );
-                      },
                     ),
 
                     const SizedBox(height: 40),
@@ -246,7 +190,6 @@ class RealWorldDatesPage extends StatelessWidget {
             ),
           ),
         ),
-
         Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
         Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
         Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
@@ -262,74 +205,64 @@ class RealWorldDatesPage extends StatelessWidget {
     );
   }
 
-  static Widget _heart(double size, Color color) => CustomPaint(
-    size: Size(size, size),
-    painter: _HeartPainter(color),
-  );
+  static Widget _heart(double size, Color color) =>
+      CustomPaint(size: Size(size, size), painter: _HeartPainter(color));
 
   // ===========================================================
-  // DATE CARD
+  // CARD TEMPLATE
   // ===========================================================
-  Widget _buildDateCard({
+  Widget _buildCard({
     required IconData icon,
     required String title,
     required String description,
     required Color color,
-    required VoidCallback onTap,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(22),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.blueGrey.withOpacity(0.10),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+    return Container(
+      padding: const EdgeInsets.all(22),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blueGrey.withOpacity(0.10),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            height: 55,
+            width: 55,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(16),
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              height: 55,
-              width: 55,
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Icon(icon, size: 28, color: color),
-            ),
-            const SizedBox(width: 18),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
+            child: Icon(icon, size: 28, color: color),
+          ),
+          const SizedBox(width: 18),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
                     style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    description,
+                    )),
+                const SizedBox(height: 4),
+                Text(description,
                     style: const TextStyle(
                       fontSize: 13.5,
                       color: Colors.black54,
                       height: 1.3,
-                    ),
-                  ),
-                ],
-              ),
+                    )),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -361,5 +294,5 @@ class _HeartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../main.dart';
-import '../stats/bondie_stats_controller.dart';
+import '../../../../main.dart';
+import '../../stats/bondie_stats_controller.dart';
 
 // IMPORTA AS NOVAS PÁGINAS
 import 'real_world_dates/real_world_dates_page.dart';
@@ -186,7 +186,7 @@ class RecommendationsPage extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 22),
+                    const SizedBox(height: 17),
 
                     // ===========================================================
                     // CATEGORY CARDS

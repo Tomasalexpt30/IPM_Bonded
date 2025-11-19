@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../recommendations/recommendations_page.dart';
+import '../actions/recommendations/recommendations_page.dart';
 import '../stats/bondie_stats_controller.dart';
 
 class BondieActions extends StatelessWidget {

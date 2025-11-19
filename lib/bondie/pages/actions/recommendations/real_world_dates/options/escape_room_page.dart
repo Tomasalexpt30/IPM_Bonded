@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../widget/animated_bondie_widget.dart';
-import '../../../stats/bondie_stats_controller.dart';
-import '../../../../../main.dart';
+import '../../../../../widget/animated_bondie_widget.dart';
+import '../../../../stats/bondie_stats_controller.dart';
+import '../../../../../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TileMuseumPage extends StatelessWidget {
+class EscapeRoomPage extends StatelessWidget {
   final BondieStatsController controller;
 
-  const TileMuseumPage({super.key, required this.controller});
+  const EscapeRoomPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,7 @@ class TileMuseumPage extends StatelessWidget {
                   children: [
                     const SizedBox(height: 6),
 
-                    // ============================
                     // HEADER
-                    // ============================
                     SizedBox(
                       height: 40,
                       child: Stack(
@@ -50,7 +48,7 @@ class TileMuseumPage extends StatelessWidget {
                           ),
 
                           const Text(
-                            "Tile Museum",
+                            "Escape Room",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 22,
@@ -107,23 +105,24 @@ class TileMuseumPage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
+            child: Container(
+              height: 150,
+              width: double.infinity,
+              color: Colors.white,
               child: Image.asset(
-                "assets/images/recommendations/tile_museum.jpg",
-                fit: BoxFit.cover,
-                alignment: const Alignment(0, -0.1), // slightly lower focus
+                "assets/images/recommendations/game_over_logo.png",
+                fit: BoxFit.contain,
               ),
             ),
           ),
 
-          const SizedBox(height: 14),
+          const SizedBox(height: 0),
 
           const Text(
-            "The Tile Museum (Museu Nacional do Azulejo) is one of Lisbon’s "
-                "most iconic cultural experiences. Discover centuries of beautiful "
-                "Portuguese tilework, hidden stories, and breathtaking corridors — "
-                "a perfect date for calm exploration, art appreciation, and deep conversation.",
+            "Escape Rooms are thrilling and fun date activities where you solve puzzles, "
+                "follow clues, and escape before time runs out. It’s teamwork and excitement in one!\n\n"
+                "We recommend the Escape Rooms from GAME OVER — they’re known for great themes "
+                "and high-quality immersive experiences.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -131,6 +130,8 @@ class TileMuseumPage extends StatelessWidget {
               height: 1.45,
             ),
           ),
+
+
 
           const SizedBox(height: 22),
 
@@ -142,7 +143,7 @@ class TileMuseumPage extends StatelessWidget {
                   label: "Website",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://www.museudoazulejo.gov.pt/en/"),
+                    Uri.parse("https://escaperoom.pt/"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -154,7 +155,7 @@ class TileMuseumPage extends StatelessWidget {
                   label: "Location",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://maps.google.com/?q=Museu+Nacional+do+Azulejo"),
+                    Uri.parse("https://maps.google.com/?q=escape+room+lisboa"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -169,9 +170,7 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
   // BUTTON
-  // ===========================================================
   Widget _iconButton({
     required IconData icon,
     required String label,
@@ -208,9 +207,7 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
   // ADD TO CALENDAR
-  // ===========================================================
   Widget _addToCalendarButton() {
     return GestureDetector(
       onTap: () {},
@@ -240,9 +237,7 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
   // TIPS SECTION
-  // ===========================================================
   Widget _tipsSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -265,7 +260,7 @@ class TileMuseumPage extends StatelessWidget {
               Icon(Icons.lightbulb_rounded, color: Color(0xFF3B82F6)),
               SizedBox(width: 8),
               Text(
-                "Tips to Appreciate It More",
+                "Tips to Boost the Experience",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -278,31 +273,29 @@ class TileMuseumPage extends StatelessWidget {
 
           _tipCard(
             number: "1",
-            title: "Take your time",
-            subtitle: "There are centuries of history — don’t rush it.",
+            title: "Communicate clearly",
+            subtitle: "Share every clue you notice — teamwork is key!",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "2",
-            title: "Explore the cloister",
-            subtitle: "One of the most beautiful hidden gems in Lisbon.",
+            title: "Divide and conquer",
+            subtitle: "Split tasks to solve puzzles faster.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "3",
-            title: "Go early",
-            subtitle: "You avoid crowds and enjoy the rooms in peace.",
+            title: "Don't panic",
+            subtitle: "Stay calm and enjoy the challenge — it's meant to be fun.",
           ),
         ],
       ),
     );
   }
 
-  // ===========================================================
   // TIP CARD
-  // ===========================================================
   Widget _tipCard({
     required String number,
     required String title,
@@ -315,6 +308,7 @@ class TileMuseumPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             number,
@@ -357,9 +351,7 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
   // BONDIE SECTION
-  // ===========================================================
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -387,9 +379,9 @@ class TileMuseumPage extends StatelessWidget {
               ],
             ),
             child: const Text(
-              "Art and culture make conversations deeper and more meaningful. "
-                  "Exploring beautiful tilework together helps you connect, share perspectives, "
-                  "and create inspiring memories.",
+              "Escape Rooms are great for connection! You must collaborate, "
+                  "solve problems together, and trust each other under pressure. "
+                  "It strengthens communication — and it's incredibly fun!",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,
@@ -401,22 +393,20 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
   // INFO SQUARES
-  // ===========================================================
   Widget _smallInfoRow() {
     return Row(
       children: [
         Expanded(
-          child: _smallSquare(Icons.schedule_rounded, "Visit Time", "1–2h"),
+          child: _smallSquare(Icons.schedule_rounded, "Duration", "60m"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.euro_rounded, "Price", "6–10€"),
+          child: _smallSquare(Icons.euro_rounded, "Price", "18–30€"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.museum_rounded, "Vibe", "Cultural"),
+          child: _smallSquare(Icons.lock_clock_rounded, "Difficulty", "Medium"),
         ),
       ],
     );
@@ -460,9 +450,7 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
   // NAV BAR
-  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -500,9 +488,7 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
   // BACKGROUND
-  // ===========================================================
   Widget _buildBackground() {
     return Stack(
       children: [

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../widget/animated_bondie_widget.dart';
-import '../../../stats/bondie_stats_controller.dart';
-import '../../../../../main.dart';
+import '../../../../../widget/animated_bondie_widget.dart';
+import '../../../../stats/bondie_stats_controller.dart';
+import '../../../../../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EscapeRoomPage extends StatelessWidget {
+class LisbonChristmasLightsPage extends StatelessWidget {
   final BondieStatsController controller;
 
-  const EscapeRoomPage({super.key, required this.controller});
+  const LisbonChristmasLightsPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class EscapeRoomPage extends StatelessWidget {
                           ),
 
                           const Text(
-                            "Escape Room",
+                            "Christmas Lights",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 22,
@@ -105,24 +105,22 @@ class EscapeRoomPage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
-            child: Container(
-              height: 150,
-              width: double.infinity,
-              color: Colors.white,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
               child: Image.asset(
-                "assets/images/recommendations/game_over_logo.png",
-                fit: BoxFit.contain,
+                "assets/images/recommendations/lisbon_christmas_lights.jpg",
+                fit: BoxFit.cover,
+                alignment: const Alignment(0, -0.1), // shows more of the street
               ),
             ),
           ),
 
-          const SizedBox(height: 0),
+          const SizedBox(height: 14),
 
           const Text(
-            "Escape Rooms are thrilling and fun date activities where you solve puzzles, "
-                "follow clues, and escape before time runs out. It’s teamwork and excitement in one!\n\n"
-                "We recommend the Escape Rooms from GAME OVER — they’re known for great themes "
-                "and high-quality immersive experiences.",
+            "Lisbon’s Christmas Lights transform the city into a magical winter wonderland. "
+                "Walk through sparkling streets, Christmas markets, and festive decorations — "
+                "a cozy date full of warmth, photos, and holiday charm.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -131,19 +129,17 @@ class EscapeRoomPage extends StatelessWidget {
             ),
           ),
 
-
-
           const SizedBox(height: 22),
 
           Row(
             children: [
               Expanded(
                 child: _iconButton(
-                  icon: Icons.link_rounded,
-                  label: "Website",
+                  icon: Icons.camera_alt_rounded,
+                  label: "Best Spots",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://escaperoom.pt/"),
+                    Uri.parse("https://www.visitlisboa.com/"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -152,10 +148,10 @@ class EscapeRoomPage extends StatelessWidget {
               Expanded(
                 child: _iconButton(
                   icon: Icons.location_on_rounded,
-                  label: "Location",
+                  label: "Main Avenue",
                   color: const Color(0xFF2FB0EC),
                   onTap: () => launchUrl(
-                    Uri.parse("https://maps.google.com/?q=escape+room+lisboa"),
+                    Uri.parse("https://maps.google.com/?q=Avenida+da+Liberdade+Lisboa"),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
@@ -170,7 +166,9 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // BUTTON
+  // ===========================================================
+  // REUSABLE BUTTON
+  // ===========================================================
   Widget _iconButton({
     required IconData icon,
     required String label,
@@ -237,7 +235,9 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================
   // TIPS SECTION
+  // ===========================================================
   Widget _tipsSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -260,7 +260,7 @@ class EscapeRoomPage extends StatelessWidget {
               Icon(Icons.lightbulb_rounded, color: Color(0xFF3B82F6)),
               SizedBox(width: 8),
               Text(
-                "Tips to Boost the Experience",
+                "Tips to Enjoy Even More",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -273,22 +273,22 @@ class EscapeRoomPage extends StatelessWidget {
 
           _tipCard(
             number: "1",
-            title: "Communicate clearly",
-            subtitle: "Share every clue you notice — teamwork is key!",
+            title: "Go after sunset",
+            subtitle: "Lights look magical around 18:00 onwards.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "2",
-            title: "Divide and conquer",
-            subtitle: "Split tasks to solve puzzles faster.",
+            title: "Visit the Christmas markets",
+            subtitle: "Hot chocolate and cozy snacks complete the date.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "3",
-            title: "Don't panic",
-            subtitle: "Stay calm and enjoy the challenge — it's meant to be fun.",
+            title: "Walk through Avenida da Liberdade",
+            subtitle: "The most iconic lights and decorations in the city.",
           ),
         ],
       ),
@@ -308,7 +308,6 @@ class EscapeRoomPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             number,
@@ -351,7 +350,9 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================
   // BONDIE SECTION
+  // ===========================================================
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -379,9 +380,9 @@ class EscapeRoomPage extends StatelessWidget {
               ],
             ),
             child: const Text(
-              "Escape Rooms are great for connection! You must collaborate, "
-                  "solve problems together, and trust each other under pressure. "
-                  "It strengthens communication — and it's incredibly fun!",
+              "Christmas lights bring out warmth and emotional connection. "
+                  "Walking together through magical streets naturally creates moments "
+                  "of closeness, shared wonder, and romantic memories.",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,
@@ -393,20 +394,22 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================
   // INFO SQUARES
+  // ===========================================================
   Widget _smallInfoRow() {
     return Row(
       children: [
         Expanded(
-          child: _smallSquare(Icons.schedule_rounded, "Duration", "60m"),
+          child: _smallSquare(Icons.calendar_today_rounded, "Season", "Nov–Jan"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.euro_rounded, "Price", "18–30€"),
+          child: _smallSquare(Icons.euro_rounded, "Cost", "Free"),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _smallSquare(Icons.lock_clock_rounded, "Difficulty", "Medium"),
+          child: _smallSquare(Icons.favorite_rounded, "Vibe", "Magical"),
         ),
       ],
     );
@@ -450,7 +453,9 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================
   // NAV BAR
+  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -488,7 +493,9 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================
   // BACKGROUND
+  // ===========================================================
   Widget _buildBackground() {
     return Stack(
       children: [
