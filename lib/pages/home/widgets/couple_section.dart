@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:bondedapp/pages/profiles/couple/couple_profile_page.dart';
+import 'package:bondedapp/bondie/pages/stats/bondie_stats_controller.dart';
 
 class CoupleSection extends StatelessWidget {
-  const CoupleSection({super.key});
+  final BondieStatsController controller;
+
+  const CoupleSection({
+    super.key,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final double bondLevel = controller.avg; // (ainda existe mas já não é usado)
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const CoupleProfilePage()),
+          MaterialPageRoute(builder: (_) => CoupleProfilePage()),
         );
       },
 
@@ -63,53 +71,8 @@ class CoupleSection extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            Column(
-              children: [
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.favorite_rounded,
-                        color: Color(0xFF2595DA), size: 22),
-                    SizedBox(width: 6),
-                    Text(
-                      "Bond Level: 82%",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 15),
-
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 9,
-                    alignment: Alignment.centerLeft,
-                    decoration: BoxDecoration(color: Colors.grey[300]),
-                    child: FractionallySizedBox(
-                      alignment: Alignment.centerLeft,
-                      widthFactor: 0.82,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFF93C9FA),
-                              Color(0xFF5AB5F1),
-                              Color(0xFF2F8DCB),
-                              Color(0xFF1E7AB3),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // ⭐ Aqui estava o Bond Level + Info — agora removido
+            // ⭐ Aqui estava a barra de progresso — agora removida
           ],
         ),
       ),

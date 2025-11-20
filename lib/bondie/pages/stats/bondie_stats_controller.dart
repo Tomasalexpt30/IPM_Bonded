@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 
 class BondieStatsController {
-  double bond;
+  double connection;
   double energy;
   double affection;
 
   BondieStatsController({
-    this.bond = 0.80,
-    this.energy = 0.90,
-    this.affection = 0.70,
+    this.connection = 0.10,
+    this.energy = 0.10,
+    this.affection = 0.10,
   });
 
-  // Atualiza valores futuramente (Firebase, lógica do app, etc)
   void updateStats({
-    double? bond,
+    double? connection,
     double? energy,
     double? affection,
   }) {
-    if (bond != null) this.bond = bond;
+    if (connection != null) this.connection = connection;
     if (energy != null) this.energy = energy;
     if (affection != null) this.affection = affection;
   }
 
-  double get avg => (bond + energy + affection) / 3;
+  double get avg => (connection + energy + affection) / 3;
 
   // -------------------------
   // Bondie Big Image
@@ -42,7 +41,7 @@ class BondieStatsController {
     if (energy == 0) return "Ghost";
     if (avg >= 0.80) return "Super Happy";
     if (avg >= 0.50) return "Happy";
-    if (avg >= 0.20) return "Sad";
+    if (avg >= 0.20) return "Low Mood";
     return "Depressed";
   }
 

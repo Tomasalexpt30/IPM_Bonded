@@ -23,7 +23,11 @@ class CoupleProfileInfo extends StatefulWidget {
 
 class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     with SingleTickerProviderStateMixin {
+
   late final AnimationController _controller;
+
+  // TEMPORARY BOND LEVEL (replace with real controller later)
+  double bondLevel = 0.82;
 
   @override
   void initState() {
@@ -77,13 +81,68 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
               CircleAvatar(radius: 38, backgroundImage: AssetImage("assets/images/user1.png")),
-              Icon(
-                Icons.favorite_rounded,
-                size: 55,
-                color: Color(0xFF3B82F6), // Azul Bonded
+              Icon(Icons.favorite_rounded, size: 55, color: Color(0xFF4E8EF6)),
+              CircleAvatar(radius: 38, backgroundImage: AssetImage("assets/images/user2.png")),
+            ],
+          ),
+
+          const SizedBox(height: 30),
+
+          // ⭐ BOND LEVEL BLOCK (EXACTLY LIKE CoupleSection)
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.favorite_rounded,
+                      color: Color(0xFF3B82F6), size: 22),
+                  const SizedBox(width: 6),
+
+                  Text(
+                    "Bond Level: ${(bondLevel * 100).round()}%",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                      fontSize: 16,
+                    ),
+                  ),
+
+                  const SizedBox(width: 6),
+
+                  GestureDetector(
+                    onTap: () => _showBondLevelInfoSheet(context),
+                    child: Icon(Icons.info_outline_rounded,
+                        size: 18, color: Colors.grey[600]),
+                  ),
+                ],
               ),
 
-              CircleAvatar(radius: 38, backgroundImage: AssetImage("assets/images/user2.png")),
+              const SizedBox(height: 12),
+
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  height: 9,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(color: Colors.grey[300]),
+                  child: FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: bondLevel,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF99C4FF),
+                            Color(0xFF7EB0FF),
+                            Color(0xFF5696FD),
+                            Color(0xFF3B82F6),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
 
@@ -101,29 +160,24 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
             ),
             child: Column(
               children: [
+
                 const Text(
                   "Couple Info",
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF3B82F6),
+                    color: Color(0xFF4E8EF6),
                     letterSpacing: 0.5,
                   ),
                 ),
 
                 const SizedBox(height: 22),
 
-                // ======================================================
-                // RESPONSIVE ROW (INFO + VINIL)
-                // ======================================================
                 LayoutBuilder(
                   builder: (context, constraints) {
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // ===========================
-                        // INFO COLUMN
-                        // ===========================
                         SizedBox(
                           width: constraints.maxWidth * 0.48,
                           child: Column(
@@ -135,7 +189,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                                 value: "$daysTogether days",
                               ),
                               const SizedBox(height: 22),
-
                               _infoTile(
                                 icon: Icons.calendar_month_rounded,
                                 label: "Anniversary",
@@ -145,7 +198,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                                     "${widget.relationshipStartDate.year}",
                               ),
                               const SizedBox(height: 22),
-
                               _infoTile(
                                 icon: Icons.flight_takeoff_rounded,
                                 label: "Trips Together",
@@ -157,14 +209,9 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
                         const SizedBox(width: 32),
 
-
-
-                        // ===========================
-                        // VINYL + MUSIC SIDE
-                        // ===========================
                         Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 10), // 🔥 aumenta aqui
+                            padding: const EdgeInsets.only(top: 10),
                             child: Column(
                               children: [
                                 AnimatedBuilder(
@@ -217,8 +264,178 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     );
   }
 
+  // ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+  // EXACT SAME BOND LEVEL SHEET FROM CoupleSection
+  // ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+  void _showBondLevelInfoSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+
+              Container(
+                width: 45,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+
+              const SizedBox(height: 22),
+
+              const Text(
+                "How Bond Level is calculated",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black87,
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              const Text(
+                "Your Bond Level represents the overall health and connection of your relationship. "
+                    "It's calculated using the average of three key emotional stats:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  height: 1.5,
+                  color: Colors.black87,
+                ),
+              ),
+
+              const SizedBox(height: 26),
+
+              // ⭐ Parameters with circular backgrounds
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF62C85B).withOpacity(0.15),
+                              shape: BoxShape.circle),
+                          child: const Icon(Icons.link_rounded,
+                              color: Color(0xFF62C85B), size: 24),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text("Connection",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14)),
+                      ],
+                    ),
+                  ),
+
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFFFB834).withOpacity(0.18),
+                              shape: BoxShape.circle),
+                          child: const Icon(Icons.bolt_rounded,
+                              color: Color(0xFFFFB834), size: 24),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text("Energy",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14)),
+                      ],
+                    ),
+                  ),
+
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFE085B5).withOpacity(0.18),
+                              shape: BoxShape.circle),
+                          child: const Icon(Icons.favorite_rounded,
+                              color: Color(0xFFE085B5), size: 24),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text("Affection",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 30),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Image.asset(
+                    "assets/images/bondie_icons/bondie_talking.png",
+                    height: 62,
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(18),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.18),
+                            blurRadius: 20,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: const Text(
+                        "Visit me to check the current status of your relationship!",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 14,
+                          height: 1.45,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 22),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   // ======================================================
-  // VINYL WITH DYNAMIC SIZE
+  // VINYL MAKER
   // ======================================================
   Widget _buildVinyl(String cover, {double size = 130}) {
     return Container(
@@ -231,6 +448,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
       child: Stack(
         alignment: Alignment.center,
         children: [
+
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -300,33 +518,22 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
             color: Color(0xFFDCEAFF),
             shape: BoxShape.circle,
           ),
-          child: Icon(
-            icon,
-            size: 20,
-            color: Color(0xFF3B82F6),
-          ),
+          child: Icon(icon, size: 20, color: Color(0xFF4E8EF6)),
         ),
         const SizedBox(width: 12),
 
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.black54.withOpacity(0.7),
-              ),
-            ),
+            Text(label,
+                style: TextStyle(
+                    fontSize: 12, color: Colors.black54.withOpacity(0.7))),
             const SizedBox(height: 4),
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Colors.black87,
-              ),
-            ),
+            Text(value,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black87)),
           ],
         ),
       ],
@@ -334,7 +541,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
   }
 
   // ======================================================
-  // MONTH NAME
+  // MONTH
   // ======================================================
   String _month(int m) {
     const months = [

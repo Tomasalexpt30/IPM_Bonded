@@ -33,9 +33,9 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     // Título da página
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(bottom: 30),
                       child: Text(
                         "Home",
@@ -47,21 +47,21 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
 
-                    // 💞 Couple section
-                    CoupleSection(),
-                    SizedBox(height: 35),
+                    // 💞 Couple section — AGORA COM CONTROLLER
+                    CoupleSection(controller: bondieStats),
+                    const SizedBox(height: 35),
 
                     // 🌤️ Daily activity
-                    DailyActivityCard(),
-                    SizedBox(height: 35),
+                    const DailyActivityCard(),
+                    const SizedBox(height: 35),
 
                     // 🕒 Time Capsule
-                    TimeCapsuleCard(),
-                    SizedBox(height: 35),
+                    const TimeCapsuleCard(),
+                    const SizedBox(height: 35),
 
                     // 🏆 Weekly Challenge — aparece só ao fazer scroll
-                    WeeklyChallengeCard(),
-                    SizedBox(height: 35),
+                    const WeeklyChallengeCard(),
+                    const SizedBox(height: 35),
                   ],
                 ),
               ),
@@ -89,17 +89,61 @@ class HomePage extends StatelessWidget {
         ),
 
         // 💙 Corações decorativos
-        Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08)),),
-        Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08)),),
-        Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08)),),
-        Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08)),),
-        Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08)),),
-        Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08)),),
-        Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08)),),
-        Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08)),),
-        Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08)),),
-        Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08)),),
-        Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08)),),
+        Positioned(
+          top: -45,
+          left: -40,
+          child: _heart(180, Colors.blueAccent.withOpacity(0.08)),
+        ),
+        Positioned(
+          top: 140,
+          left: -60,
+          child: _heart(250, Colors.blueAccent.withOpacity(0.08)),
+        ),
+        Positioned(
+          top: 60,
+          right: 0,
+          child: _heart(170, Colors.lightBlue.withOpacity(0.08)),
+        ),
+        Positioned(
+          top: 200,
+          left: 220,
+          child: _heart(50, Colors.blue.withOpacity(0.08)),
+        ),
+        Positioned(
+          top: 300,
+          left: 180,
+          child: _heart(90, Colors.blue.withOpacity(0.08)),
+        ),
+        Positioned(
+          top: 420,
+          left: 30,
+          child: _heart(120, Colors.blueAccent.withOpacity(0.08)),
+        ),
+        Positioned(
+          bottom: 145,
+          right: -50,
+          child: _heart(220, Colors.lightBlue.withOpacity(0.08)),
+        ),
+        Positioned(
+          top: 220,
+          right: -80,
+          child: _heart(160, Colors.indigoAccent.withOpacity(0.08)),
+        ),
+        Positioned(
+          bottom: -50,
+          left: -50,
+          child: _heart(200, Colors.lightBlue.withOpacity(0.08)),
+        ),
+        Positioned(
+          bottom: 150,
+          left: 140,
+          child: _heart(70, Colors.indigoAccent.withOpacity(0.08)),
+        ),
+        Positioned(
+          bottom: -150,
+          right: -50,
+          child: _heart(270, Colors.blueAccent.withOpacity(0.08)),
+        ),
       ],
     );
   }

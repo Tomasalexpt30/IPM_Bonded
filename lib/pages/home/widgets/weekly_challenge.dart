@@ -69,9 +69,9 @@ class WeeklyChallengeCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         gradient: const LinearGradient(
                           colors: [
-                            Color(0xFF5AB5F1),
-                            Color(0xFF2F8DCB),
-                            Color(0xFF1E7AB3),
+                            Color(0xFF7EB0FF),
+                            Color(0xFF5696FD),
+                            Color(0xFF3B82F6),
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -149,10 +149,10 @@ class WeeklyChallengeCard extends StatelessWidget {
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
                                   colors: [
-                                    Color(0xFF93C9FA),
-                                    Color(0xFF5AB5F1),
-                                    Color(0xFF2F8DCB),
-                                    Color(0xFF1E7AB3),
+                                    Color(0xFF99C4FF),
+                                    Color(0xFF7EB0FF),
+                                    Color(0xFF5696FD),
+                                    Color(0xFF3B82F6),
                                   ],
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,

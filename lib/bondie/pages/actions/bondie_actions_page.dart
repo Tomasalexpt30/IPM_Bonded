@@ -84,7 +84,7 @@ class BondieActions extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 28, color: const Color(0xFF2595DA)),
+            Icon(icon, size: 28, color: const Color(0xFF3B82F6)),
             const SizedBox(width: 14),
             Expanded(
               child: Text(

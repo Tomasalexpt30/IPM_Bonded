@@ -50,7 +50,7 @@ class BondieStats extends StatelessWidget {
             const SizedBox(width: 30),
 
             const Icon(Icons.hourglass_bottom_rounded,
-                size: 20, color: Colors.blueAccent),
+                size: 20, color: Color(0xFF3B82F6)),
             const SizedBox(width: 6),
             const Text(
               "2y 3m",
@@ -70,21 +70,21 @@ class BondieStats extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _CircularStat(
-              label: "Bond",
-              icon: Icons.favorite_rounded,
-              iconColor: const Color(0xFF2F8DCB),
-              value: controller.bond,
+              label: "Connection",
+              icon: Icons.link_rounded,
+              iconColor: const Color(0xFF66C85B), // mint green
+              value: controller.connection,
             ),
             _CircularStat(
               label: "Energy",
               icon: Icons.bolt_rounded,
-              iconColor: const Color(0xFFFFB834),
+              iconColor: const Color(0xFFFFB834), // yellow (same)
               value: controller.energy,
             ),
             _CircularStat(
               label: "Affection",
-              icon: Icons.handshake_rounded,
-              iconColor: const Color(0xFF8C4AD3),
+              icon: Icons.favorite_rounded,
+              iconColor: const Color(0xFFE085B5), // warm lavender pink
               value: controller.affection,
             ),
           ],
@@ -97,7 +97,7 @@ class BondieStats extends StatelessWidget {
 }
 
 // ==========================================================================
-// CIRCULAR STAT (igual ao original)
+// CIRCULAR STAT
 // ==========================================================================
 class _CircularStat extends StatelessWidget {
   final String label;
@@ -138,11 +138,12 @@ class _CircularStat extends StatelessWidget {
             color: Colors.black87,
           ),
         ),
+        const SizedBox(height: 1),
         Text(
           "${(value * 100).round()}%",
           style: TextStyle(
             fontSize: 13,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w800,
             color: iconColor,
           ),
         ),

@@ -79,7 +79,11 @@ class CoupleProfileChart extends StatelessWidget {
                       reservedSize: 30,
                       getTitlesWidget: (value, _) => Text(
                         "${(value * 100).round()}%",
-                        style: const TextStyle(color: Colors.black54, fontSize: 10),
+                        style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600, // ← mais peso
+                        ),
                       ),
                     ),
                   ),
@@ -96,7 +100,11 @@ class CoupleProfileChart extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 10), // ← MAIOR ESPAÇAMENTO
                           child: Text(
                             days[value.toInt()],
-                            style: const TextStyle(fontSize: 11, color: Colors.black54),
+                            style: const TextStyle(
+                              color: Colors.black87,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600, // ← mais peso
+                            ),
                           ),
                         );
                       },
@@ -112,9 +120,9 @@ class CoupleProfileChart extends StatelessWidget {
 
 
                 lineBarsData: [
-                  _lineData(bond, const Color(0xFF3B82F6)),
-                  _lineData(energy, const Color(0xFFF59E0B)),
-                  _lineData(mood, const Color(0xFF10B981)),
+                  _lineData(bond, const Color(0xFF66C85B)),
+                  _lineData(energy, const Color(0xFFFFB834)),
+                  _lineData(mood, const Color(0xFFE085B5)),
                 ],
               ),
             ),
@@ -131,11 +139,11 @@ class CoupleProfileChart extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _legendItem("Bond", const Color(0xFF3B82F6)),
+        _legendItem("Connection", const Color(0xFF66C85B)),
         const SizedBox(width: 18),
-        _legendItem("Energy", const Color(0xFFF59E0B)),
+        _legendItem("Energy", const Color(0xFFFFB834)),
         const SizedBox(width: 18),
-        _legendItem("Mood", const Color(0xFF10B981)),
+        _legendItem("Affection", const Color(0xFFE085B5)),
       ],
     );
   }
@@ -152,7 +160,14 @@ class CoupleProfileChart extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 6),
-        Text(label, style: const TextStyle(fontSize: 12, color: Colors.black87)),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500, // ← mais pesado
+            color: Colors.black87,
+          ),
+        ),
       ],
     );
   }
