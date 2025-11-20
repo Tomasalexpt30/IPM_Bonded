@@ -19,6 +19,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  fl_chart: ^0.69.0
 
 flutter:
   uses-material-design: true
@@ -27,6 +28,7 @@ flutter:
     - assets/images/user1.png
     - assets/images/user2.png
     - assets/images/bonded_logo.png
+    - assets/images/couple_album.jpg
 
     # Bondie icons
     - assets/images/bondie_icons/bondie_depressed.png
