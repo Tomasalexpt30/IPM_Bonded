@@ -211,7 +211,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
                         Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 10),
+                            padding: const EdgeInsets.only(top: 7),
                             child: Column(
                               children: [
                                 AnimatedBuilder(
