@@ -88,14 +88,20 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
           const SizedBox(height: 30),
 
-          // ⭐ BOND LEVEL BLOCK (EXACTLY LIKE CoupleSection)
-          Column(
+        // ⭐ BOND LEVEL BLOCK (CLICKABLE AREA)
+        GestureDetector(
+          onTap: () => _showBondLevelInfoSheet(context),
+          child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.favorite_rounded,
-                      color: Color(0xFF3B82F6), size: 22),
+
+                  Icon(
+                    Icons.info_outline_rounded,
+                    size: 18,
+                    color: const Color(0xFF3B82F6),
+                  ),
                   const SizedBox(width: 6),
 
                   Text(
@@ -109,11 +115,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
                   const SizedBox(width: 6),
 
-                  GestureDetector(
-                    onTap: () => _showBondLevelInfoSheet(context),
-                    child: Icon(Icons.info_outline_rounded,
-                        size: 18, color: Colors.grey[600]),
-                  ),
+
                 ],
               ),
 
@@ -145,6 +147,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
               ),
             ],
           ),
+        ),
 
           const SizedBox(height: 30),
 
@@ -264,9 +267,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     );
   }
 
-  // ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
   // EXACT SAME BOND LEVEL SHEET FROM CoupleSection
-  // ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
   void _showBondLevelInfoSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -412,7 +413,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                         ],
                       ),
                       child: const Text(
-                        "Visit me to check the current status of your relationship!",
+                        "Visit my page to check the current status of your relationship!",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 14,
