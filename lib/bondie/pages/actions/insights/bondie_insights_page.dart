@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../../main.dart';
+import 'package:bondedapp/layout/app_background.dart';
 
 // IMPORTS DAS OPÇÕES
 import 'options/tip_of_the_day.dart';
@@ -47,86 +48,81 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
       backgroundColor: const Color(0xFFF8F9FD),
       bottomNavigationBar: _buildBottomBar(context),
 
-      body: Stack(
-        children: [
-          _buildBackground(),
-          SafeArea(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 6),
-                    _buildHeader(),
+      body: AppBackground(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                children: [
+                  const SizedBox(height: 6),
+                  _buildHeader(),
 
-                    const SizedBox(height: 20),
-                    _buildBondieInsight(),
+                  const SizedBox(height: 20),
+                  _buildBondieInsight(),
 
-                    const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                    // ============================
-                    //      INSIGHT CARDS
-                    // ============================
-                    _buildInsightCard(
-                      icon: Icons.lightbulb_outline_rounded,
-                      title: "Tip of the Day",
-                      description: "A simple idea from Bondie to try today.",
-                      color: const Color(0xFF7AB6F6),
-                      onTap: () => TipOfTheDayOption.show(context),
-                    ),
+                  // ===== INSIGHT CARDS =====
+                  _buildInsightCard(
+                    icon: Icons.lightbulb_outline_rounded,
+                    title: "Tip of the Day",
+                    description: "A simple idea from Bondie to try today.",
+                    color: const Color(0xFF7AB6F6),
+                    onTap: () => TipOfTheDayOption.show(context),
+                  ),
 
-                    const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                    _buildInsightCard(
-                      icon: Icons.favorite_rounded,
-                      title: "Affection Boost",
-                      description:
-                      "Small actions that increase warmth and closeness.",
-                      color: const Color(0xFFF69AB4),
-                      onTap: () => AffectionBoostOption.show(context),
-                    ),
+                  _buildInsightCard(
+                    icon: Icons.favorite_rounded,
+                    title: "Affection Boost",
+                    description:
+                    "Small actions that increase warmth and closeness.",
+                    color: const Color(0xFFF69AB4),
+                    onTap: () => AffectionBoostOption.show(context),
+                  ),
 
-                    const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                    _buildInsightCard(
-                      icon: Icons.bolt_rounded,
-                      title: "Energy Reset",
-                      description:
-                      "Quick suggestions to reset the mood when the day feels heavy.",
-                      color: const Color(0xFFFFB834),
-                      onTap: () => EnergyResetOption.show(context),
-                    ),
+                  _buildInsightCard(
+                    icon: Icons.bolt_rounded,
+                    title: "Energy Reset",
+                    description:
+                    "Quick suggestions to reset the mood when the day feels heavy.",
+                    color: const Color(0xFFFFB834),
+                    onTap: () => EnergyResetOption.show(context),
+                  ),
 
-                    const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                    _buildInsightCard(
-                      icon: Icons.handshake_rounded,
-                      title: "Quick Couple Exercise",
-                      description:
-                      "Short, simple exercises to strengthen your bond.",
-                      color: const Color(0xFF8C4AD3),
-                      onTap: () => CoupleExerciseOption.show(context),
-                    ),
+                  _buildInsightCard(
+                    icon: Icons.handshake_rounded,
+                    title: "Quick Couple Exercise",
+                    description:
+                    "Short, simple exercises to strengthen your bond.",
+                    color: const Color(0xFF8C4AD3),
+                    onTap: () => CoupleExerciseOption.show(context),
+                  ),
 
-                    const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                    _buildInsightCard(
-                      icon: Icons.chat_bubble_outline_rounded,
-                      title: "Ask Bondie Anything",
-                      description: "Tap to get a special response from Bondie.",
-                      color: const Color(0xFF5EC8A7),
-                      onTap: () => AskBondieOption.show(context),
-                    ),
+                  _buildInsightCard(
+                    icon: Icons.chat_bubble_outline_rounded,
+                    title: "Ask Bondie Anything",
+                    description:
+                    "Tap to get a special response from Bondie.",
+                    color: const Color(0xFF5EC8A7),
+                    onTap: () => AskBondieOption.show(context),
+                  ),
 
-                    const SizedBox(height: 40),
-                  ],
-                ),
+                  const SizedBox(height: 40),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -171,14 +167,13 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
   // BONDIE TALKING CARD
   // ===========================================================
   Widget _buildBondieInsight() {
-    final bubbleColor = const Color(0xFFD8EAFE); // azul visível e harmonioso
+    final bubbleColor = const Color(0xFFD8EAFE);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Bondie ao lado da bolha
           Padding(
             padding: const EdgeInsets.only(top: 6),
             child: Image.asset(
@@ -189,7 +184,6 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
 
           const SizedBox(width: 12),
 
-          // Speech Bubble (sem triângulo)
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
@@ -197,7 +191,7 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
                 color: bubbleColor,
                 borderRadius: BorderRadius.circular(22),
                 border: Border.all(
-                  color: const Color(0xFFAAC7F8), // borda suave
+                  color: const Color(0xFFAAC7F8),
                   width: 1.6,
                 ),
                 boxShadow: [
@@ -356,86 +350,22 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_rounded),
-            label: "Home",
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_rounded),
-            label: "Calendar",
+            label: 'Calendar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline_rounded),
-            label: "Messages",
+            icon: Icon(Icons.favorite_rounded),
+            label: 'Couple',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
-            label: "Profile",
+            icon: Icon(Icons.settings_rounded),
+            label: 'Settings',
           ),
         ],
       ),
     );
   }
-
-  // ===========================================================
-  // BACKGROUND + HEARTS
-  // ===========================================================
-  Widget _buildBackground() {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
-      ],
-    );
-  }
-
-  static Widget _heart(double size, Color color) => CustomPaint(
-    size: Size(size, size),
-    painter: _HeartPainter(color),
-  );
-}
-
-// ===========================================================
-// HEART PAINTER
-// ===========================================================
-class _HeartPainter extends CustomPainter {
-  final Color color;
-  _HeartPainter(this.color);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final w = size.width;
-    final h = size.height;
-
-    final path = Path()
-      ..moveTo(w / 2, h * 0.75)
-      ..cubicTo(-w * 0.2, h * 0.35, w * 0.25, -h * 0.2, w / 2, h * 0.25)
-      ..cubicTo(w * 0.75, -h * 0.2, w * 1.2, h * 0.35, w / 2, h * 0.75)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'pages/home/home_page.dart';
 import 'pages/calendar/calendar_page.dart';
+import 'pages/profiles/couple/couple_profile_page.dart';
+
 import 'bondie/widget/animated_bondie_widget.dart';
 import 'bondie/pages/bondie_page.dart';
 import 'bondie/pages/stats/bondie_stats_controller.dart';
-import 'pages/profiles/couple/couple_profile_page.dart';
 
 void main() {
   runApp(const BondedApp());
@@ -17,24 +19,24 @@ class BondedApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Bonded',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Poppins',
+        useMaterial3: true,
         scaffoldBackgroundColor: const Color(0xFFF8F9FD),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF3B82F6),
           secondary: const Color(0xFF06B6D4),
         ),
-        useMaterial3: true,
       ),
-      debugShowCheckedModeBanner: false,
       home: const MainScreen(),
     );
   }
 }
 
-// =====================================
-// MAIN SCREEN (BOTTOM NAVIGATION)
-// =====================================
+// ============================================================
+// MAIN SCREEN — CONTROLA TODA A NAVEGAÇÃO PRINCIPAL
+// ============================================================
 class MainScreen extends StatefulWidget {
   final int initialIndex;
   const MainScreen({super.key, this.initialIndex = 0});
@@ -46,32 +48,35 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late int _selectedIndex;
 
+  // Controller central — partilhado entre todas as páginas
   final BondieStatsController bondieStats = BondieStatsController();
 
-  late List<Widget> _pages;
+  late final List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
+
     _selectedIndex = widget.initialIndex;
 
     _pages = [
       HomePage(bondieStats: bondieStats),
       const CalendarPage(),
-      CoupleProfilePage(controller: bondieStats),   // ← abre aqui
+      CoupleProfilePage(controller: bondieStats),
       const Center(child: Text("Settings page coming soon")),
     ];
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  void _onTabTapped(int index) {
+    setState(() => _selectedIndex = index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ------------------------------------------------------------
+      // PAGE CONTENT
+      // ------------------------------------------------------------
       body: Stack(
         children: [
           _pages[_selectedIndex],
@@ -85,11 +90,10 @@ class _MainScreenState extends State<MainScreen> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        BondiePage(statsController: bondieStats),
+                    builder: (_) => BondiePage(statsController: bondieStats),
                   ),
                 );
-                setState(() {});
+                setState(() {}); // Atualiza ao voltar
               },
               child: AnimatedBondieWidget(controller: bondieStats),
             ),
@@ -97,11 +101,17 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
 
-      // Bottom Navigation Bar
+      // ------------------------------------------------------------
+      // BOTTOM NAVIGATION BAR
+      // ------------------------------------------------------------
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
           color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(26),
+            topRight: Radius.circular(26),
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.blueGrey.withOpacity(0.15),
@@ -109,23 +119,18 @@ class _MainScreenState extends State<MainScreen> {
               offset: const Offset(0, -3),
             ),
           ],
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(26),
-            topRight: Radius.circular(26),
-          ),
         ),
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
+          onTap: _onTabTapped,
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          selectedItemColor: const Color(0xFF3B82F6),
-          unselectedItemColor: Colors.grey[500],
-          showUnselectedLabels: true,
           iconSize: 30,
           selectedFontSize: 14,
           unselectedFontSize: 13,
+          selectedItemColor: const Color(0xFF3B82F6),
+          unselectedItemColor: Colors.grey[500],
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_rounded),
@@ -150,7 +155,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-// Helper — open MainScreen at index
+// ============================================================
+// HELPER PARA ABRIR O MAIN COM UM INDEX ESPECÍFICO
+// ============================================================
 class MainScreenWithIndex extends StatelessWidget {
   final int index;
   const MainScreenWithIndex({super.key, required this.index});

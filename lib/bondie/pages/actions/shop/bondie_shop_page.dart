@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../../main.dart';
-import 'bondie_shop_header.dart';
-import 'bondie_shop_grid.dart';
-import 'bondie_shop_sheets.dart';
+import 'sections/bondie_shop_header.dart';
+import 'sections/bondie_shop_grid.dart';
+import 'sections/bondie_shop_sheets.dart';
+import 'package:bondedapp/layout/app_background.dart';
 
 class BondieShopPage extends StatefulWidget {
   const BondieShopPage({super.key});
@@ -113,85 +114,75 @@ class _BondieShopPageState extends State<BondieShopPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
-
-      // ⭐ ADICIONADO AQUI — Bottom Navigation Bar igual à da BondiePage
       bottomNavigationBar: _buildBottomNavBar(),
 
-      body: Stack(
-        children: [
-          _buildBackground(),
-          SafeArea(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BondieShopHeader(
-                      coins: coins,
+      // ⭐ Agora substituído por AppBackground
+      body: AppBackground(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BondieShopHeader(
+                    coins: coins,
+                    selectedSort: selectedSort,
+                    selectedFilter: selectedFilter,
+                    equippedIndex: equippedIndex,
+                    skins: skins,
+                    rarityColor: rarityColor,
+                    onOpenSort: () => showSortSheet(
+                      context: context,
                       selectedSort: selectedSort,
-                      selectedFilter: selectedFilter,
-                      equippedIndex: equippedIndex,
-                      skins: skins,
-                      rarityColor: rarityColor,
-
-                      onOpenSort: () => showSortSheet(
-                        context: context,
-                        selectedSort: selectedSort,
-                        onSelect: (value) =>
-                            setState(() => selectedSort = value),
-                      ),
-
-                      onOpenFilter: () => showFilterSheet(
-                        context: context,
-                        selectedFilter: selectedFilter,
-                        rarityColor: rarityColor,
-                        onSelect: (value) =>
-                            setState(() => selectedFilter = value),
-                      ),
-
-                      onOpenCoins: () => showCoinsSheet(
-                        context: context,
-                        coins: coins,
-                      ),
+                      onSelect: (value) =>
+                          setState(() => selectedSort = value),
                     ),
-
-                    const SizedBox(height: 20),
-
-                    BondieShopGrid(
-                      skins: skins,
+                    onOpenFilter: () => showFilterSheet(
+                      context: context,
                       selectedFilter: selectedFilter,
-                      selectedSort: selectedSort,
-                      purchased: purchased,
-                      equippedIndex: equippedIndex,
+                      rarityColor: rarityColor,
+                      onSelect: (value) =>
+                          setState(() => selectedFilter = value),
+                    ),
+                    onOpenCoins: () => showCoinsSheet(
+                      context: context,
                       coins: coins,
-                      rarityColor: rarityColor,
-
-                      onEquip: (i) => setState(() => equippedIndex = i),
-
-                      onBuy: (i, price) {
-                        setState(() {
-                          coins -= price;
-                          purchased.add(i);
-                          equippedIndex = i;
-                        });
-                      },
-
-                      onNotEnoughCoins: () =>
-                          showNotEnoughCoinsSheet(context: context),
                     ),
-                  ],
-                ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  BondieShopGrid(
+                    skins: skins,
+                    selectedFilter: selectedFilter,
+                    selectedSort: selectedSort,
+                    purchased: purchased,
+                    equippedIndex: equippedIndex,
+                    coins: coins,
+                    rarityColor: rarityColor,
+                    onEquip: (i) => setState(() => equippedIndex = i),
+                    onBuy: (i, price) {
+                      setState(() {
+                        coins -= price;
+                        purchased.add(i);
+                        equippedIndex = i;
+                      });
+                    },
+                    onNotEnoughCoins: () =>
+                        showNotEnoughCoinsSheet(context: context),
+                  ),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 
-  // ⭐ BOTTOM NAV BAR — IGUALZINHA À DA BONDIEPAGE
+  // ⭐ Bottom Navigation Bar
   Widget _buildBottomNavBar() {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -238,79 +229,15 @@ class _BondieShopPageState extends State<BondieShopPage> {
             label: 'Calendar',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), label: "Favorites"),
+            icon: Icon(Icons.favorite_rounded),
+            label: 'Couple',
+          ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
-            label: 'Profile',
+            icon: Icon(Icons.settings_rounded),
+            label: 'Settings',
           ),
         ],
       ),
     );
   }
-
-  // BACKGROUND
-  Widget _buildBackground() {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        ..._hearts(),
-      ],
-    );
-  }
-
-  List<Widget> _hearts() {
-    return [
-      Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
-      Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
-      Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
-      Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08))),
-      Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08))),
-      Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
-      Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
-      Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
-      Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
-      Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
-      Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
-    ];
-  }
-
-  Widget _heart(double size, Color color) {
-    return CustomPaint(
-      size: Size(size, size),
-      painter: _HeartPainter(color.withOpacity(0.08)),
-    );
-  }
-}
-
-class _HeartPainter extends CustomPainter {
-  final Color color;
-  _HeartPainter(this.color);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final w = size.width;
-    final h = size.height;
-
-    final path = Path()
-      ..moveTo(w / 2, h * 0.75)
-      ..cubicTo(-w * 0.2, h * 0.35, w * 0.25, -h * 0.2, w / 2, h * 0.25)
-      ..cubicTo(w * 0.75, -h * 0.2, w * 1.2, h * 0.35, w / 2, h * 0.75);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

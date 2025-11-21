@@ -3,6 +3,7 @@ import '../../../../../widget/animated_bondie_widget.dart';
 import '../../../../stats/bondie_stats_controller.dart';
 import '../../../../../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:bondedapp/layout/app_background.dart';
 
 class EscapeRoomPage extends StatelessWidget {
   final BondieStatsController controller;
@@ -15,70 +16,66 @@ class EscapeRoomPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF8F9FD),
       bottomNavigationBar: _buildBottomBar(context),
 
-      body: Stack(
-        children: [
-          _buildBackground(),
+      body: AppBackground(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 6),
 
-          SafeArea(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 6),
-
-                    // HEADER
-                    SizedBox(
-                      height: 40,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: const Icon(
-                                Icons.arrow_back_rounded,
-                                size: 26,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-
-                          const Text(
-                            "Escape Room",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
+                  // HEADER
+                  SizedBox(
+                    height: 40,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const Icon(
+                              Icons.arrow_back_rounded,
+                              size: 26,
                               color: Colors.black87,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+
+                        const Text(
+                          "Escape Room",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
 
-                    const SizedBox(height: 26),
+                  const SizedBox(height: 26),
 
-                    _mainInfoBlock(context),
-                    const SizedBox(height: 26),
+                  _mainInfoBlock(context),
+                  const SizedBox(height: 26),
 
-                    _bondieWhySection(),
-                    const SizedBox(height: 26),
+                  _bondieWhySection(),
+                  const SizedBox(height: 26),
 
-                    _tipsSection(),
-                    const SizedBox(height: 26),
+                  _tipsSection(),
+                  const SizedBox(height: 26),
 
-                    _smallInfoRow(),
-                    const SizedBox(height: 60),
-                  ],
-                ),
+                  _smallInfoRow(),
+                  const SizedBox(height: 60),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -130,8 +127,6 @@ class EscapeRoomPage extends StatelessWidget {
               height: 1.45,
             ),
           ),
-
-
 
           const SizedBox(height: 22),
 
@@ -207,7 +202,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // ADD TO CALENDAR
   Widget _addToCalendarButton() {
     return GestureDetector(
       onTap: () {},
@@ -295,7 +289,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // TIP CARD
   Widget _tipCard({
     required String number,
     required String title,
@@ -351,7 +344,7 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // BONDIE SECTION
+  // BONDIE WHY SECTION
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -379,9 +372,10 @@ class EscapeRoomPage extends StatelessWidget {
               ],
             ),
             child: const Text(
-              "Escape Rooms are great for connection! You must collaborate, "
-                  "solve problems together, and trust each other under pressure. "
-                  "It strengthens communication — and it's incredibly fun!",
+              "Escape Rooms are great for connection!"
+                  " You must collaborate, solve problems together,"
+                  " and trust each other under pressure."
+                  " It strengthens communication — and it's incredibly fun!",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,
@@ -450,7 +444,9 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================
   // NAV BAR
+  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -474,78 +470,31 @@ class EscapeRoomPage extends StatelessWidget {
         onTap: (index) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => MainScreenWithIndex(index: index)),
+            MaterialPageRoute(
+              builder: (_) => MainScreenWithIndex(index: index),
+            ),
                 (_) => false,
           );
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded), label: "Calendar"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "Favorites"),
-          BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "Profile"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_rounded),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month_rounded),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_rounded),
+            label: 'Couple',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings_rounded),
+            label: 'Settings',
+          ),
         ],
       ),
     );
   }
-
-  // BACKGROUND
-  Widget _buildBackground() {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
-      ],
-    );
-  }
-
-  static Widget _heart(double size, Color color) {
-    return CustomPaint(
-      size: Size(size, size),
-      painter: _HeartPainter(color),
-    );
-  }
-}
-
-class _HeartPainter extends CustomPainter {
-  final Color color;
-  _HeartPainter(this.color);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final w = size.width;
-    final h = size.height;
-
-    final path = Path()
-      ..moveTo(w / 2, h * 0.75)
-      ..cubicTo(-w * 0.2, h * 0.35, w * 0.25, -h * 0.2, w / 2, h * 0.25)
-      ..cubicTo(w * 0.75, -h * 0.2, w * 1.2, h * 0.35, w / 2, h * 0.75)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_) => false;
 }

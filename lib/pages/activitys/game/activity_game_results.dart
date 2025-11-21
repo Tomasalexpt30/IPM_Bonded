@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bondedapp/layout/app_background.dart';
 
 class ActivityGameResultsPage extends StatelessWidget {
   final List<String> prompts;
@@ -23,9 +24,7 @@ class ActivityGameResultsPage extends StatelessWidget {
   int _calculateMatch() {
     int match = 0;
     for (int i = 0; i < answers.length; i++) {
-      if (answers[i] == partnerAnswers[i]) {
-        match++;
-      }
+      if (answers[i] == partnerAnswers[i]) match++;
     }
     return ((match / answers.length) * 100).round();
   }
@@ -36,30 +35,27 @@ class ActivityGameResultsPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9FF),
-      body: Stack(
-        children: [
-          _buildBackground(),
 
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-              child: Column(
-                children: [
-                  _buildHeader(context),
-                  const SizedBox(height: 22),
+      body: AppBackground(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+            child: Column(
+              children: [
+                _buildHeader(context),
+                const SizedBox(height: 22),
 
-                  _buildBondieMatchIntro(matchValue),
-                  const SizedBox(height: 22),
+                _buildBondieMatchIntro(matchValue),
+                const SizedBox(height: 22),
 
-                  Expanded(child: _buildResultsList()),
+                Expanded(child: _buildResultsList()),
+                const SizedBox(height: 20),
 
-                  const SizedBox(height: 20),
-                  _finishButton(context),
-                ],
-              ),
+                _finishButton(context),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -68,30 +64,26 @@ class ActivityGameResultsPage extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     return SizedBox(
       height: 46,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          const Text(
-            "Game Results",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-              color: Colors.black87,
-            ),
+      child: const Center(
+        child: Text(
+          "Game Results",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w800,
+            color: Colors.black87,
           ),
-        ],
+        ),
       ),
     );
   }
 
   // ===============================================================
-// BONDIE - MATCH BUBBLE (WITH AIRPODS-STYLE CIRCULAR GAUGE)
-// ===============================================================
+  // MATCH SCORE (CIRCULAR GAUGE + TEXT)
+  // ===============================================================
   Widget _buildBondieMatchIntro(int value) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Bondie
         Image.asset(
           "assets/images/bondie_icons/bondie_talking.png",
           height: 100,
@@ -116,12 +108,7 @@ class ActivityGameResultsPage extends StatelessWidget {
 
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
-                // ======================================================
-                // CÍRCULO COM O NÚMERO (CENTRADO)
-                // ======================================================
                 SizedBox(
                   height: 85,
                   width: 85,
@@ -159,9 +146,6 @@ class ActivityGameResultsPage extends StatelessWidget {
 
                 const SizedBox(height: 14),
 
-                // ======================================================
-                // TEXTO (CENTRADO ABAIXO DO CÍRCULO)
-                // ======================================================
                 const Text(
                   "Compatibility Score",
                   style: TextStyle(
@@ -179,10 +163,9 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-
   // ===============================================================
-// RESULTS LIST
-// ===============================================================
+  // RESULTS LIST
+  // ===============================================================
   Widget _buildResultsList() {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
@@ -199,7 +182,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: double.infinity,
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -215,7 +197,6 @@ class ActivityGameResultsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Pergunta
               Text(
                 "${i + 1}. ${prompts[i]}",
                 style: const TextStyle(
@@ -227,24 +208,20 @@ class ActivityGameResultsPage extends StatelessWidget {
 
               const SizedBox(height: 14),
 
-              // Partner answer
               _answerRow(
                 avatar: "assets/images/user2.png",
                 answer: partnerAnswers[i],
               ),
               const SizedBox(height: 10),
 
-              // Your answer
               _answerRow(
                 avatar: "assets/images/user1.png",
                 answer: answers[i],
               ),
-
             ],
           ),
         ),
 
-        // MATCH / MISMATCH ICON  ------------------------------------
         Positioned(
           right: 20,
           bottom: 20,
@@ -252,17 +229,13 @@ class ActivityGameResultsPage extends StatelessWidget {
             height: 54,
             width: 54,
             decoration: BoxDecoration(
-              color: isMatch
-                  ? const Color(0xFFDDEBFF)  // azul muito suave
-                  : const Color(0xFFFFE5E9), // vermelho suave
+              color: isMatch ? const Color(0xFFDDEBFF) : const Color(0xFFFFE5E9),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(
               isMatch ? Icons.favorite_rounded : Icons.close_rounded,
               size: 26,
-              color: isMatch
-                  ? const Color(0xFF3B82F6)  // azul forte
-                  : const Color(0xFFE11D48), // vermelho forte
+              color: isMatch ? const Color(0xFF3B82F6) : const Color(0xFFE11D48),
             ),
           ),
         ),
@@ -270,10 +243,9 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-
   // ===============================================================
-// SINGLE ANSWER ROW — WITH TIGHT BLUE PILL
-// ===============================================================
+  // SINGLE ANSWER ROW
+  // ===============================================================
   Widget _answerRow({
     required String avatar,
     required String answer,
@@ -290,7 +262,6 @@ class ActivityGameResultsPage extends StatelessWidget {
         ),
         const SizedBox(width: 10),
 
-        // Bubble adjusts to text size
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
           decoration: BoxDecoration(
@@ -310,8 +281,9 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-
-  // BUTTON --------------------------------------------------------
+  // ===============================================================
+  // FINISH BUTTON
+  // ===============================================================
   Widget _finishButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
@@ -320,11 +292,11 @@ class ActivityGameResultsPage extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF3B82F6),
           foregroundColor: Colors.white,
-          elevation: 0,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(26),
           ),
+          elevation: 0,
         ),
         child: const Text(
           "Done",
@@ -336,62 +308,4 @@ class ActivityGameResultsPage extends StatelessWidget {
       ),
     );
   }
-
-  // BACKGROUND ---------------------------------------------------
-  Widget _buildBackground() {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        Positioned(top: -45, left: -40, child: _heart(180)),
-        Positioned(top: 140, left: -60, child: _heart(250)),
-        Positioned(top: 60, right: 0, child: _heart(170)),
-        Positioned(top: 200, left: 220, child: _heart(50)),
-        Positioned(top: 300, left: 180, child: _heart(90)),
-        Positioned(top: 420, left: 30, child: _heart(120)),
-        Positioned(bottom: 145, right: -50, child: _heart(220)),
-        Positioned(top: 220, right: -80, child: _heart(160)),
-        Positioned(bottom: -50, left: -50, child: _heart(200)),
-        Positioned(bottom: 150, left: 140, child: _heart(70)),
-        Positioned(bottom: -150, right: -50, child: _heart(270)),
-      ],
-    );
-  }
-
-  Widget _heart(double size) {
-    return CustomPaint(
-      size: Size(size, size),
-      painter: _HeartPainter(Colors.blueAccent.withOpacity(0.08)),
-    );
-  }
-}
-
-class _HeartPainter extends CustomPainter {
-  final Color color;
-  _HeartPainter(this.color);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = color;
-    final w = size.width;
-    final h = size.height;
-
-    final path = Path()
-      ..moveTo(w / 2, h * 0.75)
-      ..cubicTo(-w * 0.2, h * 0.35, w * 0.25, -h * 0.2, w / 2, h * 0.25)
-      ..cubicTo(w * 0.75, -h * 0.2, w * 1.2, h * 0.35, w / 2, h * 0.75)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_) => false;
 }

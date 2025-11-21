@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../widget/animated_bondie_widget.dart';
 import '../../../../stats/bondie_stats_controller.dart';
 import '../../../../../../main.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:bondedapp/layout/app_background.dart';
 
 class ZeroLatencyPage extends StatelessWidget {
   final BondieStatsController controller;
@@ -15,74 +16,68 @@ class ZeroLatencyPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF8F9FD),
       bottomNavigationBar: _buildBottomBar(context),
 
-      body: Stack(
-        children: [
-          _buildBackground(),
+      body: AppBackground(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 6),
 
-          SafeArea(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 6),
-
-                    // ===========================================================
-                    // HEADER
-                    // ===========================================================
-                    SizedBox(
-                      height: 40,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: const Padding(
-                                padding: EdgeInsets.only(left: 4),
-                                child: Icon(
-                                  Icons.arrow_back_rounded,
-                                  size: 26,
-                                  color: Colors.black87,
-                                ),
+                  // HEADER
+                  SizedBox(
+                    height: 40,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(
+                                Icons.arrow_back_rounded,
+                                size: 26,
+                                color: Colors.black87,
                               ),
                             ),
                           ),
+                        ),
 
-                          const Text(
-                            "Zero Latency VR",
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black87,
-                            ),
+                        const Text(
+                          "Zero Latency VR",
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black87,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
 
-                    const SizedBox(height: 26),
+                  const SizedBox(height: 26),
 
-                    _mainInfoBlock(context),
-                    const SizedBox(height: 26),
+                  _mainInfoBlock(context),
+                  const SizedBox(height: 26),
 
-                    _bondieWhySection(),
-                    const SizedBox(height: 26),
+                  _bondieWhySection(),
+                  const SizedBox(height: 26),
 
-                    _tipsSection(),
-                    const SizedBox(height: 26),
+                  _tipsSection(),
+                  const SizedBox(height: 26),
 
-                    _smallInfoRow(),
-                    const SizedBox(height: 60),
-                  ],
-                ),
+                  _smallInfoRow(),
+                  const SizedBox(height: 60),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -222,9 +217,9 @@ class ZeroLatencyPage extends StatelessWidget {
           color: const Color(0xFF3B82F6).withOpacity(0.15),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.event_available_rounded, color: Color(0xFF3B82F6)),
             SizedBox(width: 8),
             Text(
@@ -304,7 +299,7 @@ class ZeroLatencyPage extends StatelessWidget {
   }
 
   // ===========================================================
-  // TIP CARD (GIANT NUMBER)
+  // TIP CARD
   // ===========================================================
   Widget _tipCard({
     required String number,
@@ -496,75 +491,24 @@ class ZeroLatencyPage extends StatelessWidget {
           );
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded), label: "Calendar"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "Favorites"),
-          BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "Profile"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_rounded),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month_rounded),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_rounded),
+            label: 'Couple',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings_rounded),
+            label: 'Settings',
+          ),
         ],
       ),
     );
   }
-
-  // ===========================================================
-  // BACKGROUND
-  // ===========================================================
-  Widget _buildBackground() {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
-      ],
-    );
-  }
-
-  static Widget _heart(double size, Color color) {
-    return CustomPaint(
-      size: Size(size, size),
-      painter: _HeartPainter(color),
-    );
-  }
-}
-
-class _HeartPainter extends CustomPainter {
-  final Color color;
-  _HeartPainter(this.color);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final w = size.width;
-    final h = size.height;
-
-    final path = Path()
-      ..moveTo(w / 2, h * 0.75)
-      ..cubicTo(-w * 0.2, h * 0.35, w * 0.25, -h * 0.2, w / 2, h * 0.25)
-      ..cubicTo(w * 0.75, -h * 0.2, w * 1.2, h * 0.35, w / 2, h * 0.75)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_) => false;
 }

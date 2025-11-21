@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bondedapp/layout/app_background.dart';
 import '../../../../main.dart';
 import '../../stats/bondie_stats_controller.dart';
 
@@ -62,252 +63,217 @@ class RecommendationsPage extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_rounded),
-              label: "Home",
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month_rounded),
-              label: "Calendar",
+              label: 'Calendar',
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "Favorites"),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              label: "Profile",
+              icon: Icon(Icons.favorite_rounded),
+              label: 'Couple',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings_rounded),
+              label: 'Settings',
             ),
           ],
         ),
       ),
 
       // ===========================================================
-      // PAGE BODY
+      // PAGE BODY WITH GLOBAL BACKGROUND
       // ===========================================================
-      body: Stack(
-        children: [
-          _buildBackground(),
+      body: AppBackground(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                children: [
+                  const SizedBox(height: 5),
 
-          SafeArea(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 5),
-
-                    // ===========================================================
-                    // HEADER
-                    // ===========================================================
-                    SizedBox(
-                      height: 40,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: const Padding(
-                                padding: EdgeInsets.only(left: 4),
-                                child: Icon(
-                                  Icons.arrow_back_rounded,
-                                  size: 26,
-                                  color: Colors.black87,
-                                ),
+                  // ===========================================================
+                  // HEADER
+                  // ===========================================================
+                  SizedBox(
+                    height: 40,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(
+                                Icons.arrow_back_rounded,
+                                size: 26,
+                                color: Colors.black87,
                               ),
                             ),
                           ),
-                          const Text(
-                            "Recommendations",
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black87,
-                            ),
+                        ),
+                        const Text(
+                          "Recommendations",
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black87,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
 
-                    const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                    // ===========================================================
-                    // BONDIE HEADER (AGORA COM IMAGEM FIXA)
-                    // ===========================================================
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 18,
-                        vertical: 38,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.12),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/bondie_icons/bondie_talking.png",
-                            height: 100,
-                          ),
-                          const SizedBox(width: 14),
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Personalized Ideas for You",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
+                  // ===========================================================
+                  // BONDIE HEADER
+                  // ===========================================================
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 18,
+                      vertical: 38,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(22),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey.withOpacity(0.12),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "assets/images/bondie_icons/bondie_talking.png",
+                          height: 100,
+                        ),
+                        const SizedBox(width: 14),
+                        const Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Personalized Ideas for You",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
                                 ),
-                                SizedBox(height: 4),
-                                Text(
-                                  "Bondie picked the best activities, dates and challenges to bring you closer together.",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                    height: 1.35,
-                                  ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                "Bondie picked the best activities, dates and challenges "
+                                    "to bring you closer together.",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black54,
+                                  height: 1.35,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
 
-                    const SizedBox(height: 17),
+                  const SizedBox(height: 17),
 
-                    // ===========================================================
-                    // CATEGORY CARDS
-                    // ===========================================================
+                  // ===========================================================
+                  // CATEGORY CARDS
+                  // ===========================================================
 
-                    // REAL WORLD DATES
-                    _buildCategory(
-                      context,
-                      icon: Icons.favorite_rounded,
-                      title: "Real-World Dates",
-                      description: "Romantic experiences in person.",
-                      color: const Color(0xFF7AB6F6),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => RealWorldDatesPage(controller: controller),
-                          ),
-                        );
-                      },
-                    ),
+                  _buildCategory(
+                    context,
+                    icon: Icons.favorite_rounded,
+                    title: "Real-World Dates",
+                    description: "Romantic experiences in person.",
+                    color: const Color(0xFF7AB6F6),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              RealWorldDatesPage(controller: controller),
+                        ),
+                      );
+                    },
+                  ),
 
-                    const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                    // ONLINE DATES
-                    _buildCategory(
-                      context,
-                      icon: Icons.monitor_heart_rounded,
-                      title: "Online Dates",
-                      description: "Cozy virtual plans for any couple.",
-                      color: const Color(0xFFA17BF6),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => OnlineDatesPage(controller: controller),
-                          ),
-                        );
-                      },
-                    ),
+                  _buildCategory(
+                    context,
+                    icon: Icons.monitor_heart_rounded,
+                    title: "Online Dates",
+                    description: "Cozy virtual plans for any couple.",
+                    color: const Color(0xFFA17BF6),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              OnlineDatesPage(controller: controller),
+                        ),
+                      );
+                    },
+                  ),
 
-                    const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                    // CHALLENGES
-                    _buildCategory(
-                      context,
-                      icon: Icons.bolt_rounded,
-                      title: "Challenges",
-                      description: "Fun weekly tasks chosen by Bondie.",
-                      color: const Color(0xFFF69AB4),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => ChallengesPage(controller: controller),
-                          ),
-                        );
-                      },
-                    ),
+                  _buildCategory(
+                    context,
+                    icon: Icons.bolt_rounded,
+                    title: "Challenges",
+                    description: "Fun weekly tasks chosen by Bondie.",
+                    color: const Color(0xFFF69AB4),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ChallengesPage(controller: controller),
+                        ),
+                      );
+                    },
+                  ),
 
-                    const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                    // GIFT IDEAS
-                    _buildCategory(
-                      context,
-                      icon: Icons.card_giftcard_rounded,
-                      title: "Gift Ideas",
-                      description: "Special little surprises.",
-                      color: const Color(0xFF5EC8A7),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => GiftIdeasPage(controller: controller),
-                          ),
-                        );
-                      },
-                    ),
+                  _buildCategory(
+                    context,
+                    icon: Icons.card_giftcard_rounded,
+                    title: "Gift Ideas",
+                    description: "Special little surprises.",
+                    color: const Color(0xFF5EC8A7),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              GiftIdeasPage(controller: controller),
+                        ),
+                      );
+                    },
+                  ),
 
-                    const SizedBox(height: 30),
-                  ],
-                ),
+                  const SizedBox(height: 30),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
-
-  // ===========================================================
-  // BACKGROUND
-  // ===========================================================
-  Widget _buildBackground() {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        Positioned(top: -45, left: -40, child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 140, left: -60, child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(top: 60, right: 0, child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 200, left: 220, child: _heart(50, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 300, left: 180, child: _heart(90, Colors.blue.withOpacity(0.08))),
-        Positioned(top: 420, left: 30, child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
-        Positioned(bottom: 145, right: -50, child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(top: 220, right: -80, child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -50, left: -50, child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
-        Positioned(bottom: 150, left: 140, child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
-        Positioned(bottom: -150, right: -50, child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
-      ],
-    );
-  }
-
-  static Widget _heart(double size, Color color) => CustomPaint(
-    size: Size(size, size),
-    painter: _HeartPainter(color),
-  );
 
   // ===========================================================
   // CATEGORY CARD
@@ -381,33 +347,4 @@ class RecommendationsPage extends StatelessWidget {
       ),
     );
   }
-}
-
-// ===========================================================
-// HEART PAINTER
-// ===========================================================
-class _HeartPainter extends CustomPainter {
-  final Color color;
-  _HeartPainter(this.color);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final w = size.width;
-    final h = size.height;
-
-    final path = Path()
-      ..moveTo(w / 2, h * 0.75)
-      ..cubicTo(-w * 0.2, h * 0.35, w * 0.25, -h * 0.2, w / 2, h * 0.25)
-      ..cubicTo(w * 0.75, -h * 0.2, w * 1.2, h * 0.35, w / 2, h * 0.75)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
