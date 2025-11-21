@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:bondedapp/bondie/pages/stats/bondie_stats_controller.dart';
 
 class CoupleProfileInfo extends StatefulWidget {
   final DateTime relationshipStartDate;
@@ -8,6 +9,8 @@ class CoupleProfileInfo extends StatefulWidget {
   final String songArtist;
   final String albumCover;
 
+  final BondieStatsController controller; // ADICIONADO
+
   const CoupleProfileInfo({
     super.key,
     required this.relationshipStartDate,
@@ -15,6 +18,7 @@ class CoupleProfileInfo extends StatefulWidget {
     required this.songTitle,
     required this.songArtist,
     required this.albumCover,
+    required this.controller, // ADICIONADO
   });
 
   @override
@@ -25,8 +29,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     with SingleTickerProviderStateMixin {
 
   late final AnimationController _controller;
-
-  double bondLevel = 0.82;
 
   @override
   void initState() {
@@ -47,6 +49,9 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
   Widget build(BuildContext context) {
     final now = DateTime.now();
     final daysTogether = now.difference(widget.relationshipStartDate).inDays;
+
+    // ⭐ NOVO: bond level vindo do controller
+    final double bondLevel = widget.controller.avg;
 
     return Container(
       width: double.infinity,
@@ -111,7 +116,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
           const SizedBox(height: 30),
 
-          // ⭐ BOND LEVEL BLOCK CLICKABLE
+          // ⭐ BOND LEVEL BLOCK — AGORA DINÂMICO
           GestureDetector(
             onTap: () => _showBondLevelInfoSheet(context),
             child: Column(
@@ -119,10 +124,10 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.info_outline_rounded,
                       size: 18,
-                      color: const Color(0xFF3B82F6),
+                      color: Color(0xFF3B82F6),
                     ),
                     const SizedBox(width: 6),
 
@@ -147,7 +152,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                     decoration: BoxDecoration(color: Colors.grey[300]),
                     child: FractionallySizedBox(
                       alignment: Alignment.centerLeft,
-                      widthFactor: bondLevel,
+                      widthFactor: bondLevel, // ⭐ AGORA USA O CONTROLLER
                       child: Container(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
@@ -285,7 +290,9 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     );
   }
 
+  // ======================================================
   // BOTTOM SHEET
+  // ======================================================
   void _showBondLevelInfoSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,

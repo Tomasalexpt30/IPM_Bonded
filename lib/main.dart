@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
     _pages = [
       HomePage(bondieStats: bondieStats),
       const CalendarPage(),
-      CoupleProfilePage(),   // ← abre aqui
+      CoupleProfilePage(controller: bondieStats),   // ← abre aqui
       const Center(child: Text("Settings page coming soon")),
     ];
   }

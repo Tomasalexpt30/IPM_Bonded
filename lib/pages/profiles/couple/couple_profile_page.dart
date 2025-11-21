@@ -4,11 +4,17 @@ import 'package:flutter/material.dart';
 import 'sections/couple_profile_chart.dart';
 import 'sections/couple_profile_achivements.dart';
 import 'sections/couple_profile_info.dart';
+import 'package:bondedapp/bondie/pages/stats/bondie_stats_controller.dart';
 
 class CoupleProfilePage extends StatelessWidget {
-  const CoupleProfilePage({super.key});
+  final BondieStatsController controller; // ⭐ RECEBE O CONTROLLER VERDADEIRO
 
-  // Dummy History Data
+  const CoupleProfilePage({
+    super.key,
+    required this.controller, // ⭐ OBRIGATÓRIO
+  });
+
+  // Dummy History Data (para o gráfico — não relacionado ao controller)
   final List<double> bondHistory = const [0.82, 0.80, 0.85, 0.83, 0.87, 0.88, 0.90];
   final List<double> energyHistory = const [0.60, 0.58, 0.65, 0.62, 0.61, 0.67, 0.70];
   final List<double> moodHistory = const [0.75, 0.78, 0.77, 0.80, 0.82, 0.79, 0.85];
@@ -48,6 +54,7 @@ class CoupleProfilePage extends StatelessWidget {
                   // INFO COMPLETA
                   // ============================
                   CoupleProfileInfo(
+                    controller: controller, // ⭐ PASSA O CONTROLLER REAL
                     relationshipStartDate: DateTime(2023, 11, 15),
                     tripsTogether: 2,
                     songTitle: "Kiss of Life",
@@ -99,8 +106,6 @@ class CoupleProfilePage extends StatelessWidget {
       ),
     );
   }
-
-
 
   // -------------------------------------------------------------------------
   // SECTION TITLE

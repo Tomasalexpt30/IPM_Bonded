@@ -6,9 +6,9 @@ class BondieStatsController {
   double affection;
 
   BondieStatsController({
-    this.connection = 0.10,
-    this.energy = 0.10,
-    this.affection = 0.10,
+    this.connection = 0.91,
+    this.energy = 0.82,
+    this.affection = 0.86,
   });
 
   void updateStats({
