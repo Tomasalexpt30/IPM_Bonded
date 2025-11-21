@@ -4,6 +4,7 @@ import 'pages/calendar/calendar_page.dart';
 import 'bondie/widget/animated_bondie_widget.dart';
 import 'bondie/pages/bondie_page.dart';
 import 'bondie/pages/stats/bondie_stats_controller.dart';
+import 'pages/profiles/couple/couple_profile_page.dart';
 
 void main() {
   runApp(const BondedApp());
@@ -45,7 +46,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late int _selectedIndex;
 
-  // 🩵 Controller PARTILHADO — usa os defaults definidos no BondieStatsController
   final BondieStatsController bondieStats = BondieStatsController();
 
   late List<Widget> _pages;
@@ -58,8 +58,8 @@ class _MainScreenState extends State<MainScreen> {
     _pages = [
       HomePage(bondieStats: bondieStats),
       const CalendarPage(),
-      const Center(child: Text("💬 Messages")),
-      const Center(child: Text("👤 Profile")),
+      CoupleProfilePage(),   // ← abre aqui
+      const Center(child: Text("Settings page coming soon")),
     ];
   }
 
@@ -76,9 +76,7 @@ class _MainScreenState extends State<MainScreen> {
         children: [
           _pages[_selectedIndex],
 
-          // ===============================================
-          // Bondie Flutuante (usa o mesmo controller global)
-          // ===============================================
+          // Floating Bondie
           Positioned(
             right: 12,
             top: 60,
@@ -91,8 +89,6 @@ class _MainScreenState extends State<MainScreen> {
                         BondiePage(statsController: bondieStats),
                   ),
                 );
-
-                // Atualiza quando volta (caso as stats mudem)
                 setState(() {});
               },
               child: AnimatedBondieWidget(controller: bondieStats),
@@ -101,9 +97,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
 
-      // ===============================================
       // Bottom Navigation Bar
-      // ===============================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
@@ -141,10 +135,13 @@ class _MainScreenState extends State<MainScreen> {
               icon: Icon(Icons.calendar_month_rounded),
               label: 'Calendar',
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "Favorites"),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              label: 'Profile',
+              icon: Icon(Icons.favorite_rounded),
+              label: 'Couple',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings_rounded),
+              label: 'Settings',
             ),
           ],
         ),
@@ -153,9 +150,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-// =====================================
-// Helper — abrir MainScreen com índice
-// =====================================
+// Helper — open MainScreen at index
 class MainScreenWithIndex extends StatelessWidget {
   final int index;
   const MainScreenWithIndex({super.key, required this.index});

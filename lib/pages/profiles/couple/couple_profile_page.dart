@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../main.dart';
 
 // IMPORTA AS SECÇÕES
 import 'sections/couple_profile_chart.dart';
@@ -14,7 +13,7 @@ class CoupleProfilePage extends StatelessWidget {
   final List<double> energyHistory = const [0.60, 0.58, 0.65, 0.62, 0.61, 0.67, 0.70];
   final List<double> moodHistory = const [0.75, 0.78, 0.77, 0.80, 0.82, 0.79, 0.85];
 
-  // Achievements list
+  // Achievements
   final List<Map<String, dynamic>> achievements = const [
     {"title": "First Week", "icon": Icons.calendar_month_rounded, "progress": 1.0},
     {"title": "Captured Moments", "icon": Icons.camera_alt_rounded, "progress": 0.80},
@@ -28,7 +27,6 @@ class CoupleProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
-      bottomNavigationBar: _buildBottomNavBar(context),
 
       body: Stack(
         children: [
@@ -45,10 +43,9 @@ class CoupleProfilePage extends StatelessWidget {
                   const SizedBox(height: 4),
 
                   _buildHeader(context),
-                  const SizedBox(height: 30),
 
                   // ============================
-                  // INFO COMPLETA (HEADER + INFO + VINIL)
+                  // INFO COMPLETA
                   // ============================
                   CoupleProfileInfo(
                     relationshipStartDate: DateTime(2023, 11, 15),
@@ -68,6 +65,7 @@ class CoupleProfilePage extends StatelessWidget {
                     energyWeeks: [energyHistory, energyHistory, energyHistory],
                     moodWeeks: [moodHistory, moodHistory, moodHistory],
                   ),
+
                   const SizedBox(height: 30),
 
                   // ==== ACHIEVEMENTS ====
@@ -89,49 +87,19 @@ class CoupleProfilePage extends StatelessWidget {
   // HEADER
   // -------------------------------------------------------------------------
   Widget _buildHeader(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Botão Back (esquerda)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: const Icon(Icons.arrow_back_rounded, size: 28),
-            ),
-          ),
-
-          // Título
-          const Text(
-            "Couple Profile",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-              color: Colors.black87,
-            ),
-          ),
-
-          // Botão Edit (direita)
-          Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: () {
-                // Ação: abre página ou mostra sheet — posso criar a página se quiseres
-                print("Edit profile tapped");
-              },
-              child: const Icon(
-                Icons.edit_rounded,
-                size: 24,
-                color: Colors.black87,
-              ),
-            ),
-          ),
-        ],
+    return const Padding(
+      padding: EdgeInsets.only(top: 12, bottom: 30),
+      child: Text(
+        "Couple Profile",
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+        ),
       ),
     );
   }
+
 
 
   // -------------------------------------------------------------------------
@@ -141,51 +109,6 @@ class CoupleProfilePage extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.black87),
-    );
-  }
-
-  // -------------------------------------------------------------------------
-  // BOTTOM NAV BAR
-  // -------------------------------------------------------------------------
-  Widget _buildBottomNavBar(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(26),
-          topRight: Radius.circular(26),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.15),
-            blurRadius: 12,
-            offset: const Offset(0, -3),
-          ),
-        ],
-      ),
-      child: BottomNavigationBar(
-        currentIndex: 0,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.grey[700],
-        unselectedItemColor: Colors.grey[500],
-        iconSize: 30,
-        onTap: (index) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => MainScreenWithIndex(index: index)),
-                (_) => false,
-          );
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded), label: "Calendar"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "Favorites"),
-          BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "Profile"),
-        ],
-      ),
     );
   }
 
