@@ -29,7 +29,7 @@ flutter:
     - assets/images/user2.png
     - assets/images/bonded_logo.png
     - assets/images/couple_album.jpg
-    - assets/images//couple_selfie.png
+    - assets/images/couple_selfie.png
 
     # Bondie icons
     - assets/images/bondie_icons/bondie_depressed.png

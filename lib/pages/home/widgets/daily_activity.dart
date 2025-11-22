@@ -11,7 +11,7 @@ class DailyActivityCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const ActivityQuestionPage()),
+          MaterialPageRoute(builder: (_) => const ActivityGamePage()),
         );
       },
 

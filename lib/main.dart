@@ -4,6 +4,9 @@ import 'pages/home/home_page.dart';
 import 'pages/calendar/calendar_page.dart';
 import 'pages/profiles/couple/couple_profile_page.dart';
 
+// NOVA IMPORTAÇÃO
+import 'pages/settings/settings_page.dart';
+
 import 'bondie/widget/animated_bondie_widget.dart';
 import 'bondie/pages/bondie_page.dart';
 import 'bondie/pages/stats/bondie_stats_controller.dart';
@@ -35,7 +38,7 @@ class BondedApp extends StatelessWidget {
 }
 
 // ============================================================
-// MAIN SCREEN — CONTROLA TODA A NAVEGAÇÃO PRINCIPAL
+// MAIN SCREEN
 // ============================================================
 class MainScreen extends StatefulWidget {
   final int initialIndex;
@@ -48,7 +51,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late int _selectedIndex;
 
-  // Controller central — partilhado entre todas as páginas
   final BondieStatsController bondieStats = BondieStatsController();
 
   late final List<Widget> _pages;
@@ -63,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
       HomePage(bondieStats: bondieStats),
       const CalendarPage(),
       CoupleProfilePage(controller: bondieStats),
-      const Center(child: Text("Settings page coming soon")),
+      const SettingsPage(), // << AGORA VAI ABRIR A TUA PÁGINA DE SETTINGS
     ];
   }
 
@@ -74,9 +76,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ------------------------------------------------------------
-      // PAGE CONTENT
-      // ------------------------------------------------------------
       body: Stack(
         children: [
           _pages[_selectedIndex],
@@ -93,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
                     builder: (_) => BondiePage(statsController: bondieStats),
                   ),
                 );
-                setState(() {}); // Atualiza ao voltar
+                setState(() {});
               },
               child: AnimatedBondieWidget(controller: bondieStats),
             ),
@@ -101,9 +100,6 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
 
-      // ------------------------------------------------------------
-      // BOTTOM NAVIGATION BAR
-      // ------------------------------------------------------------
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
@@ -155,9 +151,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-// ============================================================
-// HELPER PARA ABRIR O MAIN COM UM INDEX ESPECÍFICO
-// ============================================================
 class MainScreenWithIndex extends StatelessWidget {
   final int index;
   const MainScreenWithIndex({super.key, required this.index});
