@@ -153,7 +153,7 @@ class _MonthCard extends StatelessWidget {
                     height: 28,
                     decoration: BoxDecoration(
                       color: isToday
-                          ? Colors.blueAccent.withOpacity(0.85)
+                          ? Color(0xFF2563EB).withOpacity(0.85)
                           : null,
                       shape: BoxShape.circle,
                     ),

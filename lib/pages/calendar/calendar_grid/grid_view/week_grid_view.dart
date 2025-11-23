@@ -87,7 +87,7 @@ class _DaysRow extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: isToday ? Colors.blueAccent : Colors.transparent,
+                  color: isToday ? Color(0xFF2563EB) : Colors.transparent,
                   shape: BoxShape.circle,
                 ),
                 child: Text(

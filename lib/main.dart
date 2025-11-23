@@ -28,7 +28,7 @@ class BondedApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: const Color(0xFFF8F9FD),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF3B82F6),
+          seedColor: const Color(0xFF2563EB),
           secondary: const Color(0xFF06B6D4),
         ),
       ),
@@ -125,7 +125,7 @@ class _MainScreenState extends State<MainScreen> {
           iconSize: 30,
           selectedFontSize: 14,
           unselectedFontSize: 13,
-          selectedItemColor: const Color(0xFF3B82F6),
+          selectedItemColor: const Color(0xFF2563EB),
           unselectedItemColor: Colors.grey[500],
           items: const [
             BottomNavigationBarItem(

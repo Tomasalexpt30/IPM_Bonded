@@ -158,7 +158,7 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
               Expanded(
                 child: _button(
                   label: "Save",
-                  background: const Color(0xFF4E8EF6),
+                  background: const Color(0xFF2563EB),
                   textColor: Colors.white,
                   onTap: () {
                     // 🔥 Aqui guardas a atividade !
@@ -287,7 +287,7 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
         duration: const Duration(milliseconds: 180),
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: selected ? const Color(0xFF4E8EF6) : Colors.white,
+          color: selected ? const Color(0xFF2563EB) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color:

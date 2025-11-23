@@ -109,7 +109,7 @@ class MonthGridView extends StatelessWidget {
                     color: day == null
                         ? Colors.transparent
                         : isToday
-                        ? Colors.blueAccent.withOpacity(0.65)
+                        ? Color(0xFF2563EB)
                         : Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: day != null
@@ -131,7 +131,7 @@ class MonthGridView extends StatelessWidget {
                         fontSize: 14,
                         fontWeight:
                         isToday ? FontWeight.w700 : FontWeight.w600,
-                        color: Colors.black87,
+                        color: isToday ? Colors.white : Colors.black87,
                       ),
                     ),
                   ),

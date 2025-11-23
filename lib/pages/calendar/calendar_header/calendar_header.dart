@@ -93,7 +93,7 @@ class CalendarHeader extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 14.5,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF4E8EF6),
+                              color: Color(0xFF2563EB),
                             ),
                           ),
                         ],
@@ -179,7 +179,7 @@ class CalendarHeader extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: [
-            Icon(icon, size: 24, color: const Color(0xFF4E8EF6)),
+            Icon(icon, size: 24, color: const Color(0xFF2563EB)),
             const SizedBox(width: 14),
 
             Text(
@@ -195,7 +195,7 @@ class CalendarHeader extends StatelessWidget {
 
             if (isSelected)
               const Icon(Icons.check_rounded,
-                  size: 22, color: Color(0xFF4E8EF6)),
+                  size: 22, color: Color(0xFF2563EB)),
           ],
         ),
       ),

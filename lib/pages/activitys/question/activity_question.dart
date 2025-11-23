@@ -65,7 +65,7 @@ class _ActivityQuestionPageState extends State<ActivityQuestionPage> {
                   child: ElevatedButton(
                     onPressed: isEmpty ? null : _submit,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF3B82F6),
+                      backgroundColor: const Color(0xFF2563EB),
                       foregroundColor: Colors.white,
                       disabledBackgroundColor: const Color(0xFF93C5FD),
                       elevation: 0,

@@ -50,7 +50,7 @@ class BondieStats extends StatelessWidget {
             const SizedBox(width: 30),
 
             const Icon(Icons.hourglass_bottom_rounded,
-                size: 20, color: Color(0xFF3B82F6)),
+                size: 20, color: Color(0xFF2563EB)),
             const SizedBox(width: 6),
             const Text(
               "2y 3m",

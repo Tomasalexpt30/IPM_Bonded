@@ -57,7 +57,7 @@ class CoupleSection extends StatelessWidget {
                 child: const Icon(
                   Icons.photo_library_rounded,
                   size: 20,
-                  color: Color(0xFF4E8EF6),
+                  color: Color(0xFF2563EB),
                 ),
               ),
             ],
@@ -100,7 +100,7 @@ class CoupleSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Icon(Icons.calendar_today_rounded,
-                  size: 18, color: Color(0xFF4E8EF6)),
+                  size: 18, color: Color(0xFF2563EB)),
               SizedBox(width: 6),
               Text(
                 memoryDate,
@@ -115,7 +115,7 @@ class CoupleSection extends StatelessWidget {
 
 
               Icon(Icons.location_on_rounded,
-                  size: 18, color: Color(0xFF4E8EF6)),
+                  size: 18, color: Color(0xFF2563EB)),
               SizedBox(width: 6),
               Text(
                 memoryLocation,

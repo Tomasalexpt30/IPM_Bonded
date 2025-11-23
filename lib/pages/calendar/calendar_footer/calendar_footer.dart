@@ -68,7 +68,7 @@ class _AddActivityButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(18),
             ),
 
-            backgroundColor: const Color(0xFF4E8EF6),
+            backgroundColor: const Color(0xFF2563EB),
             foregroundColor: Colors.white,
 
             elevation: 0,

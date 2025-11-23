@@ -100,7 +100,7 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
                       child: _pillButton(
                         label: "Both",
                         icon: Icons.people_rounded,
-                        color: const Color(0xFF3B82F6),
+                        color: const Color(0xFF2563EB),
                       ),
                       onTap: () => _selectAnswer("Both"),
                     ),
@@ -245,7 +245,7 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFF75ABF3), width: 2),
+              border: Border.all(color: const Color(0xFF2563EB), width: 2),
             ),
             child: ClipOval(
               child: Image.asset(
@@ -365,7 +365,7 @@ class _TapAnimatedHighlightState extends State<_TapAnimatedHighlight> {
           color: Colors.blue.withOpacity(0.10 * _highlight),
           borderRadius: BorderRadius.circular(26),
           border: Border.all(
-            color: const Color(0xFF75ABF3).withOpacity(_borderAlpha),
+            color: const Color(0xFF2563EB).withOpacity(_borderAlpha),
             width: 2,
           ),
         ),

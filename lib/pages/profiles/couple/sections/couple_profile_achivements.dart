@@ -53,8 +53,8 @@ class CoupleProfileAchievements extends StatelessWidget {
             height: 62,
             width: 62,
             child: CustomPaint(
-              painter: _CircularProgressPainter(progress: progress, color: const Color(0xFF3B82F6)),
-              child: Center(child: Icon(icon, size: 28, color: const Color(0xFF3B82F6))),
+              painter: _CircularProgressPainter(progress: progress, color: const Color(0xFF2563EB)),
+              child: Center(child: Icon(icon, size: 28, color: const Color(0xFF2563EB))),
             ),
           ),
           const SizedBox(height: 10),

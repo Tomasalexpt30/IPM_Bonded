@@ -64,7 +64,7 @@ Future<void> showSortSheet({
                             : o == "Rarity"
                             ? Icons.auto_awesome_rounded
                             : Icons.sort_by_alpha_rounded,
-                        color: isActive ? const Color(0xFF3B82F6) : Colors.black45,
+                        color: isActive ? const Color(0xFF2563EB) : Colors.black45,
                       ),
                       title: Text(
                         o,
@@ -73,13 +73,13 @@ Future<void> showSortSheet({
                           fontWeight:
                           isActive ? FontWeight.w700 : FontWeight.w500,
                           color: isActive
-                              ? const Color(0xFF1D4ED8)
+                              ? const Color(0xFF2563EB)
                               : Colors.black87,
                         ),
                       ),
                       trailing: isActive
                           ? const Icon(Icons.check_rounded,
-                          color: Color(0xFF3B82F6))
+                          color: Color(0xFF2563EB))
                           : null,
                       onTap: () {
                         onSelect(o);
@@ -341,7 +341,7 @@ Future<void> showNotEnoughCoinsSheet({
                       padding: const EdgeInsets.symmetric(
                           horizontal: 24, vertical: 10),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF3B82F6),
+                        color: const Color(0xFF2563EB),
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: const Text(

@@ -100,7 +100,7 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Icon(
-                                    Icons.lock_rounded,
+                                    Icons.wallet_giftcard_rounded,
                                     size: 20,
                                     color: Color(0xFF2563EB),
                                   ),
@@ -277,7 +277,7 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
             Icon(
               icon,
               size: 24,
-              color: const Color(0xFF4E8EF6),
+              color: const Color(0xFF2563EB),
             ),
             const SizedBox(width: 12),
             Text(

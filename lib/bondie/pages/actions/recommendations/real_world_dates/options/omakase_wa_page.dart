@@ -209,20 +209,20 @@ class OmakaseWaPage extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: const Color(0xFF3B82F6).withOpacity(0.15),
+          color: const Color(0xFF2563EB).withOpacity(0.15),
           borderRadius: BorderRadius.circular(16),
         ),
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.event_available_rounded, color: Color(0xFF3B82F6)),
+            Icon(Icons.event_available_rounded, color: Color(0xFF2563EB)),
             SizedBox(width: 8),
             Text(
               "Add to Calendar",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF3B82F6),
+                color: Color(0xFF2563EB),
               ),
             ),
           ],
@@ -253,7 +253,7 @@ class OmakaseWaPage extends StatelessWidget {
         children: [
           Row(
             children: const [
-              Icon(Icons.lightbulb_rounded, color: Color(0xFF3B82F6)),
+              Icon(Icons.lightbulb_rounded, color: Color(0xFF2563EB)),
               SizedBox(width: 8),
               Text(
                 "Tips for the Perfect Experience",
@@ -427,7 +427,7 @@ class OmakaseWaPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Icon(icon, size: 28, color: const Color(0xFF3B82F6)),
+          Icon(icon, size: 28, color: const Color(0xFF2563EB)),
           const SizedBox(height: 10),
           Text(
             title,

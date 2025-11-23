@@ -96,7 +96,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                   child: const Icon(
                     Icons.edit_rounded,
                     size: 24,
-                    color: Color(0xFF4E8EF6),
+                    color: Color(0xFF2563EB),
                   ),
                 ),
               ),
@@ -109,7 +109,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
               CircleAvatar(radius: 38, backgroundImage: AssetImage("assets/images/user1.png")),
-              Icon(Icons.favorite_rounded, size: 55, color: Color(0xFF4E8EF6)),
+              Icon(Icons.favorite_rounded, size: 55, color: Color(0xFF2563EB)),
               CircleAvatar(radius: 38, backgroundImage: AssetImage("assets/images/user2.png")),
             ],
           ),
@@ -127,7 +127,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                     const Icon(
                       Icons.info_outline_rounded,
                       size: 18,
-                      color: Color(0xFF3B82F6),
+                      color: Color(0xFF2563EB),
                     ),
                     const SizedBox(width: 6),
 
@@ -160,7 +160,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                               Color(0xFF99C4FF),
                               Color(0xFF7EB0FF),
                               Color(0xFF5696FD),
-                              Color(0xFF3B82F6),
+                              Color(0xFF2563EB),
                             ],
                           ),
                         ),
@@ -192,7 +192,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF4E8EF6),
+                    color: Color(0xFF2563EB),
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -508,7 +508,7 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
             color: Color(0xFFDCEAFF),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, size: 20, color: Color(0xFF4E8EF6)),
+          child: Icon(icon, size: 20, color: Color(0xFF2563EB)),
         ),
         const SizedBox(width: 12),
 

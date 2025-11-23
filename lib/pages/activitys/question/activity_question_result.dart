@@ -266,7 +266,7 @@ class ActivityQuestionResultPage extends StatelessWidget {
           Navigator.popUntil(context, (route) => route.isFirst);
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF3B82F6),
+          backgroundColor: const Color(0xFF2563EB),
           foregroundColor: Colors.white,
           elevation: 0,
           padding: const EdgeInsets.symmetric(vertical: 16),

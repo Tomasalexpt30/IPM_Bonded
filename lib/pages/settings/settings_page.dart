@@ -165,7 +165,7 @@ class SettingsPage extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: const Color(0xFF3B82F6),
+                color: const Color(0xFF2563EB),
                 width: 2,
               ),
               boxShadow: [

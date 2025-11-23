@@ -129,7 +129,7 @@ class ActivityGameResultsPage extends StatelessWidget {
                           strokeWidth: 9,
                           strokeCap: StrokeCap.round,
                           backgroundColor: Colors.transparent,
-                          valueColor: const AlwaysStoppedAnimation(Color(0xFF3B82F6)),
+                          valueColor: const AlwaysStoppedAnimation(Color(0xFF2563EB)),
                         ),
                       ),
                       Text(
@@ -137,7 +137,7 @@ class ActivityGameResultsPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900,
-                          color: Color(0xFF3B82F6),
+                          color: Color(0xFF2563EB),
                         ),
                       ),
                     ],
@@ -229,13 +229,13 @@ class ActivityGameResultsPage extends StatelessWidget {
             height: 54,
             width: 54,
             decoration: BoxDecoration(
-              color: isMatch ? const Color(0xFFDDEBFF) : const Color(0xFFFFE5E9),
+              color: isMatch ? const Color(0xFFD5E5FF) : const Color(0xFFFFE5E9),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(
               isMatch ? Icons.favorite_rounded : Icons.close_rounded,
               size: 26,
-              color: isMatch ? const Color(0xFF3B82F6) : const Color(0xFFE11D48),
+              color: isMatch ? const Color(0xFF2563EB) : const Color(0xFFE11D48),
             ),
           ),
         ),
@@ -290,7 +290,7 @@ class ActivityGameResultsPage extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => Navigator.pop(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF3B82F6),
+          backgroundColor: const Color(0xFF2563EB),
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
