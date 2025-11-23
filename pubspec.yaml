@@ -50,6 +50,11 @@ flutter:
     - assets/images/bondie_skins/bondie_soccer.png
     - assets/images/bondie_skins/bondie_thief.png
 
+    # Bondie Time Capsule
+    - assets/images/bondie_time_capsule/time_capsule_closed.png
+    - assets/images/bondie_time_capsule/time_capsule_opened.png
+    - assets/images/bondie_time_capsule/time_capsule_submission.png
+
     # Recommendations
     - assets/images/recommendations/zero_latency_logo.webp
     - assets/images/recommendations/game_over_logo.png

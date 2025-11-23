@@ -7,6 +7,9 @@ import 'widgets/daily_activity.dart';
 import 'widgets/time_capsule.dart';
 import 'widgets/weekly_challenge.dart';
 
+// IMPORTA A PÁGINA NOVA
+import 'package:bondedapp/pages/time_capsule/submission/time_capsule_submission_page.dart';
+
 class HomePage extends StatelessWidget {
   final BondieStatsController bondieStats;
 
@@ -54,8 +57,20 @@ class HomePage extends StatelessWidget {
                   const DailyActivityCard(),
                   const SizedBox(height: 35),
 
-                  // Time Capsule
-                  const TimeCapsuleCard(),
+                  // Time Capsule (CLICKABLE)
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TimeCapsuleSubmissionPage(
+                            controller: bondieStats,   // ✅ AGORA PASSA O CONTROLLER
+                          ),
+                        ),
+                      );
+                    },
+                    child: const TimeCapsuleCard(),
+                  ),
                   const SizedBox(height: 35),
 
                   // Weekly Challenge

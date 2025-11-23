@@ -27,16 +27,16 @@ class SettingsPage extends StatelessWidget {
 
                 // PROFILE SECTION
                 _profileHeader(),
-                const SizedBox(height: 18),
+                const SizedBox(height: 15),
                 _profileButtons(),
 
-                const SizedBox(height: 35),
+                const SizedBox(height: 30),
 
                 // ============================
                 // MERGED SECTION: APP SETTINGS
                 // ============================
                 _sectionTitle("App Settings"),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _settingsCard(
                   icon: Icons.lock_rounded,
@@ -45,7 +45,7 @@ class SettingsPage extends StatelessWidget {
                   description: "Manage what you share with Bonded.",
                   onTap: () {},
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _settingsCard(
                   icon: Icons.devices_rounded,
@@ -54,7 +54,7 @@ class SettingsPage extends StatelessWidget {
                   description: "Check where your account is logged in.",
                   onTap: () {},
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _settingsCard(
                   icon: Icons.language_rounded,
@@ -63,7 +63,7 @@ class SettingsPage extends StatelessWidget {
                   description: "Choose the app language and region.",
                   onTap: () {},
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _settingsCard(
                   icon: Icons.notifications_rounded,
@@ -72,7 +72,7 @@ class SettingsPage extends StatelessWidget {
                   description: "Adjust reminders and alert preferences.",
                   onTap: () {},
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _settingsCard(
                   icon: Icons.color_lens_rounded,
@@ -82,13 +82,13 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {},
                 ),
 
-                const SizedBox(height: 35),
+                const SizedBox(height: 30),
 
                 // ============================
                 // SUPPORT
                 // ============================
                 _sectionTitle("Support"),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _settingsCard(
                   icon: Icons.help_outline_rounded,
@@ -97,7 +97,7 @@ class SettingsPage extends StatelessWidget {
                   description: "FAQ, tutorials and troubleshooting.",
                   onTap: () {},
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _settingsCard(
                   icon: Icons.mail_rounded,
@@ -107,13 +107,13 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {},
                 ),
 
-                const SizedBox(height: 35),
+                const SizedBox(height: 30),
 
                 // ============================
                 // ACCOUNT ACTIONS
                 // ============================
                 _sectionTitle("Account Actions"),
-                const SizedBox(height: 16),
+                const SizedBox(height: 15),
 
                 _dangerCard(
                   title: "Log Out",
@@ -121,7 +121,7 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {},
                 ),
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 15),
 
                 _dangerCard(
                   title: "Delete Account",
@@ -129,7 +129,7 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {},
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -186,10 +186,10 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
 
           const Text(
-            "Bruno",
+            "Bruno Alves",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -197,10 +197,10 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 5),
+          const SizedBox(height: 4),
 
           Text(
-            "brunofalexandre76@gmail.com",
+            "brunoalves76@gmail.com",
             style: TextStyle(
               fontSize: 14,
               color: Colors.black54,
