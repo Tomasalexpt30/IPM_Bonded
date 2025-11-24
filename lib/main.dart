@@ -32,7 +32,7 @@ class BondedApp extends StatelessWidget {
           secondary: const Color(0xFF06B6D4),
         ),
       ),
-      home: const SplashScreen(),  // Splash primeiro
+      home: const SplashScreen(),
     );
   }
 }
