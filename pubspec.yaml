@@ -68,8 +68,6 @@ flutter:
     - assets/images/recommendations/real_world_dates/omakase_wa.jpeg
     - assets/images/recommendations/real_world_dates/tile_museum.jpg
 
-    - assets/images/recommendations/online_dates/scribbl.png
-
     # Bruno Submissions
     - assets/images/submissions/bruno/bruno_submission_1.png
     - assets/images/submissions/bruno/bruno_submission_2.png
