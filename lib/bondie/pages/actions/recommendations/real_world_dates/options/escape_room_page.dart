@@ -136,7 +136,7 @@ class EscapeRoomPage extends StatelessWidget {
                 child: _iconButton(
                   icon: Icons.link_rounded,
                   label: "Website",
-                  color: const Color(0xFF2FB0EC),
+                  color: const Color(0xFF2563EB),
                   onTap: () => launchUrl(
                     Uri.parse("https://escaperoom.pt/"),
                     mode: LaunchMode.externalApplication,
@@ -148,7 +148,7 @@ class EscapeRoomPage extends StatelessWidget {
                 child: _iconButton(
                   icon: Icons.location_on_rounded,
                   label: "Location",
-                  color: const Color(0xFF2FB0EC),
+                  color: const Color(0xFF2563EB),
                   onTap: () => launchUrl(
                     Uri.parse("https://maps.google.com/?q=escape+room+lisboa"),
                     mode: LaunchMode.externalApplication,
@@ -157,9 +157,6 @@ class EscapeRoomPage extends StatelessWidget {
               ),
             ],
           ),
-
-          const SizedBox(height: 16),
-          _addToCalendarButton(),
         ],
       ),
     );
@@ -194,35 +191,6 @@ class EscapeRoomPage extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: color,
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _addToCalendarButton() {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: BoxDecoration(
-          color: const Color(0xFF2563EB).withOpacity(0.15),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.event_available_rounded, color: Color(0xFF2563EB)),
-            SizedBox(width: 8),
-            Text(
-              "Add to Calendar",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF2563EB),
               ),
             ),
           ],

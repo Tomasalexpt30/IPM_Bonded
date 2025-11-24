@@ -1,5 +1,6 @@
 import 'package:bondedapp/pages/home/widgets/daily_question.dart';
 import 'package:bondedapp/pages/time_capsule/closed/time_capsule_closed_page.dart';
+import 'package:bondedapp/pages/time_capsule/opened/time_capsule_opened_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bondedapp/layout/app_background.dart';
 import '../../../bondie/pages/stats/bondie_stats_controller.dart';
@@ -96,7 +97,7 @@ class HomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => TimeCapsuleClosedPage(
+                          builder: (_) => TimeCapsuleSubmissionPage(
                             controller: bondieStats,
                           ),
                         ),
