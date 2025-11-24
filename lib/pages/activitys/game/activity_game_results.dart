@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bondedapp/layout/app_background.dart';
 
 class ActivityGameResultsPage extends StatelessWidget {
   final List<String> prompts;
@@ -19,7 +18,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     "Both",
   ];
 
-  // Matching calculation
   int _calculateMatch() {
     int match = 0;
     for (int i = 0; i < answers.length; i++) {
@@ -28,33 +26,86 @@ class ActivityGameResultsPage extends StatelessWidget {
     return ((match / answers.length) * 100).round();
   }
 
+  Widget _buildBackground() {
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFFF8FAFF), Color(0xFFE9F1FF)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+
+        Positioned(top: -45, left: -40,
+            child: _heart(180, Colors.blueAccent.withOpacity(0.08))),
+        Positioned(top: 140, left: -60,
+            child: _heart(250, Colors.blueAccent.withOpacity(0.08))),
+        Positioned(top: 60, right: 0,
+            child: _heart(170, Colors.lightBlue.withOpacity(0.08))),
+        Positioned(top: 200, left: 220,
+            child: _heart(50, Colors.blue.withOpacity(0.08))),
+        Positioned(top: 300, left: 180,
+            child: _heart(90, Colors.blue.withOpacity(0.08))),
+        Positioned(top: 365, right: 35,
+            child: _heart(60, Colors.lightBlue.withOpacity(0.08))),
+        Positioned(top: 420, left: 30,
+            child: _heart(120, Colors.blueAccent.withOpacity(0.08))),
+        Positioned(bottom: 105, right: -80,
+            child: _heart(220, Colors.lightBlue.withOpacity(0.08))),
+        Positioned(top: 220, right: -80,
+            child: _heart(160, Colors.indigoAccent.withOpacity(0.08))),
+        Positioned(bottom: -50, left: -50,
+            child: _heart(200, Colors.lightBlue.withOpacity(0.08))),
+        Positioned(bottom: 150, left: 140,
+            child: _heart(70, Colors.indigoAccent.withOpacity(0.08))),
+        Positioned(bottom: -150, right: -50,
+            child: _heart(270, Colors.blueAccent.withOpacity(0.08))),
+        Positioned(bottom: 280, right: 20,
+            child: _heart(200, Colors.blueAccent.withOpacity(0.08))),
+      ],
+    );
+  }
+
+  Widget _heart(double size, Color color) {
+    return CustomPaint(
+      size: Size(size, size),
+      painter: _HeartPainter(color),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final matchValue = _calculateMatch();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9FF),
+      body: Stack(
+        children: [
+          _buildBackground(),
 
-      body: AppBackground(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-            child: Column(
-              children: [
-                _buildHeader(context),
-                const SizedBox(height: 22),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+              child: Column(
+                children: [
+                  _buildHeader(context),
+                  const SizedBox(height: 22),
 
-                _buildBondieMatchIntro(matchValue),
-                const SizedBox(height: 22),
+                  _buildBondieMatchIntro(matchValue),
+                  const SizedBox(height: 22),
 
-                Expanded(child: _buildResultsList()),
-                const SizedBox(height: 20),
+                  Expanded(child: _buildResultsList()),
+                  const SizedBox(height: 20),
 
-                _finishButton(context),
-              ],
+                  _finishButton(context),
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -102,7 +153,6 @@ class ActivityGameResultsPage extends StatelessWidget {
             ),
 
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
                   height: 85,
@@ -115,7 +165,8 @@ class ActivityGameResultsPage extends StatelessWidget {
                           value: 1,
                           strokeWidth: 9,
                           backgroundColor: const Color(0xFFE4ECFF),
-                          valueColor: const AlwaysStoppedAnimation(Color(0xFFE4ECFF)),
+                          valueColor:
+                          const AlwaysStoppedAnimation(Color(0xFFE4ECFF)),
                         ),
                       ),
                       SizedBox.expand(
@@ -124,7 +175,8 @@ class ActivityGameResultsPage extends StatelessWidget {
                           strokeWidth: 9,
                           strokeCap: StrokeCap.round,
                           backgroundColor: Colors.transparent,
-                          valueColor: const AlwaysStoppedAnimation(Color(0xFF2563EB)),
+                          valueColor:
+                          const AlwaysStoppedAnimation(Color(0xFF2563EB)),
                         ),
                       ),
                       Text(
@@ -221,13 +273,17 @@ class ActivityGameResultsPage extends StatelessWidget {
             height: 54,
             width: 54,
             decoration: BoxDecoration(
-              color: isMatch ? const Color(0xFFD5E5FF) : const Color(0xFFFFE5E9),
+              color: isMatch
+                  ? const Color(0xFFD5E5FF)
+                  : const Color(0xFFFFE5E9),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(
               isMatch ? Icons.favorite_rounded : Icons.close_rounded,
               size: 26,
-              color: isMatch ? const Color(0xFF2563EB) : const Color(0xFFE11D48),
+              color: isMatch
+                  ? const Color(0xFF2563EB)
+                  : const Color(0xFFE11D48),
             ),
           ),
         ),
@@ -252,7 +308,8 @@ class ActivityGameResultsPage extends StatelessWidget {
         const SizedBox(width: 10),
 
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+          padding:
+          const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
           decoration: BoxDecoration(
             color: const Color(0xFFE8F1FF),
             borderRadius: BorderRadius.circular(16),
@@ -294,4 +351,30 @@ class ActivityGameResultsPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class _HeartPainter extends CustomPainter {
+  final Color color;
+  _HeartPainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    final w = size.width;
+    final h = size.height;
+
+    final path = Path()
+      ..moveTo(w / 2, h * 0.75)
+      ..cubicTo(-w * 0.2, h * 0.35, w * 0.25, -h * 0.2, w / 2, h * 0.25)
+      ..cubicTo(w * 0.75, -h * 0.2, w * 1.2, h * 0.35, w / 2, h * 0.75)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
