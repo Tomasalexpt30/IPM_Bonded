@@ -24,12 +24,11 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
   final List<String> _mainInsights = const [
     "Did you know small everyday gestures can strengthen any relationship?",
     "I woke up extra inspired today! I’ve got a special idea for you two.",
-    "Connection isn’t only in the big moments – it lives in the tiny details of your day.",
-    "Communication is the bridge between you both – talk a little more today 💙",
+    "Connection isn’t only in the big moments, it lives in the tiny details of your day.",
+    "Communication is the bridge between you both, talk a little more today",
     "Even on hard days, remembering you’re a team changes everything.",
     "Love grows when you care for each other in simple, intentional ways.",
     "Little surprises create big memories. Maybe today is a good day for one.",
-    "I’ve got a mini mission for you below 👇",
   ];
 
   @override
