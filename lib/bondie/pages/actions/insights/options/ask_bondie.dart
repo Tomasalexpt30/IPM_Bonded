@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AskBondieOption {
-  // -------- RESPOSTAS POR CATEGORIA ----------
   static const Map<String, List<String>> categoryResponses = {
     "Give us a gentle reminder": [
       "A calm reminder: the tone you choose can change everything.",
@@ -122,7 +121,6 @@ class AskBondieOption {
 
                       const SizedBox(height: 14),
 
-                      // Grid de perguntas
                       GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -144,7 +142,6 @@ class AskBondieOption {
 
                       const SizedBox(height: 12),
 
-                      // ----------- Resposta + Bondie -----------
                       Flexible(
                         child: SingleChildScrollView(
                           controller: scrollController,
@@ -205,7 +202,6 @@ class AskBondieOption {
     );
   }
 
-  // ---------- BOTÃO DO GRID ----------
   static Widget _askGridButton({
     required String text,
     required bool isSelected,

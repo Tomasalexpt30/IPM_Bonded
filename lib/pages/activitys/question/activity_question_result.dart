@@ -11,7 +11,6 @@ class ActivityQuestionResultPage extends StatelessWidget {
     required this.userAnswer,
   });
 
-  // Resposta automática do parceiro (gerada por mim)
   String get partnerAnswer {
     return switch (question) {
       _ when question.contains("appreciated") =>
@@ -52,9 +51,6 @@ class ActivityQuestionResultPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // HEADER
-  // ===============================================================
   Widget _buildHeader(BuildContext context) {
     return SizedBox(
       height: 46,
@@ -71,9 +67,6 @@ class ActivityQuestionResultPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // REFLECTION BUBBLE
-  // ===============================================================
   Widget _buildReflectionBubble() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,9 +124,6 @@ class ActivityQuestionResultPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // CARD COM RESPOSTAS
-  // ===============================================================
   Widget _buildAnswersCard() {
     return Container(
       width: double.infinity,
@@ -195,9 +185,6 @@ class ActivityQuestionResultPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // ROW TEMPLATE
-  // ===============================================================
   Widget _answerRow({
     required String label,
     required String avatar,
@@ -255,9 +242,6 @@ class ActivityQuestionResultPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // BUTTON → FECHA TUDO E VOLTA PARA HOME
-  // ===============================================================
   Widget _finishButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,

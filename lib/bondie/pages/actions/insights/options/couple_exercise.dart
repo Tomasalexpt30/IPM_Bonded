@@ -36,7 +36,6 @@ class CoupleExerciseOption {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Grabber
                   Center(
                     child: Container(
                       width: 40,

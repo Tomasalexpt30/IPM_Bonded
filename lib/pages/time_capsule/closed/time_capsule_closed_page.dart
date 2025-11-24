@@ -219,9 +219,6 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
     );
   }
 
-  // ============================
-  // CAPSULE LOCKED CARD (sem barra vertical)
-  // ============================
   Widget _buildCapsuleLockedCard(double progress, int daysPassed) {
     return Container(
       width: double.infinity,

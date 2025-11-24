@@ -18,7 +18,6 @@ class _MoodQuestPageState extends State<MoodQuestPage> {
   int energyIndex = -1;
   int affectionIndex = -1;
 
-  // Apenas animação visual — sem guardar nada
   void nextPage() {
     if (currentPage < 2) {
       _pageController.nextPage(
@@ -29,7 +28,6 @@ class _MoodQuestPageState extends State<MoodQuestPage> {
   }
 
   void submit() {
-    // Fecha tudo e volta ao MainScreen original
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => MainScreen()),
@@ -85,14 +83,12 @@ class _MoodQuestPageState extends State<MoodQuestPage> {
 
               const SizedBox(height: 20),
 
-              // PAGEVIEW
               Expanded(
                 child: PageView(
                   physics: const BouncingScrollPhysics(),
                   controller: _pageController,
                   onPageChanged: (i) => setState(() => currentPage = i),
                   children: [
-                    // CONNECTION
                     _questionPage(
                       title:
                       "If your connection with your boyfriend were the moon tonight, how would it look?",
@@ -107,7 +103,6 @@ class _MoodQuestPageState extends State<MoodQuestPage> {
                       onNext: nextPage,
                     ),
 
-                    // ENERGY
                     _questionPage(
                       title:
                       "If your day had a tension meter, how high would it be?",
@@ -122,7 +117,6 @@ class _MoodQuestPageState extends State<MoodQuestPage> {
                       onNext: nextPage,
                     ),
 
-                    // AFFECTION
                     _questionPage(
                       title:
                       "If your relationship’s mood today were the weather, what would it be?",
@@ -147,7 +141,6 @@ class _MoodQuestPageState extends State<MoodQuestPage> {
     );
   }
 
-  // QUESTION TEMPLATE
   Widget _questionPage({
     required String title,
     required List<MoodItem> options,

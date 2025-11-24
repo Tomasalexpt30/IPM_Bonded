@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-// 🔥 ADICIONADO — atividades
 import '../../add_activity/calendar_activity_controller.dart';
 
 class MonthGridView extends StatelessWidget {
   final DateTime date;
-
-  // 🔥 ADICIONADO
   final CalendarActivityController activities;
 
   const MonthGridView({
@@ -20,24 +16,16 @@ class MonthGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     final int year = date.year;
     final int month = date.month;
-
     final DateTime firstDay = DateTime(year, month, 1);
-
-    // 🔹 Monday=1 → 0; Tuesday=2 → 1; ...; Sunday=7 → 6
     final int firstWeekday = firstDay.weekday - 1;
-
     final int daysInMonth = DateUtils.getDaysInMonth(year, month);
-
-    // Lista growable com dias vazios antes do dia 1
     final List<int?> cells =
     List<int?>.filled(firstWeekday, null, growable: true);
 
-    // Dias do mês
     for (int i = 1; i <= daysInMonth; i++) {
       cells.add(i);
     }
 
-    // Completar até múltiplo de 7
     while (cells.length % 7 != 0) {
       cells.add(null);
     }
@@ -72,7 +60,6 @@ class MonthGridView extends StatelessWidget {
           ),
           const SizedBox(height: 18),
 
-          // DAYS OF WEEK HEADER
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -95,7 +82,6 @@ class MonthGridView extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // GRID
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -116,7 +102,6 @@ class MonthGridView extends StatelessWidget {
                       DateTime.now().month == month &&
                       DateTime.now().day == day;
 
-              // 🔥 TEM ATIVIDADES? ENTÃO DESTACAR
               final bool hasActivity =
                   activities.getActivitiesForDay(DateTime(year, month, day))
                       .isNotEmpty;

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ============================================================
-// SORT SHEET
-// ============================================================
 Future<void> showSortSheet({
   required BuildContext context,
   required String selectedSort,
@@ -101,9 +98,6 @@ Future<void> showSortSheet({
   );
 }
 
-// ============================================================
-// FILTER SHEET
-// ============================================================
 Future<void> showFilterSheet({
   required BuildContext context,
   required String selectedFilter,
@@ -203,9 +197,6 @@ Future<void> showFilterSheet({
   );
 }
 
-// ============================================================
-// COINS SHEET
-// ============================================================
 Future<void> showCoinsSheet({
   required BuildContext context,
   required int coins,
@@ -288,9 +279,6 @@ Future<void> showCoinsSheet({
   );
 }
 
-// ============================================================
-// NOT ENOUGH COINS SHEET
-// ============================================================
 Future<void> showNotEnoughCoinsSheet({
   required BuildContext context,
 }) {
@@ -366,9 +354,6 @@ Future<void> showNotEnoughCoinsSheet({
   );
 }
 
-// ============================================================
-// CONFIRM BUY SHEET
-// ============================================================
 Future<void> showConfirmBuySheet({
   required BuildContext context,
   required String skinName,

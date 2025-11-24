@@ -40,9 +40,6 @@ class BondieShopHeader extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // TOP BAR
-  // ============================================================
   Widget _buildTopBar(BuildContext context) {
     return SizedBox(
       height: 44,
@@ -58,7 +55,6 @@ class BondieShopHeader extends StatelessWidget {
             ),
           ),
 
-          // TÍTULO CENTRADO
           const Align(
             alignment: Alignment.center,
             child: Text(
@@ -70,7 +66,6 @@ class BondieShopHeader extends StatelessWidget {
             ),
           ),
 
-          // MOEDAS À DIREITA
           Align(
             alignment: Alignment.centerRight,
             child: _buildCoinsChip(),
@@ -118,9 +113,6 @@ class BondieShopHeader extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // PREVIEW BASED ON EQUIPPED SKIN
-  // ============================================================
   Widget _buildBondiePreview() {
     final bool isDefault = equippedIndex == null || equippedIndex == 0;
 
@@ -194,9 +186,6 @@ class BondieShopHeader extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // SORT + FILTER
-  // ============================================================
   Widget _buildSortFilterRow() {
     return Row(
       children: [
@@ -207,9 +196,6 @@ class BondieShopHeader extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // SORT CHIP
-  // ============================================================
   Widget _buildSortChip() {
     return GestureDetector(
       onTap: onOpenSort,
@@ -247,9 +233,6 @@ class BondieShopHeader extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // FILTER CHIP
-  // ============================================================
   Widget _buildFilterChip() {
     final bool hasFilter = selectedFilter != "All";
 

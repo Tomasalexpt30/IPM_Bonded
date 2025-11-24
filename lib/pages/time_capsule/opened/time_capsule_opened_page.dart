@@ -1,5 +1,3 @@
-// -------------- TIME CAPSULE OPENED PAGE (COM STATS) -----------------
-
 import 'package:flutter/material.dart';
 import 'package:bondedapp/layout/app_background.dart';
 import 'package:bondedapp/bondie/widget/animated_bondie_widget.dart';
@@ -138,8 +136,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-  // ---------------- SECRET THEME CARD ----------------
-
   Widget _secretThemeCard() {
     return Align(
       alignment: Alignment.center,
@@ -228,8 +224,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-  // ---------------- STATS HEADER ----------------
-
   Widget _statsHeader({
     required int photos,
     required int videos,
@@ -263,8 +257,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-  // ---------------- SUBMISSIONS SECTION ----------------
-
   Widget _submissionsSection({
     required String title,
     required String subtitle,
@@ -292,13 +284,11 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ---------------- HEADER + STATS ----------------
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment:
-            CrossAxisAlignment.start, // topo da cell
+            CrossAxisAlignment.start,
             children: [
-              // TITLES
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -319,8 +309,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
                   ),
                 ],
               ),
-
-              // STATS ALINHADOS PELA ALTURA DO TÍTULO
               Padding(
                 padding: const EdgeInsets.only(top: 6),
                 child: _statsHeader(
@@ -348,8 +336,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-  // ---------------- MASONRY GRID ----------------
-
   Widget _mixedMosaic(List<Map<String, dynamic>> items) {
     return MasonryGridView.count(
       crossAxisCount: 2,
@@ -372,7 +358,7 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
               child: Stack(
                 children: [
                   Transform.scale(
-                    scale: 1.5, // ⬅️ ZOOM INTERNO 1.5x
+                    scale: 1.5,
                     child: Image.asset(
                       media["path"],
                       height: tall ? 160 : 101,
@@ -407,8 +393,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
       },
     );
   }
-
-  // ---------------- NOTE SPEECH BUBBLE ----------------
 
   Widget _noteSpeechBubble({
     required String text,
@@ -446,8 +430,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-  // ---------------- FULLSCREEN IMAGE ----------------
-
   void _openFullImage(String path, int index, {required bool isVideo}) {
     Navigator.push(
       context,
@@ -461,9 +443,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-  // ----------------------------------------------------------
-  // Bottom navigation bar
-  // ----------------------------------------------------------
   Widget _buildBottomNavBar() {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),
@@ -522,8 +501,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 }
-
-// ---------------- FULLSCREEN PAGE ----------------
 
 class _FullscreenImagePage extends StatelessWidget {
   final String imagePath;

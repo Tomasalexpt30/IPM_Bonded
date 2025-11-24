@@ -4,12 +4,9 @@ import 'package:bondedapp/pages/time_capsule/opened/time_capsule_opened_page.dar
 import 'package:flutter/material.dart';
 import 'package:bondedapp/layout/app_background.dart';
 import '../../../bondie/pages/stats/bondie_stats_controller.dart';
-
 import 'widgets/couple_section.dart';
 import 'widgets/daily_game.dart';
 import 'widgets/time_capsule.dart';
-
-// IMPORTA A PÁGINA NOVA
 import 'package:bondedapp/pages/time_capsule/submission/time_capsule_submission_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,7 +17,6 @@ class HomePage extends StatelessWidget {
     required this.bondieStats,
   });
 
-  // ---------- MINI TITLE (igual à SettingsPage) ----------
   Widget _sectionTitle(String text) {
     return Text(
       text,
@@ -50,9 +46,6 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  // ---------------------------------------------------
-                  // HEADER
-                  // ---------------------------------------------------
                   const Padding(
                     padding: EdgeInsets.only(bottom: 30),
                     child: Text(
@@ -65,15 +58,9 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
 
-                  // ---------------------------------------------------
-                  // MEMORY OF THE DAY
-                  // ---------------------------------------------------
                   CoupleSection(controller: bondieStats),
                   const SizedBox(height: 35),
 
-                  // ---------------------------------------------------
-                  // DAILY ACTIVITIES TITLE
-                  // ---------------------------------------------------
                   _sectionTitle("Daily Activities"),
                   const SizedBox(height: 16),
 
@@ -85,9 +72,6 @@ class HomePage extends StatelessWidget {
                   const DailyQuestionCard(),
                   const SizedBox(height: 35),
 
-                  // ---------------------------------------------------
-                  // TIME CAPSULE TITLE
-                  // ---------------------------------------------------
                   _sectionTitle("Time Capsule"),
                   const SizedBox(height: 16),
 

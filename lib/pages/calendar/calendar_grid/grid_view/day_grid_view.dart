@@ -63,10 +63,6 @@ class DayGridView extends StatelessWidget {
   }
 }
 
-// =============================================================
-// 🔵 HEADER “Mon 24”
-// =============================================================
-
 class _DayHeader extends StatelessWidget {
   final DateTime date;
 
@@ -92,10 +88,6 @@ class _DayHeader extends StatelessWidget {
   }
 }
 
-// =============================================================
-// 🔵 SCROLL (GRID HORAS + ACTIVITIES)
-// =============================================================
-
 class _ScrollableDayHours extends StatelessWidget {
   final CalendarGridController controller;
   final List<String> hours;
@@ -119,7 +111,6 @@ class _ScrollableDayHours extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // GRID DRAWING
           Column(
             children: hours.map((hourLabel) {
               return SizedBox(
@@ -157,7 +148,6 @@ class _ScrollableDayHours extends StatelessWidget {
             }).toList(),
           ),
 
-          // ACTIVITY BLOCKS
           ...todayActivities.map((a) {
             final startOffset =
                 a.start.hour * CalendarGridController.rowHeight +
@@ -191,7 +181,6 @@ class _ScrollableDayHours extends StatelessWidget {
             );
           }).toList(),
 
-          // CURRENT TIME INDICATOR
           AnimatedBuilder(
             animation: controller,
             builder: (context, _) {
@@ -209,10 +198,6 @@ class _ScrollableDayHours extends StatelessWidget {
     );
   }
 }
-
-// =============================================================
-// 🔵 ACTIVITY BLOCK
-// =============================================================
 
 class _ActivityBlock extends StatelessWidget {
   final CalendarActivity activity;
@@ -256,10 +241,6 @@ class _ActivityBlock extends StatelessWidget {
   }
 }
 
-// =============================================================
-// 🔵 CURRENT TIME INDICATOR
-// =============================================================
-
 class _CurrentTimeIndicator extends StatelessWidget {
   const _CurrentTimeIndicator();
 
@@ -289,10 +270,6 @@ class _CurrentTimeIndicator extends StatelessWidget {
     );
   }
 }
-
-// =============================================================
-// 🔵 LEGENDA (Individual / Couple)
-// =============================================================
 
 class _DayLegend extends StatelessWidget {
   const _DayLegend();

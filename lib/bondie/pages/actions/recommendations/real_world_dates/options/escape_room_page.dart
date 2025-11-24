@@ -80,9 +80,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // MAIN INFO BLOCK
-  // ===========================================================
   Widget _mainInfoBlock(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -162,7 +159,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // BUTTON
   Widget _iconButton({
     required IconData icon,
     required String label,
@@ -199,7 +195,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // TIPS SECTION
   Widget _tipsSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -312,7 +307,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // BONDIE WHY SECTION
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -355,7 +349,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // INFO SQUARES
   Widget _smallInfoRow() {
     return Row(
       children: [
@@ -412,9 +405,6 @@ class EscapeRoomPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // NAV BAR
-  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

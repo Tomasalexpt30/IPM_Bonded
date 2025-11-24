@@ -95,9 +95,6 @@ class BondieShopGrid extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // SKIN CARD
-  // ============================================================
   Widget _skinCard(BuildContext context, int index) {
     final skin = skins[index];
 
@@ -148,7 +145,6 @@ class BondieShopGrid extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // SKIN IMAGE
           Expanded(
             flex: 3,
             child: Image.asset(
@@ -159,7 +155,6 @@ class BondieShopGrid extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // NAME
           Text(
             skin["name"],
             textAlign: TextAlign.center,
@@ -172,7 +167,6 @@ class BondieShopGrid extends StatelessWidget {
 
           const SizedBox(height: 4),
 
-          // DESCRIPTION
           Text(
             skin["desc"],
             textAlign: TextAlign.center,
@@ -186,7 +180,6 @@ class BondieShopGrid extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // PRICE
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -208,7 +201,6 @@ class BondieShopGrid extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // BUTTON
           _buildButton(
             context: context,
             index: index,
@@ -224,9 +216,6 @@ class BondieShopGrid extends StatelessWidget {
     );
   }
 
-  // ============================================================
-  // BUY / EQUIP / EQUIPPED BUTTON
-  // ============================================================
   Widget _buildButton({
     required BuildContext context,
     required int index,

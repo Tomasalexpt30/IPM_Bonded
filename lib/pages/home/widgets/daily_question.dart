@@ -32,25 +32,22 @@ class DailyQuestionCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            // ÍCONE DENTRO DO QUADRADO PASTEL
             Container(
               height: 55,
               width: 55,
               decoration: BoxDecoration(
-                color: const Color(0xFFE3ECFF),  // azul pastel claro (matching app)
+                color: const Color(0xFFE3ECFF),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: const Icon(
                 Icons.question_mark_rounded,
                 size: 30,
-                color: Color(0xFF2563EB),       // azul principal Bonded
+                color: Color(0xFF2563EB),
               ),
             ),
 
             const SizedBox(width: 18),
 
-            // TEXTOS
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +76,6 @@ class DailyQuestionCard extends StatelessWidget {
 
             const SizedBox(width: 12),
 
-            // SETA (MESMA DA SETTINGS)
             const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,

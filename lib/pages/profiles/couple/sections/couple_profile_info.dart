@@ -9,7 +9,7 @@ class CoupleProfileInfo extends StatefulWidget {
   final String songArtist;
   final String albumCover;
 
-  final BondieStatsController controller; // ADICIONADO
+  final BondieStatsController controller;
 
   const CoupleProfileInfo({
     super.key,
@@ -18,7 +18,7 @@ class CoupleProfileInfo extends StatefulWidget {
     required this.songTitle,
     required this.songArtist,
     required this.albumCover,
-    required this.controller, // ADICIONADO
+    required this.controller,
   });
 
   @override
@@ -50,7 +50,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     final now = DateTime.now();
     final daysTogether = now.difference(widget.relationshipStartDate).inDays;
 
-    // ⭐ NOVO: bond level vindo do controller
     final double bondLevel = widget.controller.avg;
 
     return Container(
@@ -70,8 +69,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
       child: Column(
         children: [
-
-          // 🔵 NOME CENTRADO + BOTÃO EDIT À DIREITA
           Stack(
             alignment: Alignment.center,
             children: [
@@ -116,7 +113,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
           const SizedBox(height: 30),
 
-          // ⭐ BOND LEVEL BLOCK — AGORA DINÂMICO
           GestureDetector(
             onTap: () => _showBondLevelInfoSheet(context),
             child: Column(
@@ -174,9 +170,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
 
           const SizedBox(height: 30),
 
-          // ======================================================
-          // COUPLE INFO BOX
-          // ======================================================
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
@@ -290,9 +283,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     );
   }
 
-  // ======================================================
-  // BOTTOM SHEET
-  // ======================================================
   void _showBondLevelInfoSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -425,9 +415,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     );
   }
 
-  // ======================================================
-  // VINYL MAKER
-  // ======================================================
   Widget _buildVinyl(String cover, {double size = 130}) {
     return Container(
       width: size,
@@ -491,9 +478,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     );
   }
 
-  // ======================================================
-  // INFO TILE
-  // ======================================================
   Widget _infoTile({
     required IconData icon,
     required String label,
@@ -534,9 +518,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
     );
   }
 
-  // ======================================================
-  // MONTH
-  // ======================================================
   String _month(int m) {
     const months = [
       "Jan","Feb","Mar","Apr","May","Jun",
@@ -546,9 +527,6 @@ class _CoupleProfileInfoState extends State<CoupleProfileInfo>
   }
 }
 
-// =========================================================
-// VINYL RIDGES PAINTER
-// =========================================================
 class _VinylRidgesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

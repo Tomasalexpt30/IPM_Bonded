@@ -17,8 +17,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-
-    // 🌱 SUPER SMOOTH GROW (0 → 1.0)
     _growController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 3000),
@@ -27,14 +25,12 @@ class _SplashScreenState extends State<SplashScreen>
     _growAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _growController,
-        curve: Curves.easeOutQuart, // 🔥 cinematic smoothing
+        curve: Curves.easeOutQuart,
       ),
     );
 
-    // Start grow
     _growController.forward();
 
-    // ⏳ Aguarda depois de crescer → muda para MoodQuestPage
     Future.delayed(const Duration(milliseconds: 3200), () {
       Navigator.pushReplacement(
         context,

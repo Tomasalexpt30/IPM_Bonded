@@ -20,21 +20,16 @@ class SettingsPage extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // HEADER
                 _buildHeader(),
 
                 const SizedBox(height: 30),
 
-                // PROFILE SECTION
                 _profileHeader(),
                 const SizedBox(height: 15),
                 _profileButtons(),
 
                 const SizedBox(height: 30),
 
-                // ============================
-                // MERGED SECTION: APP SETTINGS
-                // ============================
                 _sectionTitle("App Settings"),
                 const SizedBox(height: 15),
 
@@ -84,9 +79,6 @@ class SettingsPage extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // ============================
-                // SUPPORT
-                // ============================
                 _sectionTitle("Support"),
                 const SizedBox(height: 15),
 
@@ -109,9 +101,6 @@ class SettingsPage extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // ============================
-                // ACCOUNT ACTIONS
-                // ============================
                 _sectionTitle("Account Actions"),
                 const SizedBox(height: 15),
 
@@ -138,9 +127,6 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // HEADER
-  // ------------------------------------------------------------
   Widget _buildHeader() {
     return const Text(
       "Settings",
@@ -153,9 +139,6 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // PROFILE HEADER
-  // ------------------------------------------------------------
   Widget _profileHeader() {
     return Center(
       child: Column(
@@ -211,9 +194,6 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // PROFILE QUICK BUTTONS
-  // ------------------------------------------------------------
   Widget _profileButtons() {
     return Row(
       children: [
@@ -261,9 +241,6 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // SECTION TITLE
-  // ------------------------------------------------------------
   Widget _sectionTitle(String text) {
     return Text(
       text,
@@ -275,9 +252,6 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // NORMAL SETTINGS CARD
-  // ------------------------------------------------------------
   Widget _settingsCard({
     required IconData icon,
     required Color color,
@@ -350,9 +324,6 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // DANGER CARD (same structure)
-  // ------------------------------------------------------------
   Widget _dangerCard({
     required String title,
     required IconData icon,

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-// 🔥 ADICIONADO — actividades
 import '../../add_activity/calendar_activity_controller.dart';
 
 class YearGridView extends StatelessWidget {
   final DateTime date;
-
-  // 🔥 ADICIONADO
   final CalendarActivityController activities;
 
   const YearGridView({
@@ -63,8 +59,6 @@ class YearGridView extends StatelessWidget {
 
               return _MonthCard(
                 date: monthDate,
-
-                // 🔥 ADICIONADO
                 activities: activities,
               );
             },
@@ -77,8 +71,6 @@ class YearGridView extends StatelessWidget {
 
 class _MonthCard extends StatelessWidget {
   final DateTime date;
-
-  // 🔥 ADICIONADO
   final CalendarActivityController activities;
 
   const _MonthCard({
@@ -90,22 +82,14 @@ class _MonthCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final int year = date.year;
     final int month = date.month;
-
     final String title = DateFormat("MMMM").format(date);
-
     final int daysInMonth = DateUtils.getDaysInMonth(year, month);
-
-    // 🔥 TEM ALGUMA ATIVIDADE NO MÊS?
     final bool hasAnyActivity = List.generate(
       daysInMonth,
           (i) => activities.getActivitiesForDay(DateTime(year, month, i + 1)),
     ).any((list) => list.isNotEmpty);
-
-    // 🔥 MÊS ATUAL?
     final bool isCurrentMonth =
         DateTime.now().month == month && DateTime.now().year == year;
-
-    // Gere estrutura dos dias
     final int firstWeekday = DateTime(year, month, 1).weekday - 1;
 
     List<int?> days = List<int?>.filled(firstWeekday, null, growable: true);
@@ -119,7 +103,6 @@ class _MonthCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
 
-        // 🔥 DESTACAR MESES COM ATIVIDADE
         border: hasAnyActivity
             ? Border.all(color: const Color(0xFF2563EB), width: 2)
             : null,
@@ -136,7 +119,6 @@ class _MonthCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // TÍTULO DO MÊS
           Text(
             title,
             style: TextStyle(
@@ -150,7 +132,6 @@ class _MonthCard extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          // LETRAS DOS DIAS
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: weekLetters
@@ -173,7 +154,6 @@ class _MonthCard extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // GRID DE DIAS
           Expanded(
             child: GridView.builder(
               padding: EdgeInsets.zero,

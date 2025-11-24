@@ -27,7 +27,6 @@ class TileMuseumPage extends StatelessWidget {
                 children: [
                   const SizedBox(height: 6),
 
-                  // HEADER
                   SizedBox(
                     height: 40,
                     child: Stack(
@@ -80,7 +79,6 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // MAIN INFO BLOCK
   Widget _mainInfoBlock(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -159,7 +157,6 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // BUTTON
   Widget _iconButton({
     required IconData icon,
     required String label,
@@ -196,7 +193,6 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // TIPS SECTION
   Widget _tipsSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -408,7 +404,6 @@ class TileMuseumPage extends StatelessWidget {
     );
   }
 
-  // NAV BAR
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

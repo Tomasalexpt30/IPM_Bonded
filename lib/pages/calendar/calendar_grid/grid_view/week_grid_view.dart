@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../calendar_grid_controller.dart';
-
-// atividades
 import '../../add_activity/calendar_activity_controller.dart';
-
-// sheet de edição
 import '../../edit_activity/edit_activity_sheet.dart';
 
 class WeekGridView extends StatelessWidget {
@@ -64,7 +60,6 @@ class WeekGridView extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          /// 🔥 LEGENDA CENTRADA (Apenas em baixo, igual ao DayGrid)
           const Center(child: _WeekLegendRow()),
         ],
       ),
@@ -142,14 +137,10 @@ class _WeekScrollableHours extends StatelessWidget {
         height: totalHeight,
         child: Stack(
           children: [
-            /// BACKGROUND GRID
             const Positioned.fill(child: _WeekGridBackground()),
-
-            /// HOURS + DAY COLUMNS
             Positioned.fill(
               child: Row(
                 children: [
-                  // LEFT HOURS
                   SizedBox(
                     width: 48,
                     child: Column(
@@ -172,7 +163,6 @@ class _WeekScrollableHours extends StatelessWidget {
                     ),
                   ),
 
-                  // WEEK COLUMNS
                   Expanded(
                     child: Row(
                       children: weekDays.map((day) {
@@ -189,7 +179,6 @@ class _WeekScrollableHours extends StatelessWidget {
               ),
             ),
 
-            /// CURRENT TIME INDICATOR
             AnimatedBuilder(
               animation: controller,
               builder: (context, _) {
@@ -316,9 +305,9 @@ class _ActivityBlock extends StatelessWidget {
 
   Color _getColor() {
     if (activity.isCouple) {
-      return const Color(0xFFFFF0D5); // casal
+      return const Color(0xFFFFF0D5);
     }
-    return const Color(0xFFBBF7D0); // individual
+    return const Color(0xFFBBF7D0);
   }
 
   @override
@@ -381,7 +370,6 @@ class _CurrentTimeIndicator extends StatelessWidget {
   }
 }
 
-/// 🔥 LEGENDA (igual ao Day)
 class _WeekLegendRow extends StatelessWidget {
   const _WeekLegendRow();
 

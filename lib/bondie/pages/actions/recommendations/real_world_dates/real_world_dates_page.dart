@@ -24,7 +24,6 @@ class RealWorldDatesPage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: _buildBottomBar(context),
 
-      // NEW GLOBAL BACKGROUND
       body: AppBackground(
         child: SafeArea(
           child: SingleChildScrollView(
@@ -34,8 +33,6 @@ class RealWorldDatesPage extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 6),
-
-                  // HEADER
                   SizedBox(
                     height: 40,
                     child: Stack(
@@ -55,7 +52,6 @@ class RealWorldDatesPage extends StatelessWidget {
                             ),
                           ),
                         ),
-
                         const Text(
                           "Real-World Date Ideas",
                           style: TextStyle(
@@ -70,7 +66,6 @@ class RealWorldDatesPage extends StatelessWidget {
 
                   const SizedBox(height: 20),
 
-                  // LIST OF DATE CARDS
                   _buildList(context),
 
                   const SizedBox(height: 40),
@@ -83,9 +78,6 @@ class RealWorldDatesPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // CARDS LIST
-  // ===========================================================
   Widget _buildList(BuildContext context) {
     return Column(
       children: [
@@ -193,9 +185,6 @@ class RealWorldDatesPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // DATE CARD
-  // ===========================================================
   Widget _buildDateCard({
     required IconData icon,
     required String title,
@@ -260,9 +249,6 @@ class RealWorldDatesPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // NAVIGATION BAR
-  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

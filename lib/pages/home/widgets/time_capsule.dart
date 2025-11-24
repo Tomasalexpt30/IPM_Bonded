@@ -9,22 +9,14 @@ class TimeCapsuleCard extends StatefulWidget {
 
 class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
   bool isOpen = false;
-
   DateTime now = DateTime.now();
-
-  // ⬅️ ABRE EM 2 DIAS
   DateTime openDate = DateTime.now().add(const Duration(days: 2));
-
-  // ⬅️ FECHA 2 DIAS DEPOIS DE ABRIR (ajusta como quiseres)
   DateTime closeDate = DateTime.now().add(const Duration(days: 4));
-
   String themeValue = "The days you made me smile";
 
   @override
   void initState() {
     super.initState();
-
-    // Atualiza o contador a cada segundo
     Future.doWhile(() async {
       await Future.delayed(const Duration(seconds: 1));
       if (!mounted) return false;
@@ -32,10 +24,6 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
       return true;
     });
   }
-
-  // =====================================================
-  // 🔥 NOVA FUNÇÃO — cria frase elegante do tempo restante
-  // =====================================================
   String _buildPrettyTime() {
     final diff = (isOpen ? closeDate : openDate).difference(now);
 
@@ -49,15 +37,12 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
     if (days > 0) {
       return "$days day${days > 1 ? 's' : ''}, ${hours}h ${minutes}m";
     }
-
     if (hours > 0) {
       return "${hours}h ${minutes}m ${seconds}s";
     }
-
     if (minutes > 0) {
       return "${minutes}m ${seconds}s";
     }
-
     return "${seconds}s";
   }
 
@@ -81,7 +66,6 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Ícone
           Container(
             height: 55,
             width: 55,
@@ -126,9 +110,6 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
 
                 const SizedBox(height: 8),
 
-                // =====================================================
-                // 🔥 "Closes in X days, Xh Xm Xs" (estilo muito melhorado)
-                // =====================================================
                 Row(
                   children: [
                     const Text(

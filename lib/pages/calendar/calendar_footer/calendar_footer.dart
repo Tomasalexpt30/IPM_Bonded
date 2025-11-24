@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-// 🔥 ADICIONADO — controller das atividades
 import '../add_activity/calendar_activity_controller.dart';
-
-// Bottom sheet para adicionar atividade
 import '../add_activity/add_activity_sheet.dart';
 
 class CalendarFooter extends StatelessWidget {
@@ -32,7 +28,6 @@ class _AddActivityButton extends StatelessWidget {
       width: double.infinity,
 
       child: Container(
-        // 🔥 Sombra suave estilo Bonded
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
@@ -59,7 +54,6 @@ class _AddActivityButton extends StatelessWidget {
               builder: (context) => const AddActivitySheet(),
             );
 
-            // 🔥 Se o utilizador carregou "Save"
             if (activity != null) {
               activityController.addActivity(activity);
             }

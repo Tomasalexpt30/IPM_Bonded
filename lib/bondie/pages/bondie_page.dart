@@ -87,9 +87,7 @@ class _BondiePageState extends State<BondiePage>
     );
   }
 
-  // ----------------------------------------------------------
   // Bottom navigation bar
-  // ----------------------------------------------------------
   Widget _buildBottomNavBar() {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

@@ -13,10 +13,6 @@ class GiftIdeasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
-
-      // ===========================================================
-      // BOTTOM NAVIGATION BAR
-      // ===========================================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
@@ -73,9 +69,6 @@ class GiftIdeasPage extends StatelessWidget {
         ),
       ),
 
-      // ===========================================================
-      // BODY WITH GLOBAL BACKGROUND
-      // ===========================================================
       body: AppBackground(
         child: SafeArea(
           child: SingleChildScrollView(
@@ -86,9 +79,6 @@ class GiftIdeasPage extends StatelessWidget {
                 children: [
                   const SizedBox(height: 6),
 
-                  // ===========================================================
-                  // HEADER
-                  // ===========================================================
                   SizedBox(
                     height: 40,
                     child: Stack(
@@ -122,10 +112,6 @@ class GiftIdeasPage extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 20),
-
-                  // ===========================================================
-                  // GIFT CARDS
-                  // ===========================================================
 
                   _buildCard(
                     icon: Icons.photo_album_rounded,
@@ -184,9 +170,6 @@ class GiftIdeasPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // CARD TEMPLATE
-  // ===========================================================
   Widget _buildCard({
     required IconData icon,
     required String title,

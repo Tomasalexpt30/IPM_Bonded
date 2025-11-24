@@ -50,7 +50,7 @@ class _AnimatedBondieWidgetState extends State<AnimatedBondieWidget>
         );
       },
       child: Image.asset(
-        widget.controller.bondieImage,     // ← usa agora o controller externo
+        widget.controller.bondieImage,
         width: 85,
         height: 85,
         fit: BoxFit.contain,

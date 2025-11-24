@@ -33,8 +33,6 @@ class CoupleSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-          // HEADER -----------------------------------------------------------
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -64,7 +62,6 @@ class CoupleSection extends StatelessWidget {
 
           const SizedBox(height: 22),
 
-          // FOTO CLICÁVEL ---------------------------------------------------
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -100,7 +97,6 @@ class CoupleSection extends StatelessWidget {
 
           const SizedBox(height: 18),
 
-          // DATE + LOCATION --------------------------------------------------
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -134,7 +130,6 @@ class CoupleSection extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // CHAT BUBBLE ------------------------------------------------------
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -171,10 +166,6 @@ class CoupleSection extends StatelessWidget {
     );
   }
 }
-
-// ==========================================================================
-// FULLSCREEN PHOTO VIEW
-// ==========================================================================
 
 class _FullImageView extends StatelessWidget {
   const _FullImageView();

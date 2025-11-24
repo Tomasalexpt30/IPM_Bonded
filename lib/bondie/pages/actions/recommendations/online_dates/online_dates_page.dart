@@ -13,10 +13,6 @@ class OnlineDatesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
-
-      // ===========================================================
-      // BOTTOM NAVIGATION BAR
-      // ===========================================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
@@ -73,9 +69,7 @@ class OnlineDatesPage extends StatelessWidget {
         ),
       ),
 
-      // ===========================================================
-      // BODY WITH GLOBAL BACKGROUND
-      // ===========================================================
+
       body: AppBackground(
         child: SafeArea(
           child: SingleChildScrollView(
@@ -85,10 +79,6 @@ class OnlineDatesPage extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 6),
-
-                  // ===========================================================
-                  // HEADER
-                  // ===========================================================
                   SizedBox(
                     height: 40,
                     child: Stack(
@@ -118,10 +108,6 @@ class OnlineDatesPage extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 20),
-
-                  // ===========================================================
-                  // CARDS
-                  // ===========================================================
 
                   _buildCard(
                     icon: Icons.movie_filter_rounded,
@@ -180,9 +166,6 @@ class OnlineDatesPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // CARD TEMPLATE
-  // ===========================================================
   Widget _buildCard({
     required IconData icon,
     required String title,

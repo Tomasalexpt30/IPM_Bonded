@@ -64,7 +64,6 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
 
                   const SizedBox(height: 18),
 
-                  // ===== INSIGHT CARDS =====
                   _buildInsightCard(
                     icon: Icons.lightbulb_outline_rounded,
                     title: "Tip of the Day",
@@ -127,9 +126,6 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
     );
   }
 
-  // ===========================================================
-  // HEADER
-  // ===========================================================
   Widget _buildHeader() {
     return SizedBox(
       height: 40,
@@ -163,9 +159,6 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
     );
   }
 
-  // ===========================================================
-  // BONDIE TALKING CARD
-  // ===========================================================
   Widget _buildBondieInsight() {
     final bubbleColor = const Color(0xFFD8EAFE);
 
@@ -241,9 +234,6 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
     );
   }
 
-  // ===========================================================
-  // INSIGHT CARD UI
-  // ===========================================================
   Widget _buildInsightCard({
     required IconData icon,
     required String title,
@@ -310,9 +300,6 @@ class _BondieInsightsPageState extends State<BondieInsightsPage> {
     );
   }
 
-  // ===========================================================
-  // BOTTOM NAVIGATION
-  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

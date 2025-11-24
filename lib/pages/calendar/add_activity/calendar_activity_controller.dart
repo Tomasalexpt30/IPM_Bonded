@@ -19,11 +19,9 @@ class CalendarActivity {
     this.note,
   });
 
-  // 🔥 DURAÇÃO EM HORAS (para desenhar no calendário)
   double get durationHours =>
       end.difference(start).inMinutes / 60;
 
-  // 🔥 copyWith para editar
   CalendarActivity copyWith({
     String? name,
     String? category,
@@ -49,13 +47,11 @@ class CalendarActivityController extends ChangeNotifier {
 
   List<CalendarActivity> get activities => List.unmodifiable(_activities);
 
-  // 🔥 ADICIONAR
   void addActivity(CalendarActivity activity) {
     _activities.add(activity);
     notifyListeners();
   }
 
-  // 🔥 OBTER ATIVIDADES POR DIA
   List<CalendarActivity> getActivitiesForDay(DateTime day) {
     return _activities.where((a) =>
     a.start.year == day.year &&
@@ -63,7 +59,6 @@ class CalendarActivityController extends ChangeNotifier {
         a.start.day == day.day).toList();
   }
 
-  // 🔥 EDITAR
   void updateActivity(CalendarActivity updated) {
     final index = _activities.indexWhere((a) => a.id == updated.id);
 
@@ -73,7 +68,6 @@ class CalendarActivityController extends ChangeNotifier {
     }
   }
 
-  // 🔥 REMOVER
   void deleteActivity(CalendarActivity activity) {
     _activities.removeWhere((a) => a.id == activity.id);
     notifyListeners();

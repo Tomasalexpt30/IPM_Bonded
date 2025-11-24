@@ -115,7 +115,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
 
             const SizedBox(height: 22),
 
-            // NAME
             const Text("Activity Name",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
@@ -123,7 +122,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
             _errorText(errors["name"]),
             const SizedBox(height: 18),
 
-            // CATEGORY
             const Text("Category",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
@@ -131,7 +129,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
             _errorText(errors["category"]),
             const SizedBox(height: 18),
 
-            // DATE & TIMES
             const Text("Date & Time",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
@@ -195,7 +192,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
 
             const SizedBox(height: 26),
 
-            // BUTTONS: DELETE + SAVE CHANGES
             Row(
               children: [
                 Expanded(
@@ -206,7 +202,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
                       widget.controller.deleteActivity(widget.activity);
                       Navigator.pop(context);
 
-                      // FEEDBACK DELETE
                       CalendarFeedback.show(
                         context,
                         "Activity deleted",
@@ -231,10 +226,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
       ),
     );
   }
-
-  // ======================================================
-  // VALIDATION + SAVE
-  // ======================================================
 
   void _validateAndSave() {
     setState(() {
@@ -286,10 +277,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
       icon: Icons.edit_rounded,
     );
   }
-
-  // ======================================================
-  // UI COMPONENTS
-  // ======================================================
 
   Widget _errorText(String? text) {
     if (text == null) return const SizedBox(height: 18);
@@ -345,7 +332,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
     );
   }
 
-  // DATE PICKER
   Widget _datePicker() {
     return GestureDetector(
       onTap: () async {
@@ -363,7 +349,6 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
     );
   }
 
-  // TIME PICKER
   Widget _timePicker(String label, TimeOfDay time, bool isStart) {
     return GestureDetector(
       onTap: () async {

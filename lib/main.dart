@@ -37,10 +37,6 @@ class BondedApp extends StatelessWidget {
   }
 }
 
-// ============================================================
-// MAIN SCREEN
-// ============================================================
-
 class MainScreen extends StatefulWidget {
   final int initialIndex;
   const MainScreen({super.key, this.initialIndex = 0});
@@ -81,7 +77,6 @@ class _MainScreenState extends State<MainScreen> {
         children: [
           _pages[_selectedIndex],
 
-          // Floating Bondie
           Positioned(
             right: 12,
             top: 60,
@@ -93,7 +88,7 @@ class _MainScreenState extends State<MainScreen> {
                     builder: (_) => BondiePage(statsController: bondieStats),
                   ),
                 );
-                setState(() {}); // refresh after returning
+                setState(() {});
               },
               child: AnimatedBondieWidget(controller: bondieStats),
             ),

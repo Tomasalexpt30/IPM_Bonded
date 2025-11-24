@@ -11,7 +11,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     required this.answers,
   });
 
-  // Respostas fixas da parceira (Sofia)
   final List<String> partnerAnswers = const [
     "Bruno",
     "Both",
@@ -60,7 +59,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-  // HEADER -------------------------------------------------------
   Widget _buildHeader(BuildContext context) {
     return SizedBox(
       height: 46,
@@ -77,9 +75,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // MATCH SCORE (CIRCULAR GAUGE + TEXT)
-  // ===============================================================
   Widget _buildBondieMatchIntro(int value) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,9 +158,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // RESULTS LIST
-  // ===============================================================
   Widget _buildResultsList() {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
@@ -243,9 +235,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // SINGLE ANSWER ROW
-  // ===============================================================
   Widget _answerRow({
     required String avatar,
     required String answer,
@@ -281,9 +270,6 @@ class ActivityGameResultsPage extends StatelessWidget {
     );
   }
 
-  // ===============================================================
-  // FINISH BUTTON
-  // ===============================================================
   Widget _finishButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,

@@ -15,10 +15,7 @@ class CoupleProfileChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // EXATAMENTE 5 DIAS
     final days = ["21/11", "22/11", "23/11", "24/11", "25/11"];
-
-    // EXATAMENTE 5 valores em cada linha
     final bond = [0.26, 0.44, 0.40, 0.68, 0.83];
     final energy = [0.58, 0.45, 0.62, 0.59, 0.57];
     final mood = [0.72, 0.75, 0.23, 0.77, 0.69];
@@ -55,7 +52,6 @@ class CoupleProfileChart extends StatelessWidget {
                     strokeWidth: 1,
                   ),
 
-                  // 👉 SOMENTE 5 TRAÇOS: 0, 0.25, 0.50, 0.75, 1.00
                   horizontalInterval: 0.25,
                   getDrawingHorizontalLine: (value) {
                     return FlLine(
@@ -82,7 +78,7 @@ class CoupleProfileChart extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.black87,
                           fontSize: 11,
-                          fontWeight: FontWeight.w600, // ← mais peso
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -97,13 +93,13 @@ class CoupleProfileChart extends StatelessWidget {
                         if (value < 0 || value > 4) return const SizedBox.shrink();
 
                         return Padding(
-                          padding: const EdgeInsets.only(top: 10), // ← MAIOR ESPAÇAMENTO
+                          padding: const EdgeInsets.only(top: 10),
                           child: Text(
                             days[value.toInt()],
                             style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 11,
-                              fontWeight: FontWeight.w600, // ← mais peso
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         );
@@ -118,7 +114,6 @@ class CoupleProfileChart extends StatelessWidget {
                 minY: 0,
                 maxY: 1,
 
-
                 lineBarsData: [
                   _lineData(bond, const Color(0xFF66C85B)),
                   _lineData(energy, const Color(0xFFFFB834)),
@@ -132,9 +127,6 @@ class CoupleProfileChart extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // LEGEND
-  // ------------------------------------------------------------
   Widget _buildLegend() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -164,7 +156,7 @@ class CoupleProfileChart extends StatelessWidget {
           label,
           style: const TextStyle(
             fontSize: 12,
-            fontWeight: FontWeight.w500, // ← mais pesado
+            fontWeight: FontWeight.w500,
             color: Colors.black87,
           ),
         ),
@@ -172,20 +164,16 @@ class CoupleProfileChart extends StatelessWidget {
     );
   }
 
-  // ------------------------------------------------------------
-  // LINE STYLE (PONTAS AFIADAS)
-  // ------------------------------------------------------------
   LineChartBarData _lineData(List<double> values, Color color) {
     return LineChartBarData(
-      isCurved: false, // << LINHA RETA, PONTAS AGUDAS
+      isCurved: false,
       barWidth: 3,
       color: color,
 
-      dotData: FlDotData(show: false), // sem pontos
+      dotData: FlDotData(show: false),
 
       belowBarData: BarAreaData(show: false),
 
-      // Criar 5 spots
       spots: List.generate(values.length, (i) => FlSpot(i.toDouble(), values[i])),
     );
   }

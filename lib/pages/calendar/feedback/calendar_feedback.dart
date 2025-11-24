@@ -97,11 +97,11 @@ class _FeedbackPopupState extends State<_FeedbackPopup>
                   Text(
                     widget.message,
                     style: const TextStyle(
-                      fontFamily: "Poppins",   // 🔥 mesma fonte da app
+                      fontFamily: "Poppins",
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
-                      decoration: TextDecoration.none, // 🔥 remove underline amarelo do debug
+                      decoration: TextDecoration.none,
                     ),
                   ),
                 ],

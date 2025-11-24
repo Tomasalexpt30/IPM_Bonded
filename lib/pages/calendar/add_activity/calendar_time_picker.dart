@@ -123,7 +123,6 @@ class _BondedTimePickerState extends State<CalendarTimePicker> {
 
           const SizedBox(height: 20),
 
-          // Confirm Button
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: SizedBox(

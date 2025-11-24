@@ -22,9 +22,6 @@ class RecommendationsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
 
-      // ===========================================================
-      // BOTTOM NAV BAR
-      // ===========================================================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10, bottom: 14),
         decoration: BoxDecoration(
@@ -81,9 +78,6 @@ class RecommendationsPage extends StatelessWidget {
         ),
       ),
 
-      // ===========================================================
-      // PAGE BODY WITH GLOBAL BACKGROUND
-      // ===========================================================
       body: AppBackground(
         child: SafeArea(
           child: SingleChildScrollView(
@@ -94,9 +88,6 @@ class RecommendationsPage extends StatelessWidget {
                 children: [
                   const SizedBox(height: 5),
 
-                  // ===========================================================
-                  // HEADER
-                  // ===========================================================
                   SizedBox(
                     height: 40,
                     child: Stack(
@@ -130,9 +121,6 @@ class RecommendationsPage extends StatelessWidget {
 
                   const SizedBox(height: 20),
 
-                  // ===========================================================
-                  // BONDIE HEADER
-                  // ===========================================================
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 18,
@@ -186,10 +174,6 @@ class RecommendationsPage extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 17),
-
-                  // ===========================================================
-                  // CATEGORY CARDS
-                  // ===========================================================
 
                   _buildCategory(
                     context,
@@ -275,9 +259,6 @@ class RecommendationsPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // CATEGORY CARD
-  // ===========================================================
   Widget _buildCategory(
       BuildContext context, {
         required IconData icon,

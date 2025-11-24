@@ -19,9 +19,6 @@ class CalendarHeader extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // ======================================================
-            // 🔹 DATE NAVIGATION (Day / Week / Month / Year)
-            // ======================================================
             Container(
               height: 45,
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -61,9 +58,6 @@ class CalendarHeader extends StatelessWidget {
 
             SizedBox(width: screenWidth * 0.03),
 
-            // ======================================================
-            // 🔹 SORT BUTTON
-            // ======================================================
             GestureDetector(
               onTap: () => _openSortMenu(context),
               child: Container(
@@ -109,9 +103,6 @@ class CalendarHeader extends StatelessWidget {
     );
   }
 
-  // ======================================================
-  // 🔹 Shared Box Style
-  // ======================================================
   BoxDecoration get _boxStyle => BoxDecoration(
     color: Colors.white.withOpacity(0.9),
     borderRadius: BorderRadius.circular(16),
@@ -124,9 +115,6 @@ class CalendarHeader extends StatelessWidget {
     ],
   );
 
-  // ======================================================
-  // 🔹 Bottom Sheet (Sort Options)
-  // ======================================================
   void _openSortMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -164,9 +152,6 @@ class CalendarHeader extends StatelessWidget {
     );
   }
 
-  // ======================================================
-  // 🔹 Sort Option Tile
-  // ======================================================
   Widget _sortOption(BuildContext context, String label, IconData icon) {
     final bool isSelected = (controller.selectedSort == label);
 

@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-// Activity model/controller
 import 'calendar_activity_controller.dart';
-
-// Custom Bonded pickers
 import '../add_activity/calendar_time_picker.dart';
 import '../add_activity/calendar_date_picker.dart';
-
-// 🔥 FEEDBACK VISUAL
 import '../feedback/calendar_feedback.dart';
-
 
 class AddActivitySheet extends StatefulWidget {
   const AddActivitySheet({super.key});
@@ -79,7 +72,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
 
             const SizedBox(height: 22),
 
-            // NAME ===============================================
             const Text("Activity Name",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
@@ -87,7 +79,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
             _errorText(errors["name"]),
             const SizedBox(height: 18),
 
-            // CATEGORY ==========================================
             const Text("Category",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
@@ -95,7 +86,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
             _errorText(errors["category"]),
             const SizedBox(height: 18),
 
-            // DATE & TIME =======================================
             const Text("Date & Time",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
@@ -122,7 +112,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
 
             const SizedBox(height: 20),
 
-            // PARTICIPANT ========================================
             const Text("Participant",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
@@ -151,14 +140,12 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
 
             const SizedBox(height: 20),
 
-            // NOTE ===============================================
             const Text("Note",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             _input(noteController, "Add Note", maxLines: 3),
             const SizedBox(height: 26),
 
-            // BUTTONS ============================================
             Row(
               children: [
                 Expanded(
@@ -188,10 +175,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
       ),
     );
   }
-
-  // ===========================================================
-  // VALIDATION + CREATION
-  // ===========================================================
 
   void _validateAndSave() {
     setState(() {
@@ -241,10 +224,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
 
     Navigator.pop(context, activity);
   }
-
-  // ===========================================================
-  // COMPONENTS
-  // ===========================================================
 
   Widget _errorText(String? text) {
     if (text == null) return const SizedBox(height: 18);
@@ -301,7 +280,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
     );
   }
 
-  // ========== DATE PICKER ===============================
   Widget _datePicker() {
     return GestureDetector(
       onTap: () async {
@@ -323,7 +301,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
     );
   }
 
-  // ========== TIME PICKER ===============================
   Widget _timePicker(String label, TimeOfDay? time, bool isStart) {
     return GestureDetector(
       onTap: () async {

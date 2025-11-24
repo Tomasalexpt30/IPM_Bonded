@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CalendarHeaderController extends ChangeNotifier {
-  // =====================================================
-  // 🔹 SORT ATUAL (Day, Week, Month, Year)
-  // =====================================================
   String _selectedSort = "Week";
   String get selectedSort => _selectedSort;
 
@@ -13,15 +10,8 @@ class CalendarHeaderController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // =====================================================
-  // 🔹 DATA ATUAL
-  // =====================================================
   DateTime _currentDate = DateTime.now();
   DateTime get currentDate => _currentDate;
-
-  // =====================================================
-  // 🔹 Mover para próxima unidade
-  // =====================================================
   void next() {
     switch (_selectedSort) {
       case "Day":
@@ -52,9 +42,6 @@ class CalendarHeaderController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // =====================================================
-  // 🔹 Mover para unidade anterior
-  // =====================================================
   void previous() {
     switch (_selectedSort) {
       case "Day":
@@ -85,9 +72,6 @@ class CalendarHeaderController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // =====================================================
-  // 🔹 Texto dinâmico exibido no header
-  // =====================================================
   String get displayRange {
     switch (_selectedSort) {
       case "Day":

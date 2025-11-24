@@ -9,7 +9,6 @@ class AppBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Fundo com gradiente
         Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -20,7 +19,6 @@ class AppBackground extends StatelessWidget {
           ),
         ),
 
-        // Elementos decorativos (corações)
         Positioned(
           top: -45,
           left: -40,
@@ -77,7 +75,6 @@ class AppBackground extends StatelessWidget {
           child: _heart(270, Colors.blueAccent.withOpacity(0.08)),
         ),
 
-        // Conteúdo principal
         child,
       ],
     );
@@ -91,9 +88,6 @@ class AppBackground extends StatelessWidget {
   }
 }
 
-// ------------------
-// Heart Painter
-// ------------------
 class _HeartPainter extends CustomPainter {
   final Color color;
   _HeartPainter(this.color);

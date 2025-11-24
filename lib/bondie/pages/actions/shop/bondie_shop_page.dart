@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:confetti/confetti.dart'; // 🎉 ADICIONADO
+import 'package:confetti/confetti.dart';
 import '../../../../main.dart';
 import 'sections/bondie_shop_header.dart';
 import 'sections/bondie_shop_grid.dart';
@@ -100,14 +100,13 @@ class _BondieShopPageState extends State<BondieShopPage> {
   @override
   void initState() {
     super.initState();
-    // 🎉 INICIALIZA CONFETTI
     _confettiController =
         ConfettiController(duration: const Duration(milliseconds: 500));
   }
 
   @override
   void dispose() {
-    _confettiController.dispose(); // 🔥 IMPORTANTE
+    _confettiController.dispose();
     super.dispose();
   }
 
@@ -134,11 +133,9 @@ class _BondieShopPageState extends State<BondieShopPage> {
       backgroundColor: const Color(0xFFF8F9FD),
       bottomNavigationBar: _buildBottomNavBar(),
 
-      // 🎉 STACK PARA POER CONFETTI POR CIMA
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
-          // ⭐ Fundo e conteúdo da página
           AppBackground(
             child: SafeArea(
               child: SingleChildScrollView(
@@ -177,7 +174,6 @@ class _BondieShopPageState extends State<BondieShopPage> {
 
                       const SizedBox(height: 20),
 
-                      // ⭐ GRID DAS SKINS
                       BondieShopGrid(
                         skins: skins,
                         selectedFilter: selectedFilter,
@@ -187,8 +183,6 @@ class _BondieShopPageState extends State<BondieShopPage> {
                         coins: coins,
                         rarityColor: rarityColor,
                         onEquip: (i) => setState(() => equippedIndex = i),
-
-                        // 🎉 Trigger do confetti aqui!
                         onBuy: (i, price) {
                           setState(() {
                             coins -= price;
@@ -196,7 +190,7 @@ class _BondieShopPageState extends State<BondieShopPage> {
                             equippedIndex = i;
                           });
 
-                          _confettiController.play(); // 🎉🎉🎉
+                          _confettiController.play();
                         },
 
                         onNotEnoughCoins: () =>
@@ -232,7 +226,6 @@ class _BondieShopPageState extends State<BondieShopPage> {
     );
   }
 
-  // ⭐ Bottom Navigation Bar
   Widget _buildBottomNavBar() {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

@@ -107,7 +107,6 @@ class _CalendarDatePickerBondedState extends State<CalendarDatePickerBonded> {
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
 
-                // MONTH PICKER
                 SizedBox(
                   width: 90,
                   child: CupertinoPicker(
@@ -137,7 +136,6 @@ class _CalendarDatePickerBondedState extends State<CalendarDatePickerBonded> {
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
 
-                // YEAR PICKER
                 SizedBox(
                   width: 90,
                   child: CupertinoPicker(
@@ -165,7 +163,6 @@ class _CalendarDatePickerBondedState extends State<CalendarDatePickerBonded> {
 
           const SizedBox(height: 20),
 
-          // Confirm button
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: SizedBox(

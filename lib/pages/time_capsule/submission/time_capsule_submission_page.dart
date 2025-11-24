@@ -6,8 +6,6 @@ import '../../../main.dart';
 import '../../../bondie/pages/bondie_page.dart';
 import 'package:bondedapp/pages/time_capsule/closed/time_capsule_closed_page.dart';
 
-
-
 class TimeCapsuleSubmissionPage extends StatefulWidget {
   final String secretTheme;
   final int daysLeft;
@@ -40,9 +38,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
         child: SafeArea(
           child: Stack(
             children: [
-              // ================================
-              // PAGE CONTENT
-              // ================================
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 padding:
@@ -50,9 +45,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ---------------------------------
-                    // TITLE (EXACTO AO HOME)
-                    // ---------------------------------
                     const Padding(
                       padding: EdgeInsets.only(bottom: 30),
                       child: Text(
@@ -64,10 +56,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                         ),
                       ),
                     ),
-
-                    // ---------------------------------
-                    // SECRET THEME — CENTRADO + EXPLICACAO
-                    // ---------------------------------
                     Align(
                       alignment: Alignment.center,
                       child: GestureDetector(
@@ -128,7 +116,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
 
                               const SizedBox(height: 10),
 
-                              // Nome do tema
                               Container(
                                 padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 9),
                                 decoration: BoxDecoration(
@@ -150,8 +137,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                                 ),
                               ),
 
-
-                              // Explicação expandida
                               AnimatedSize(
                                 duration: const Duration(milliseconds: 220),
                                 curve: Curves.easeInOut,
@@ -206,7 +191,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
 
                     const SizedBox(height: 32),
 
-                    // Buttons
                     _submissionButton(
                       label: "UPLOAD NOTE",
                       icon: Icons.message_rounded,
@@ -233,9 +217,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                 ),
               ),
 
-              // ================================
-              // FLOATING BONDIE (EXACT LIKE HOME)
-              // ================================
               Positioned(
                 right: 12,
                 top: 10,
@@ -259,9 +240,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
     );
   }
 
-  // ==========================================================================
-  // SUBMISSION BUTTON
-  // ==========================================================================
   Widget _submissionButton({
     required String label,
     required IconData icon,
@@ -287,7 +265,7 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
           children: [
             const SizedBox(width: 4),
             const Icon(
-              Icons.circle, // placeholder invisível para alinhamento, se quiseres
+              Icons.circle,
               size: 0,
               color: Colors.transparent,
             ),
@@ -311,9 +289,6 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
     );
   }
 
-  // ==========================================================================
-  // BOTTOM NAV BAR
-  // ==========================================================================
   Widget _buildBottomNavBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

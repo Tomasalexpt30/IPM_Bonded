@@ -27,7 +27,6 @@ class ZeroLatencyPage extends StatelessWidget {
                 children: [
                   const SizedBox(height: 6),
 
-                  // HEADER
                   SizedBox(
                     height: 40,
                     child: Stack(
@@ -82,9 +81,6 @@ class ZeroLatencyPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // MAIN INFO BLOCK
-  // ===========================================================
   Widget _mainInfoBlock(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -165,9 +161,6 @@ class ZeroLatencyPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // REUSABLE BUTTON
-  // ===========================================================
   Widget _iconButton({
     required IconData icon,
     required String label,
@@ -201,9 +194,6 @@ class ZeroLatencyPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // TIPS SECTION
-  // ===========================================================
   Widget _tipsSection() {
     return Container(
       width: double.infinity,
@@ -263,9 +253,6 @@ class ZeroLatencyPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // TIP CARD
-  // ===========================================================
   Widget _tipCard({
     required String number,
     required String title,
@@ -321,9 +308,6 @@ class ZeroLatencyPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // BONDIE EXPLAINS
-  // ===========================================================
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -369,9 +353,6 @@ class ZeroLatencyPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // SMALL INFO SQUARES
-  // ===========================================================
   Widget _smallInfoRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -425,9 +406,6 @@ class ZeroLatencyPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // NAV BAR
-  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

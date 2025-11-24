@@ -42,7 +42,6 @@ class TipOfTheDayOption {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Grabber
                   Center(
                     child: Container(
                       width: 40,
@@ -55,7 +54,6 @@ class TipOfTheDayOption {
                     ),
                   ),
 
-                  // Title
                   const Text(
                     "Tip of the Day",
                     style: TextStyle(
@@ -78,7 +76,6 @@ class TipOfTheDayOption {
 
                   const SizedBox(height: 18),
 
-                  // -------- BONDIE A FALAR --------
                   Flexible(
                     child: SingleChildScrollView(
                       controller: scrollController,
@@ -94,7 +91,6 @@ class TipOfTheDayOption {
                             ),
                           ),
 
-                          // Speech bubble
                           Expanded(
                             child: Container(
                               padding: const EdgeInsets.all(18),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bondedapp/layout/app_background.dart';
-
-// IMPORTA AS SECÇÕES
 import 'sections/couple_profile_chart.dart';
 import 'sections/couple_profile_achivements.dart';
 import 'sections/couple_profile_info.dart';
@@ -15,7 +13,6 @@ class CoupleProfilePage extends StatelessWidget {
     required this.controller,
   });
 
-  // Dummy History Data
   final List<double> bondHistory = const [0.82, 0.80, 0.85, 0.83, 0.87, 0.88, 0.90];
   final List<double> energyHistory = const [0.60, 0.58, 0.65, 0.62, 0.61, 0.67, 0.70];
   final List<double> moodHistory = const [0.75, 0.78, 0.77, 0.80, 0.82, 0.79, 0.85];
@@ -47,7 +44,6 @@ class CoupleProfilePage extends StatelessWidget {
 
                 _buildHeader(),
 
-                // INFO
                 CoupleProfileInfo(
                   controller: controller,
                   relationshipStartDate: DateTime(2023, 11, 15),
@@ -59,7 +55,6 @@ class CoupleProfilePage extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // GRAPH
                 _sectionTitle("Bond Graph"),
                 const SizedBox(height: 14),
                 CoupleProfileChart(
@@ -70,7 +65,6 @@ class CoupleProfilePage extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // ACHIEVEMENTS
                 _sectionTitle("Achievements"),
                 const SizedBox(height: 18),
                 CoupleProfileAchievements(achievements: achievements),
@@ -84,7 +78,6 @@ class CoupleProfilePage extends StatelessWidget {
     );
   }
 
-  // HEADER --------------------------------------------------------
   Widget _buildHeader() {
     return const Padding(
       padding: EdgeInsets.only(top: 12, bottom: 30),
@@ -99,7 +92,6 @@ class CoupleProfilePage extends StatelessWidget {
     );
   }
 
-  // SECTION TITLE -------------------------------------------------
   Widget _sectionTitle(String text) {
     return Text(
       text,

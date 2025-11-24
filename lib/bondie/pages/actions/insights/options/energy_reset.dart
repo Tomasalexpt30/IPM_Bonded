@@ -51,7 +51,6 @@ class EnergyResetOption {
                     ),
                   ),
 
-                  // Title
                   const Text(
                     "Energy Reset",
                     style: TextStyle(
@@ -74,13 +73,11 @@ class EnergyResetOption {
 
                   const SizedBox(height: 18),
 
-                  // Bondie + bubble
                   SingleChildScrollView(
                     controller: scrollController,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Bondie icon
                         Padding(
                           padding: const EdgeInsets.only(top: 4, right: 12),
                           child: Image.asset(
@@ -89,7 +86,6 @@ class EnergyResetOption {
                           ),
                         ),
 
-                        // Speech bubble
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.all(18),

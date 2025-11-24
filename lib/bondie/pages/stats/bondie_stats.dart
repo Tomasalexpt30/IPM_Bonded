@@ -15,7 +15,6 @@ class BondieStats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Floating Bondie
         AnimatedBuilder(
           animation: floatAnimation,
           builder: (context, child) {
@@ -32,7 +31,6 @@ class BondieStats extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // ⭐ Mood + Age
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -65,7 +63,6 @@ class BondieStats extends StatelessWidget {
 
         const SizedBox(height: 25),
 
-        // ⭐ Circular Stats
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -96,9 +93,6 @@ class BondieStats extends StatelessWidget {
   }
 }
 
-// ==========================================================================
-// CIRCULAR STAT
-// ==========================================================================
 class _CircularStat extends StatelessWidget {
   final String label;
   final IconData icon;
@@ -152,9 +146,6 @@ class _CircularStat extends StatelessWidget {
   }
 }
 
-// ==========================================================================
-// PAINTER (igual ao original)
-// ==========================================================================
 class _CircularStatPainter extends CustomPainter {
   final double value;
   final Color color;

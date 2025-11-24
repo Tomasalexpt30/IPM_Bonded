@@ -168,7 +168,6 @@ class ChallengesPage extends StatelessWidget {
     );
   }
 
-  // CARD TEMPLATE
   Widget _buildCard({
     required IconData icon,
     required String title,

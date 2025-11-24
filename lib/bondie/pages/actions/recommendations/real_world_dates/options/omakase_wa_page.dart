@@ -80,9 +80,6 @@ class OmakaseWaPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // MAIN INFO BLOCK
-  // ===========================================================
   Widget _mainInfoBlock(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -161,7 +158,6 @@ class OmakaseWaPage extends StatelessWidget {
     );
   }
 
-  // BUTTON
   Widget _iconButton({
     required IconData icon,
     required String label,
@@ -198,9 +194,6 @@ class OmakaseWaPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // TIPS SECTION
-  // ===========================================================
   Widget _tipsSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -258,7 +251,6 @@ class OmakaseWaPage extends StatelessWidget {
     );
   }
 
-  // TIP CARD
   Widget _tipCard({
     required String number,
     required String title,
@@ -313,9 +305,6 @@ class OmakaseWaPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // BONDIE SECTION
-  // ===========================================================
   Widget _bondieWhySection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -357,9 +346,6 @@ class OmakaseWaPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // INFO SQUARES
-  // ===========================================================
   Widget _smallInfoRow() {
     return Row(
       children: [
@@ -416,9 +402,6 @@ class OmakaseWaPage extends StatelessWidget {
     );
   }
 
-  // ===========================================================
-  // NAV BAR
-  // ===========================================================
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

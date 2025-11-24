@@ -11,7 +11,6 @@ class BondieStatsController {
     this.affection = 0.8,
   });
 
-  // Atualiza apenas durante a sessão (sem guardar nada)
   void updateStats({
     double? connection,
     double? energy,
@@ -22,7 +21,6 @@ class BondieStatsController {
     if (affection != null) this.affection = affection;
   }
 
-  // Helpers
   double get avg => (connection + energy + affection) / 3;
 
   String get bondieImage {
