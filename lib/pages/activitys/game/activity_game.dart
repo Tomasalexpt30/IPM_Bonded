@@ -10,6 +10,9 @@ class ActivityGamePage extends StatefulWidget {
 }
 
 class _ActivityGamePageState extends State<ActivityGamePage> {
+  final PageController _pageController = PageController();
+  int currentIndex = 0;
+
   final List<String> prompts = [
     "Who is more capable of organizing a surprise date?",
     "Who is more likely to start a spontaneous trip?",
@@ -18,7 +21,6 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
     "Who is more romantic on a random Tuesday?",
   ];
 
-  int currentIndex = 0;
   final List<String> answers = [];
 
   void _selectAnswer(String answer) {
@@ -39,19 +41,16 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
       return;
     }
 
-    setState(() {
-      currentIndex++;
-    });
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
   }
 
-  // ================================================================
-  // ROOT
-  // ================================================================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9FF),
-
       body: AppBackground(
         child: SafeArea(
           child: Padding(
@@ -61,62 +60,72 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
                 _buildHeader(context),
                 const SizedBox(height: 20),
 
-                _buildBondieSpeech(),
-                const SizedBox(height: 40),
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: prompts.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged: (i) => setState(() => currentIndex = i),
+                    itemBuilder: (_, index) {
+                      return Column(
+                        children: [
+                          _buildBondieSpeech(index),
+                          const SizedBox(height: 40),
+                          const Spacer(),
 
-                const Spacer(),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _TapAnimatedHighlight(
+                                  child: _avatarChoice(
+                                    name: "Bruno",
+                                    image: "assets/images/user1.png",
+                                  ),
+                                  onTap: () => _selectAnswer("Bruno"),
+                                ),
+                              ),
+                              const SizedBox(width: 14),
+                              Expanded(
+                                child: _TapAnimatedHighlight(
+                                  child: _avatarChoice(
+                                    name: "Ana",
+                                    image: "assets/images/user2.png",
+                                  ),
+                                  onTap: () => _selectAnswer("Ana"),
+                                ),
+                              ),
+                            ],
+                          ),
 
-                // AVATARS
-                Row(
-                  children: [
-                    Expanded(
-                      child: _TapAnimatedHighlight(
-                        child: _avatarChoice(
-                          name: "Bruno",
-                          image: "assets/images/user1.png",
-                        ),
-                        onTap: () => _selectAnswer("Bruno"),
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: _TapAnimatedHighlight(
-                        child: _avatarChoice(
-                          name: "Ana",
-                          image: "assets/images/user2.png",
-                        ),
-                        onTap: () => _selectAnswer("Ana"),
-                      ),
-                    ),
-                  ],
+                          const SizedBox(height: 20),
+
+                          Column(
+                            children: [
+                              _TapAnimatedHighlight(
+                                child: _pillButton(
+                                  label: "Both",
+                                  icon: Icons.people_rounded,
+                                  color: const Color(0xFF2563EB),
+                                ),
+                                onTap: () => _selectAnswer("Both"),
+                              ),
+                              const SizedBox(height: 12),
+                              _TapAnimatedHighlight(
+                                child: _pillButton(
+                                  label: "Neither",
+                                  icon: Icons.block_rounded,
+                                  color: const Color(0xFFE11D48),
+                                ),
+                                onTap: () => _selectAnswer("Neither"),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-
-                const SizedBox(height: 20),
-
-                // BOTH & NEITHER
-                Column(
-                  children: [
-                    _TapAnimatedHighlight(
-                      child: _pillButton(
-                        label: "Both",
-                        icon: Icons.people_rounded,
-                        color: const Color(0xFF2563EB),
-                      ),
-                      onTap: () => _selectAnswer("Both"),
-                    ),
-                    const SizedBox(height: 12),
-                    _TapAnimatedHighlight(
-                      child: _pillButton(
-                        label: "Neither",
-                        icon: Icons.block_rounded,
-                        color: const Color(0xFFE11D48),
-                      ),
-                      onTap: () => _selectAnswer("Neither"),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 12),
               ],
             ),
           ),
@@ -125,9 +134,6 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
     );
   }
 
-  // ================================================================
-  // HEADER
-  // ================================================================
   Widget _buildHeader(BuildContext context) {
     return SizedBox(
       height: 46,
@@ -154,11 +160,8 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
     );
   }
 
-  // ================================================================
-  // SPEECH BUBBLE
-  // ================================================================
-  Widget _buildBondieSpeech() {
-    final q = currentIndex + 1;
+  Widget _buildBondieSpeech(int index) {
+    final q = index + 1;
     final total = prompts.length;
 
     return Row(
@@ -200,8 +203,8 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 250),
                   child: Text(
-                    prompts[currentIndex],
-                    key: ValueKey(currentIndex),
+                    prompts[index],
+                    key: ValueKey(index),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 20,
@@ -219,9 +222,6 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
     );
   }
 
-  // ================================================================
-  // AVATAR CARD
-  // ================================================================
   Widget _avatarChoice({
     required String name,
     required String image,
@@ -269,9 +269,6 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
     );
   }
 
-  // ================================================================
-  // PILL BUTTON (both / neither)
-  // ================================================================
   Widget _pillButton({
     required String label,
     required IconData icon,
@@ -314,9 +311,6 @@ class _ActivityGamePageState extends State<ActivityGamePage> {
   }
 }
 
-// =============================================================
-// UNIVERSAL TAP ANIMATION (scale + highlight)
-// =============================================================
 class _TapAnimatedHighlight extends StatefulWidget {
   final Widget child;
   final VoidCallback onTap;

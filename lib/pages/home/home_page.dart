@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // DAILY GAME
-                  const DailyGameCard(),
+                  DailyGameCard(controller: bondieStats),
                   const SizedBox(height: 20),
 
                   // DAILY QUESTION

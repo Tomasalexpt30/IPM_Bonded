@@ -11,6 +11,7 @@ class BondieStatsController {
     this.affection = 0.8,
   });
 
+  // Atualiza apenas durante a sessão (sem guardar nada)
   void updateStats({
     double? connection,
     double? energy,
@@ -21,11 +22,9 @@ class BondieStatsController {
     if (affection != null) this.affection = affection;
   }
 
+  // Helpers
   double get avg => (connection + energy + affection) / 3;
 
-  // -------------------------
-  // Bondie Big Image
-  // -------------------------
   String get bondieImage {
     if (energy == 0) return "assets/images/bondie_icons/bondie_ghost.png";
     if (avg >= 0.80) return "assets/images/bondie_icons/bondie_super_happy.png";
@@ -34,9 +33,6 @@ class BondieStatsController {
     return "assets/images/bondie_icons/bondie_depressed.png";
   }
 
-  // -------------------------
-  // Mood Text
-  // -------------------------
   String get moodText {
     if (energy == 0) return "Ghost";
     if (avg >= 0.80) return "Super Happy";
@@ -45,9 +41,6 @@ class BondieStatsController {
     return "Depressed";
   }
 
-  // -------------------------
-  // Mood Icon
-  // -------------------------
   IconData get moodIcon {
     if (energy == 0) return Icons.stars_outlined;
     if (avg >= 0.80) return Icons.celebration_rounded;
@@ -56,9 +49,6 @@ class BondieStatsController {
     return Icons.sentiment_very_dissatisfied_rounded;
   }
 
-  // -------------------------
-  // Mood Icon Color
-  // -------------------------
   Color get moodColor {
     if (energy == 0) return const Color(0xFF8C4AD3);
     if (avg >= 0.85) return Colors.orangeAccent;

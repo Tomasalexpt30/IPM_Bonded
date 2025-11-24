@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'pages/splash_screen/splash_screen.dart';
 import 'pages/home/home_page.dart';
 import 'pages/calendar/calendar_page.dart';
 import 'pages/profiles/couple/couple_profile_page.dart';
-
-// NOVA IMPORTAÇÃO
 import 'pages/settings/settings_page.dart';
 
 import 'bondie/widget/animated_bondie_widget.dart';
 import 'bondie/pages/bondie_page.dart';
 import 'bondie/pages/stats/bondie_stats_controller.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const BondedApp());
 }
 
@@ -32,7 +32,7 @@ class BondedApp extends StatelessWidget {
           secondary: const Color(0xFF06B6D4),
         ),
       ),
-      home: const MainScreen(),
+      home: const SplashScreen(),  // Splash primeiro
     );
   }
 }
@@ -40,6 +40,7 @@ class BondedApp extends StatelessWidget {
 // ============================================================
 // MAIN SCREEN
 // ============================================================
+
 class MainScreen extends StatefulWidget {
   final int initialIndex;
   const MainScreen({super.key, this.initialIndex = 0});
@@ -49,9 +50,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  late int _selectedIndex;
-
   final BondieStatsController bondieStats = BondieStatsController();
+
+  int _selectedIndex = 0;
 
   late final List<Widget> _pages;
 
@@ -65,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
       HomePage(bondieStats: bondieStats),
       const CalendarPage(),
       CoupleProfilePage(controller: bondieStats),
-      const SettingsPage(), // << AGORA VAI ABRIR A TUA PÁGINA DE SETTINGS
+      const SettingsPage(),
     ];
   }
 
@@ -92,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
                     builder: (_) => BondiePage(statsController: bondieStats),
                   ),
                 );
-                setState(() {});
+                setState(() {}); // refresh after returning
               },
               child: AnimatedBondieWidget(controller: bondieStats),
             ),
