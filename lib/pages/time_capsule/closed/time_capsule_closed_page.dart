@@ -4,6 +4,7 @@ import 'package:bondedapp/bondie/widget/animated_bondie_widget.dart';
 import '../../../bondie/pages/stats/bondie_stats_controller.dart';
 import '../../../main.dart';
 import '../../../bondie/pages/bondie_page.dart';
+import 'package:bondedapp/pages/time_capsule/opened/time_capsule_opened_page.dart';
 
 class TimeCapsuleClosedPage extends StatefulWidget {
   final String secretTheme;
@@ -65,11 +66,25 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
                     const SizedBox(height: 18),
 
                     Center(
-                      child: Image.asset(
-                        "assets/images/bondie_time_capsule/time_capsule_closed.png",
-                        height: 220,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => TimeCapsuleOpenedPage(
+                                controller: widget.controller,
+                                secretTheme: widget.secretTheme,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          "assets/images/bondie_time_capsule/time_capsule_closed.png",
+                          height: 220,
+                        ),
                       ),
                     ),
+
 
                     const SizedBox(height: 20),
 

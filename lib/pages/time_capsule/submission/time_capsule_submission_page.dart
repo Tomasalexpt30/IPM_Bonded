@@ -4,6 +4,8 @@ import 'package:bondedapp/bondie/widget/animated_bondie_widget.dart';
 import '../../../bondie/pages/stats/bondie_stats_controller.dart';
 import '../../../main.dart';
 import '../../../bondie/pages/bondie_page.dart';
+import 'package:bondedapp/pages/time_capsule/closed/time_capsule_closed_page.dart';
+
 
 
 class TimeCapsuleSubmissionPage extends StatefulWidget {
@@ -181,11 +183,26 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
 
                     // IMAGE
                     Center(
-                      child: Image.asset(
-                        "assets/images/bondie_time_capsule/time_capsule_submission.png",
-                        height: 220,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => TimeCapsuleClosedPage(
+                                controller: widget.controller,
+                                secretTheme: widget.secretTheme,
+                                daysLeftToOpen: widget.daysLeft,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          "assets/images/bondie_time_capsule/time_capsule_submission.png",
+                          height: 220,
+                        ),
                       ),
                     ),
+
 
                     const SizedBox(height: 32),
 

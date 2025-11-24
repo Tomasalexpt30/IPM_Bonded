@@ -9,34 +9,56 @@ class TimeCapsuleCard extends StatefulWidget {
 
 class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
   bool isOpen = false;
+
   DateTime now = DateTime.now();
-  DateTime openDate = DateTime.now().add(const Duration(hours: 10));
-  DateTime closeDate = DateTime.now().add(const Duration(hours: 20));
+
+  // ⬅️ ABRE EM 2 DIAS
+  DateTime openDate = DateTime.now().add(const Duration(days: 2));
+
+  // ⬅️ FECHA 2 DIAS DEPOIS DE ABRIR (ajusta como quiseres)
+  DateTime closeDate = DateTime.now().add(const Duration(days: 4));
 
   String themeValue = "The days you made me smile";
-
-  String getTimeRemaining() {
-    final target = isOpen ? closeDate : openDate;
-    final diff = target.difference(now);
-    if (diff.isNegative) return "00:00:00";
-
-    final hours = diff.inHours.remainder(24).toString().padLeft(2, '0');
-    final minutes = diff.inMinutes.remainder(60).toString().padLeft(2, '0');
-    final seconds = diff.inSeconds.remainder(60).toString().padLeft(2, '0');
-
-    return "$hours:$minutes:$seconds";
-  }
 
   @override
   void initState() {
     super.initState();
 
+    // Atualiza o contador a cada segundo
     Future.doWhile(() async {
       await Future.delayed(const Duration(seconds: 1));
       if (!mounted) return false;
       setState(() => now = DateTime.now());
       return true;
     });
+  }
+
+  // =====================================================
+  // 🔥 NOVA FUNÇÃO — cria frase elegante do tempo restante
+  // =====================================================
+  String _buildPrettyTime() {
+    final diff = (isOpen ? closeDate : openDate).difference(now);
+
+    if (diff.isNegative) return "0s";
+
+    final days = diff.inDays;
+    final hours = diff.inHours.remainder(24);
+    final minutes = diff.inMinutes.remainder(60);
+    final seconds = diff.inSeconds.remainder(60);
+
+    if (days > 0) {
+      return "$days day${days > 1 ? 's' : ''}, ${hours}h ${minutes}m";
+    }
+
+    if (hours > 0) {
+      return "${hours}h ${minutes}m ${seconds}s";
+    }
+
+    if (minutes > 0) {
+      return "${minutes}m ${seconds}s";
+    }
+
+    return "${seconds}s";
   }
 
   @override
@@ -59,25 +81,23 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-          // ÍCONE AMARELO TORRADO
+          // Ícone
           Container(
             height: 55,
             width: 55,
             decoration: BoxDecoration(
-              color: const Color(0xFFFFF5DD), // fundo pastel amarelo suave
+              color: const Color(0xFFFFF5DD),
               borderRadius: BorderRadius.circular(16),
             ),
             child: const Icon(
               Icons.hourglass_bottom,
               size: 30,
-              color: Color(0xFFDFA72A), // amarelo torrado
+              color: Color(0xFFDFA72A),
             ),
           ),
 
           const SizedBox(width: 18),
 
-          // TEXTOS
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +113,6 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
 
                 const SizedBox(height: 8),
 
-                // SECRET THEME APRIMORADO
                 Text(
                   "“$themeValue”",
                   style: const TextStyle(
@@ -107,23 +126,25 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
 
                 const SizedBox(height: 8),
 
+                // =====================================================
+                // 🔥 "Closes in X days, Xh Xm Xs" (estilo muito melhorado)
+                // =====================================================
                 Row(
                   children: [
                     const Text(
-                      "Opens in: ",
+                      "Closes in ",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
                         color: Colors.black87,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      getTimeRemaining(),
+                      _buildPrettyTime(),
                       style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 15.5,
+                        fontWeight: FontWeight.w800,
                         color: Color(0xFF2563EB),
-                        fontFamily: 'RobotoMono',
                       ),
                     ),
                   ],
