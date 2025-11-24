@@ -14,7 +14,7 @@ class TimeCapsuleClosedPage extends StatefulWidget {
   const TimeCapsuleClosedPage({
     super.key,
     required this.controller,
-    this.secretTheme = "The days you made me smile",
+    this.secretTheme = "The days you made me smile the most",
     this.daysLeftToOpen = 10,
     this.opensOn = "November 27",
   });
@@ -28,37 +28,27 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
 
   bool _showExplanation = false;
 
-  final int totalCycleDays = 30; // <= DEFINIDO POR TI
+  final int totalCycleDays = 30;
 
   @override
   Widget build(BuildContext context) {
-    // ============================
-    // PROGRESS BAR CALCULATION
-    // ============================
     final int daysPassed = totalCycleDays - widget.daysLeftToOpen;
     final double progress = (daysPassed / totalCycleDays).clamp(0.0, 1.0);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
-
       bottomNavigationBar: _buildBottomNavBar(context),
 
       body: AppBackground(
         child: SafeArea(
           child: Stack(
             children: [
-              // ================================
-              // PAGE CONTENT
-              // ================================
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ---------------------------------
-                    // TITLE
-                    // ---------------------------------
                     const Padding(
                       padding: EdgeInsets.only(bottom: 30),
                       child: Text(
@@ -71,14 +61,9 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
                       ),
                     ),
 
-                    // ---------------------------------
-                    // SECRET THEME — MESMO ESTILO
-                    // ---------------------------------
                     _buildSecretThemeCard(),
-
                     const SizedBox(height: 18),
 
-                    // IMAGE
                     Center(
                       child: Image.asset(
                         "assets/images/bondie_time_capsule/time_capsule_closed.png",
@@ -88,19 +73,12 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
 
                     const SizedBox(height: 20),
 
-                    // ---------------------------------
-                    // CAPSULE LOCKED CARD
-                    // ---------------------------------
                     _buildCapsuleLockedCard(progress, daysPassed),
-
                     const SizedBox(height: 40),
                   ],
                 ),
               ),
 
-              // ================================
-              // FLOATING BONDIE
-              // ================================
               Positioned(
                 right: 12,
                 top: 10,
@@ -126,9 +104,6 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
     );
   }
 
-  // ==========================================================================
-  // SECRET THEME WIDGET
-  // ==========================================================================
   Widget _buildSecretThemeCard() {
     return Align(
       alignment: Alignment.center,
@@ -155,7 +130,6 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
           ),
           child: Column(
             children: [
-              // Linha principal + seta
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -183,7 +157,6 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
 
               const SizedBox(height: 10),
 
-              // Nome do tema com borda azul
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 9),
                 decoration: BoxDecoration(
@@ -205,7 +178,6 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
                 ),
               ),
 
-              // Explicação expandida
               AnimatedSize(
                 duration: const Duration(milliseconds: 220),
                 curve: Curves.easeInOut,
@@ -213,8 +185,8 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
                     ? Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    "Each of you added a memory that fits this secret theme. "
-                        "All entries stay hidden until the capsule opens at the end of the month.",
+                    "The Time Capsule is locked. You’ll be able to open and check the submissions on the release date. "
+                        "",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13.5,
@@ -232,9 +204,9 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
     );
   }
 
-  // ==========================================================================
-  // CAPSULE LOCKED CARD + PROGRESS BAR
-  // ==========================================================================
+  // ============================
+  // CAPSULE LOCKED CARD (sem barra vertical)
+  // ============================
   Widget _buildCapsuleLockedCard(double progress, int daysPassed) {
     return Container(
       width: double.infinity,
@@ -261,14 +233,12 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
                 size: 105,
                 color: Color(0xFF2563EB),
               ),
-
               const SizedBox(width: 18),
 
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Título
                     const Text(
                       "Capsule Locked",
                       style: TextStyle(
@@ -278,76 +248,54 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
                       ),
                     ),
 
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
 
-                    // Blue bar info row
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: 5,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF2563EB),
-                            borderRadius: BorderRadius.circular(4),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: "Opens on: ",
+                                style: TextStyle(
+                                  fontSize: 15.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              TextSpan(
+                                text: widget.opensOn,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
 
-                        const SizedBox(width: 12),
+                        const SizedBox(height: 4),
 
-                        // Conteúdo centralizado
-                        SizedBox(
-                          height: 48,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        Text.rich(
+                          TextSpan(
                             children: [
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    const TextSpan(
-                                      text: "Opens on: ",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black87,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: widget.opensOn,
-                                      style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.black87,
-                                      ),
-                                    ),
-                                  ],
+                              TextSpan(
+                                text: "${widget.daysLeftToOpen} ",
+                                style: const TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xFF2563EB),
                                 ),
                               ),
-
-                              const SizedBox(height: 4),
-
-                              Text.rich(
-                                TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "${widget.daysLeftToOpen} ",
-                                      style: const TextStyle(
-                                        fontSize: 14.5,
-                                        fontWeight: FontWeight.w800,
-                                        color: Color(0xFF2563EB),
-                                      ),
-                                    ),
-                                    const TextSpan(
-                                      text: "days to go",
-                                      style: TextStyle(
-                                        fontSize: 14.5,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xFF2563EB),
-                                      ),
-                                    ),
-                                  ],
+                              const TextSpan(
+                                text: "days to go",
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF2563EB),
                                 ),
                               ),
                             ],
@@ -363,9 +311,8 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
 
           const SizedBox(height: 12),
 
-          // Submissions message
           const Text(
-            "Submissions are closed until the time capsule opens.",
+            "Bondie is angry because the submissions are closed until the time capsule opens...",
             style: TextStyle(
               fontSize: 16,
               height: 1.50,
@@ -375,9 +322,6 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
 
           const SizedBox(height: 15),
 
-          // ----------------------------
-          // PROGRESS BAR
-          // ----------------------------
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -388,9 +332,7 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
                 backgroundColor: const Color(0xFFE3EAF7),
                 valueColor: const AlwaysStoppedAnimation(Color(0xFF2563EB)),
               ),
-
               const SizedBox(height: 8),
-
               Text(
                 "Progress: ${((progress * 100).round())}%",
                 style: const TextStyle(
@@ -406,9 +348,6 @@ class _TimeCapsuleClosedPageState extends State<TimeCapsuleClosedPage>
     );
   }
 
-  // ==========================================================================
-  // BOTTOM NAV BAR
-  // ==========================================================================
   Widget _buildBottomNavBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),

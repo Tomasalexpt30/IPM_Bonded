@@ -64,7 +64,9 @@ Future<void> showSortSheet({
                             : o == "Rarity"
                             ? Icons.auto_awesome_rounded
                             : Icons.sort_by_alpha_rounded,
-                        color: isActive ? const Color(0xFF2563EB) : Colors.black45,
+                        color: isActive
+                            ? const Color(0xFF2563EB)
+                            : Colors.black45,
                       ),
                       title: Text(
                         o,
@@ -181,8 +183,8 @@ Future<void> showFilterSheet({
                     leading: const Icon(Icons.close_rounded, color: Colors.red),
                     title: const Text(
                       "Clear filter",
-                      style:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     onTap: () {
                       onSelect("All");
@@ -331,7 +333,6 @@ Future<void> showNotEnoughCoinsSheet({
                       style: TextStyle(fontSize: 13, color: Colors.black54),
                     ),
                   ),
-
 
                   const SizedBox(height: 18),
 

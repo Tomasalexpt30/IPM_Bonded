@@ -17,7 +17,7 @@ class TimeCapsuleOpenedPage extends StatefulWidget {
   const TimeCapsuleOpenedPage({
     super.key,
     required this.controller,
-    this.secretTheme = "The days you made me smile",
+    this.secretTheme = "The days you made me smile the most",
   });
 
   @override
@@ -31,19 +31,27 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
   static const String samplePhoto =
       "assets/images/recommendations/gulbenkian_garden.jpg";
 
-  final List<Map<String, dynamic>> mixedMedia = [
-    {"type": "photo", "path": samplePhoto},
-    {"type": "video", "path": samplePhoto},
-    {"type": "photo", "path": samplePhoto},
-    {"type": "video", "path": samplePhoto},
-    {"type": "photo", "path": samplePhoto},
+  final List<Map<String, dynamic>> brunoMedia = [
+    {"type": "video", "path": "assets/images/submissions/bruno/bruno_submission_2.png"},
+    {"type": "photo", "path": "assets/images/submissions/bruno/bruno_submission_1.png"},
+    {"type": "photo", "path": "assets/images/submissions/bruno/bruno_submission_3.png"},
+    {"type": "photo", "path": "assets/images/submissions/bruno/bruno_submission_4.png"},
+    {"type": "video", "path": "assets/images/submissions/bruno/bruno_submission_5.png"},
+  ];
+
+  final List<Map<String, dynamic>> anaMedia = [
+    {"type": "photo", "path": "assets/images/submissions/ana/ana_submission_2.png"},
+    {"type": "video", "path": "assets/images/submissions/ana/ana_submission_1.png"},
+    {"type": "photo", "path": "assets/images/submissions/ana/ana_submission_3.png"},
+    {"type": "video", "path": "assets/images/submissions/ana/ana_submission_4.png"},
+    {"type": "photo", "path": "assets/images/submissions/ana/ana_submission_5.png"},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
-      bottomNavigationBar: _buildBottomNavBar(context),
+      bottomNavigationBar: _buildBottomNavBar(),
       body: AppBackground(
         child: SafeArea(
           child: Stack(
@@ -83,7 +91,7 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
                       title: "Bruno’s Submissions",
                       subtitle: "Your saved memories",
                       avatar: "assets/images/user1.png",
-                      mixedList: mixedMedia,
+                      mixedList: brunoMedia,
                       notes: const [
                         "I still remember that afternoon in the gardens, you laughed so much you cried.",
                       ],
@@ -95,7 +103,7 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
                       title: "Ana’s Submissions",
                       subtitle: "What Ana shared with you",
                       avatar: "assets/images/user2.png",
-                      mixedList: mixedMedia,
+                      mixedList: anaMedia,
                       notes: const [
                         "You made me smile every single week, especially the sushi night",
                       ],
@@ -235,9 +243,8 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,   // 👈 ADICIONADO
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         const Icon(Icons.photo_rounded, size: 18, color: Color(0xFF2563EB)),
         const SizedBox(width: 3),
         Text("$photos", style: style),
@@ -248,7 +255,8 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
         Text("$videos", style: style),
         const SizedBox(width: 12),
 
-        const Icon(Icons.sticky_note_2_rounded, size: 18, color: Color(0xFF2563EB)),
+        const Icon(Icons.sticky_note_2_rounded,
+            size: 18, color: Color(0xFF2563EB)),
         const SizedBox(width: 3),
         Text("$notes", style: style),
       ],
@@ -284,11 +292,11 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // ---------------- HEADER + STATS ----------------
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start, // topo da cell
+            crossAxisAlignment:
+            CrossAxisAlignment.start, // topo da cell
             children: [
               // TITLES
               Column(
@@ -314,7 +322,7 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
 
               // STATS ALINHADOS PELA ALTURA DO TÍTULO
               Padding(
-                padding: const EdgeInsets.only(top: 6), // 👈 AJUSTE FINO AQUI
+                padding: const EdgeInsets.only(top: 6),
                 child: _statsHeader(
                   photos: photos,
                   videos: videos,
@@ -340,8 +348,6 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-
-
   // ---------------- MASONRY GRID ----------------
 
   Widget _mixedMosaic(List<Map<String, dynamic>> items) {
@@ -365,11 +371,14 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
               borderRadius: BorderRadius.circular(16),
               child: Stack(
                 children: [
-                  Image.asset(
-                    media["path"],
-                    height: tall ? 160 : 101,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  Transform.scale(
+                    scale: 1.5, // ⬅️ ZOOM INTERNO 1.5x
+                    child: Image.asset(
+                      media["path"],
+                      height: tall ? 160 : 101,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
 
                   if (media["type"] == "video")
@@ -452,9 +461,10 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
     );
   }
 
-  // ---------------- BOTTOM NAV ----------------
-
-  Widget _buildBottomNavBar(BuildContext context) {
+  // ----------------------------------------------------------
+  // Bottom navigation bar
+  // ----------------------------------------------------------
+  Widget _buildBottomNavBar() {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 14),
       decoration: BoxDecoration(
@@ -466,31 +476,47 @@ class _TimeCapsuleOpenedPageState extends State<TimeCapsuleOpenedPage>
             offset: const Offset(0, -3),
           ),
         ],
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(26)),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(26),
+          topRight: Radius.circular(26),
+        ),
       ),
       child: BottomNavigationBar(
         currentIndex: 0,
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         selectedItemColor: Colors.grey[500],
         unselectedItemColor: Colors.grey[500],
-        elevation: 0,
+        iconSize: 30,
+        selectedFontSize: 13,
+        unselectedFontSize: 13,
         onTap: (index) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (_) => MainScreenWithIndex(index: index)),
+              builder: (_) => MainScreenWithIndex(index: index),
+            ),
                 (_) => false,
           );
         },
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded), label: "Home"),
+            icon: Icon(Icons.home_rounded),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month_rounded), label: "Calendar"),
+            icon: Icon(Icons.calendar_month_rounded),
+            label: 'Calendar',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_rounded), label: "Couple"),
+            icon: Icon(Icons.favorite_rounded),
+            label: 'Couple',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings_rounded), label: "Settings"),
+            icon: Icon(Icons.settings_rounded),
+            label: 'Settings',
+          ),
         ],
       ),
     );

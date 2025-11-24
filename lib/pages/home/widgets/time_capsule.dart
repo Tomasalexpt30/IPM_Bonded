@@ -13,8 +13,7 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
   DateTime openDate = DateTime.now().add(const Duration(hours: 10));
   DateTime closeDate = DateTime.now().add(const Duration(hours: 20));
 
-  String themeTitle = "Secret Theme:";
-  String themeValue = "Anniversary Memories";
+  String themeValue = "The days you made me smile";
 
   String getTimeRemaining() {
     final target = isOpen ? closeDate : openDate;
@@ -31,7 +30,7 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
   @override
   void initState() {
     super.initState();
-    // Atualiza contador da cápsula do tempo
+
     Future.doWhile(() async {
       await Future.delayed(const Duration(seconds: 1));
       if (!mounted) return false;
@@ -44,114 +43,101 @@ class _TimeCapsuleCardState extends State<TimeCapsuleCard> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFDBEAFE), Color(0xFF96D5FD)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(22),
         boxShadow: [
           BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.35),
+            color: Colors.blueGrey.withOpacity(0.10),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
         ],
       ),
-      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 20),
-      child: Stack(
+
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Positioned(
-            top: 0,
-            right: 0,
-            child: Icon(
-              isOpen ? Icons.lock_open_rounded : Icons.lock_rounded,
-              color: const Color(0xDD000000),
-              size: 28,
+
+          // ÍCONE AMARELO TORRADO
+          Container(
+            height: 55,
+            width: 55,
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF5DD), // fundo pastel amarelo suave
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Icon(
+              Icons.hourglass_bottom,
+              size: 30,
+              color: Color(0xFFDFA72A), // amarelo torrado
             ),
           ),
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Row(
-                children: [
-                  SizedBox(width: 8),
-                  Text(
-                    "Time Capsule",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
+          const SizedBox(width: 18),
 
-              const SizedBox(height: 22),
-
-              // 🔹 Theme box with bold "Secret Theme:"
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFF78BCE9), width: 2),
-                  borderRadius: BorderRadius.circular(18),
-                  color: Colors.white.withOpacity(0.8),
-                ),
-                child: Center(
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        const TextSpan(
-                          text: "Secret Theme: ",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800, // MAIS PESADO
-                            color: Color(0xFF1D7CB6),
-                          ),
-                        ),
-                        const TextSpan(
-                          text: "Anniversary Memories",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF2595DA),
-                          ),
-                        ),
-                      ],
-                    ),
+          // TEXTOS
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Time Capsule",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.black87,
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 8),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Opens in: ",
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
+                // SECRET THEME APRIMORADO
+                Text(
+                  "“$themeValue”",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black54,
+                    height: 1.35,
                   ),
-                  Text(
-                    getTimeRemaining(),
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
-                      color: Color(0xFF165D88),
-                      fontFamily: 'RobotoMono',
+                ),
+
+                const SizedBox(height: 8),
+
+                Row(
+                  children: [
+                    const Text(
+                      "Opens in: ",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Text(
+                      getTimeRemaining(),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2563EB),
+                        fontFamily: 'RobotoMono',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(width: 12),
+
+          const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 18,
+            color: Colors.black38,
           ),
         ],
       ),

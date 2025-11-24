@@ -14,7 +14,7 @@ class TimeCapsuleSubmissionPage extends StatefulWidget {
   const TimeCapsuleSubmissionPage({
     super.key,
     required this.controller,
-    this.secretTheme = "The days you made me smile",
+    this.secretTheme = "The days you made me smile the most",
     this.daysLeft = 2,
   });
 
@@ -160,7 +160,7 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                                   ),
                                   child: Text(
                                     "Each of you adds a memory that fits this secret theme. "
-                                        "All entries stay hidden until the capsule opens at the end of the month.",
+                                        "All entries stay hidden until the capsule opens at the end of the month. Good Luck!",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 13.5,

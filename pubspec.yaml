@@ -22,6 +22,7 @@ dev_dependencies:
   fl_chart: ^0.69.0
   flutter_staggered_grid_view: ^0.7.0
   photo_view: ^0.14.0
+  confetti: ^0.7.0
 
 flutter:
   uses-material-design: true
@@ -64,4 +65,19 @@ flutter:
     - assets/images/recommendations/lisbon_christmas_lights.jpg
     - assets/images/recommendations/omakase_wa.jpeg
     - assets/images/recommendations/tile_museum.jpg
+
+    # Bruno Submissions
+    - assets/images/submissions/bruno/bruno_submission_1.png
+    - assets/images/submissions/bruno/bruno_submission_2.png
+    - assets/images/submissions/bruno/bruno_submission_3.png
+    - assets/images/submissions/bruno/bruno_submission_4.png
+    - assets/images/submissions/bruno/bruno_submission_5.png
+
+    #Ana Submissions
+    - assets/images/submissions/ana/ana_submission_1.png
+    - assets/images/submissions/ana/ana_submission_2.png
+    - assets/images/submissions/ana/ana_submission_3.png
+    - assets/images/submissions/ana/ana_submission_4.png
+    - assets/images/submissions/ana/ana_submission_5.png
+
 

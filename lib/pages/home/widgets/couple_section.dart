@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:bondedapp/bondie/pages/stats/bondie_stats_controller.dart';
 
 class CoupleSection extends StatelessWidget {
@@ -11,7 +12,6 @@ class CoupleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Informação da memória (podes mudar quando quiseres)
     const String memoryDate = "12 Feb 2024";
     const String memoryLocation = "Lisbon, Portugal";
 
@@ -33,9 +33,8 @@ class CoupleSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ======================================================
-          // HEADER — MEMORY OF THE DAY + ÍCONE
-          // ======================================================
+
+          // HEADER -----------------------------------------------------------
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -65,37 +64,43 @@ class CoupleSection extends StatelessWidget {
 
           const SizedBox(height: 22),
 
-          // ======================================================
-          // FOTO DO CASAL — MEMÓRIA
-          // ======================================================
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(22),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.10),
-                  blurRadius: 18,
-                  offset: const Offset(0, 8),
+          // FOTO CLICÁVEL ---------------------------------------------------
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const _FullImageView(),
                 ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(22),
-              child: Image.asset(
-                "assets/images/couple_selfie.png",
-                height: 130,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                alignment: const Alignment(0, -0.55),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(22),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.10),
+                    blurRadius: 18,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Image.asset(
+                  "assets/images/couple_selfie.png",
+                  height: 130,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  alignment: const Alignment(0, -0.55),
+                ),
               ),
             ),
           ),
 
           const SizedBox(height: 18),
 
-          // ======================================================
-          // DATE + LOCATION (CENTRADOS)
-          // ======================================================
+          // DATE + LOCATION --------------------------------------------------
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -113,7 +118,6 @@ class CoupleSection extends StatelessWidget {
 
               SizedBox(width: 12),
 
-
               Icon(Icons.location_on_rounded,
                   size: 18, color: Color(0xFF2563EB)),
               SizedBox(width: 6),
@@ -130,13 +134,10 @@ class CoupleSection extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // ======================================================
-          // PERSONAL COMMENT FROM ANA — "CHAT BUBBLE"
-          // ======================================================
+          // CHAT BUBBLE ------------------------------------------------------
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Avatar da Ana
               const CircleAvatar(
                 radius: 20,
                 backgroundImage: AssetImage("assets/images/user2.png"),
@@ -144,7 +145,6 @@ class CoupleSection extends StatelessWidget {
 
               const SizedBox(width: 10),
 
-              // Caixa da frase
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -167,6 +167,30 @@ class CoupleSection extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ==========================================================================
+// FULLSCREEN PHOTO VIEW
+// ==========================================================================
+
+class _FullImageView extends StatelessWidget {
+  const _FullImageView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.pop(context),
+        child: PhotoView(
+          imageProvider: const AssetImage("assets/images/couple_selfie.png"),
+          minScale: PhotoViewComputedScale.contained,
+          maxScale: PhotoViewComputedScale.covered * 2.5,
+        ),
       ),
     );
   }

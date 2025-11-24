@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:confetti/confetti.dart'; // 🎉 ADICIONADO
 import '../../../../main.dart';
 import 'sections/bondie_shop_header.dart';
 import 'sections/bondie_shop_grid.dart';
@@ -13,6 +14,9 @@ class BondieShopPage extends StatefulWidget {
 }
 
 class _BondieShopPageState extends State<BondieShopPage> {
+  // 🎉 CONFETTI CONTROLLER
+  late ConfettiController _confettiController;
+
   String selectedSort = "Price: Low to High";
   String selectedFilter = "All";
 
@@ -50,7 +54,7 @@ class _BondieShopPageState extends State<BondieShopPage> {
       "asset": "assets/images/bondie_skins/bondie_firefighter.png",
       "price": 150,
       "rarity": "Rare",
-      "desc": "Puts out any toxic flames — only love remains."
+      "desc": "Puts out any toxic flames, only love remains."
     },
     {
       "name": "Nerd Bondie",
@@ -93,6 +97,20 @@ class _BondieShopPageState extends State<BondieShopPage> {
   Set<int> purchased = {0};
   int coins = 520;
 
+  @override
+  void initState() {
+    super.initState();
+    // 🎉 INICIALIZA CONFETTI
+    _confettiController =
+        ConfettiController(duration: const Duration(milliseconds: 500));
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose(); // 🔥 IMPORTANTE
+    super.dispose();
+  }
+
   Color rarityColor(String rarity) {
     switch (rarity) {
       case "Default":
@@ -116,68 +134,100 @@ class _BondieShopPageState extends State<BondieShopPage> {
       backgroundColor: const Color(0xFFF8F9FD),
       bottomNavigationBar: _buildBottomNavBar(),
 
-      // ⭐ Agora substituído por AppBackground
-      body: AppBackground(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BondieShopHeader(
-                    coins: coins,
-                    selectedSort: selectedSort,
-                    selectedFilter: selectedFilter,
-                    equippedIndex: equippedIndex,
-                    skins: skins,
-                    rarityColor: rarityColor,
-                    onOpenSort: () => showSortSheet(
-                      context: context,
-                      selectedSort: selectedSort,
-                      onSelect: (value) =>
-                          setState(() => selectedSort = value),
-                    ),
-                    onOpenFilter: () => showFilterSheet(
-                      context: context,
-                      selectedFilter: selectedFilter,
-                      rarityColor: rarityColor,
-                      onSelect: (value) =>
-                          setState(() => selectedFilter = value),
-                    ),
-                    onOpenCoins: () => showCoinsSheet(
-                      context: context,
-                      coins: coins,
-                    ),
-                  ),
+      // 🎉 STACK PARA POER CONFETTI POR CIMA
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          // ⭐ Fundo e conteúdo da página
+          AppBackground(
+            child: SafeArea(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BondieShopHeader(
+                        coins: coins,
+                        selectedSort: selectedSort,
+                        selectedFilter: selectedFilter,
+                        equippedIndex: equippedIndex,
+                        skins: skins,
+                        rarityColor: rarityColor,
+                        onOpenSort: () => showSortSheet(
+                          context: context,
+                          selectedSort: selectedSort,
+                          onSelect: (value) =>
+                              setState(() => selectedSort = value),
+                        ),
+                        onOpenFilter: () => showFilterSheet(
+                          context: context,
+                          selectedFilter: selectedFilter,
+                          rarityColor: rarityColor,
+                          onSelect: (value) =>
+                              setState(() => selectedFilter = value),
+                        ),
+                        onOpenCoins: () => showCoinsSheet(
+                          context: context,
+                          coins: coins,
+                        ),
+                      ),
 
-                  const SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
-                  BondieShopGrid(
-                    skins: skins,
-                    selectedFilter: selectedFilter,
-                    selectedSort: selectedSort,
-                    purchased: purchased,
-                    equippedIndex: equippedIndex,
-                    coins: coins,
-                    rarityColor: rarityColor,
-                    onEquip: (i) => setState(() => equippedIndex = i),
-                    onBuy: (i, price) {
-                      setState(() {
-                        coins -= price;
-                        purchased.add(i);
-                        equippedIndex = i;
-                      });
-                    },
-                    onNotEnoughCoins: () =>
-                        showNotEnoughCoinsSheet(context: context),
+                      // ⭐ GRID DAS SKINS
+                      BondieShopGrid(
+                        skins: skins,
+                        selectedFilter: selectedFilter,
+                        selectedSort: selectedSort,
+                        purchased: purchased,
+                        equippedIndex: equippedIndex,
+                        coins: coins,
+                        rarityColor: rarityColor,
+                        onEquip: (i) => setState(() => equippedIndex = i),
+
+                        // 🎉 Trigger do confetti aqui!
+                        onBuy: (i, price) {
+                          setState(() {
+                            coins -= price;
+                            purchased.add(i);
+                            equippedIndex = i;
+                          });
+
+                          _confettiController.play(); // 🎉🎉🎉
+                        },
+
+                        onNotEnoughCoins: () =>
+                            showNotEnoughCoinsSheet(context: context),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
+
+          // 🎉 CONFETTI WIDGET
+          ConfettiWidget(
+            confettiController: _confettiController,
+            blastDirectionality: BlastDirectionality.explosive,
+            emissionFrequency: 0.10,
+            numberOfParticles: 25,
+            maxBlastForce: 18,
+            minBlastForce: 8,
+            gravity: 0.6,
+            colors: const [
+              Colors.blue,
+              Colors.red,
+              Colors.green,
+              Colors.yellow,
+              Colors.purple,
+              Colors.orange,
+            ],
+          ),
+        ],
       ),
     );
   }
