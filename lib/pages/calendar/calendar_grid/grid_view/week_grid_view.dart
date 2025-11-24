@@ -61,6 +61,11 @@ class WeekGridView extends StatelessWidget {
               activities: activities,
             ),
           ),
+
+          const SizedBox(height: 16),
+
+          /// 🔥 LEGENDA CENTRADA (Apenas em baixo, igual ao DayGrid)
+          const Center(child: _WeekLegendRow()),
         ],
       ),
     );
@@ -184,7 +189,7 @@ class _WeekScrollableHours extends StatelessWidget {
               ),
             ),
 
-            /// CURRENT TIME LINE
+            /// CURRENT TIME INDICATOR
             AnimatedBuilder(
               animation: controller,
               builder: (context, _) {
@@ -223,7 +228,8 @@ class _WeekDayColumn extends StatelessWidget {
         final end = activity.end;
 
         final double startOffset =
-            (start.hour + start.minute / 60) * CalendarGridController.rowHeight;
+            (start.hour + start.minute / 60) *
+                CalendarGridController.rowHeight;
 
         final double durationHours =
             end.difference(start).inMinutes / 60.0;
@@ -276,13 +282,15 @@ class _WeekGridBackground extends StatelessWidget {
                           border: Border(
                             right: i < 6
                                 ? BorderSide(
-                              color: Colors.white.withOpacity(0.55),
+                              color:
+                              Colors.white.withOpacity(0.55),
                               width: 1.2,
                             )
                                 : BorderSide.none,
                             bottom: hour < 23
                                 ? BorderSide(
-                              color: Colors.white.withOpacity(0.55),
+                              color:
+                              Colors.white.withOpacity(0.55),
                               width: 1.2,
                             )
                                 : BorderSide.none,
@@ -306,12 +314,11 @@ class _ActivityBlock extends StatelessWidget {
 
   const _ActivityBlock({required this.activity});
 
-  /// SAME LOGIC AS DAY VIEW
   Color _getColor() {
     if (activity.isCouple) {
-      return const Color(0xFFFFF0D5);
+      return const Color(0xFFFFF0D5); // casal
     }
-    return const Color(0xFFBBF7D0); // Verde claro
+    return const Color(0xFFBBF7D0); // individual
   }
 
   @override
@@ -368,6 +375,64 @@ class _CurrentTimeIndicator extends StatelessWidget {
               color: Colors.red.withOpacity(0.8),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+/// 🔥 LEGENDA (igual ao Day)
+class _WeekLegendRow extends StatelessWidget {
+  const _WeekLegendRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        _LegendDot(color: Color(0xFFBBF7D0)),
+        SizedBox(width: 6),
+        Text(
+          "Individual",
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        SizedBox(width: 24),
+        _LegendDot(color: Color(0xFFFFF0D5)),
+        SizedBox(width: 6),
+        Text(
+          "Couple",
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LegendDot extends StatelessWidget {
+  final Color color;
+
+  const _LegendDot({required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 14,
+      height: 14,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: color,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.12),
+            blurRadius: 4,
+            offset: const Offset(0, 1),
+          )
         ],
       ),
     );

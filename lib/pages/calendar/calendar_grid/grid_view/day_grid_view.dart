@@ -52,11 +52,20 @@ class DayGridView extends StatelessWidget {
               activities: activities,
             ),
           ),
+
+          const SizedBox(height: 18),
+
+          // 🔥 LEGENDA AQUI
+          const _DayLegend(),
         ],
       ),
     );
   }
 }
+
+// =============================================================
+// 🔵 HEADER “Mon 24”
+// =============================================================
 
 class _DayHeader extends StatelessWidget {
   final DateTime date;
@@ -76,11 +85,16 @@ class _DayHeader extends StatelessWidget {
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Colors.black87,
+          fontFamily: "Poppins",
         ),
       ),
     );
   }
 }
+
+// =============================================================
+// 🔵 SCROLL (GRID HORAS + ACTIVITIES)
+// =============================================================
 
 class _ScrollableDayHours extends StatelessWidget {
   final CalendarGridController controller;
@@ -105,7 +119,7 @@ class _ScrollableDayHours extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          /// GRID DRAWING
+          // GRID DRAWING
           Column(
             children: hours.map((hourLabel) {
               return SizedBox(
@@ -117,9 +131,11 @@ class _ScrollableDayHours extends StatelessWidget {
                       child: Text(
                         hourLabel,
                         style: TextStyle(
+                          fontFamily: "Poppins",
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: Colors.black.withOpacity(0.75),
+                          decoration: TextDecoration.none,
                         ),
                       ),
                     ),
@@ -141,7 +157,7 @@ class _ScrollableDayHours extends StatelessWidget {
             }).toList(),
           ),
 
-          /// ACTIVITY BLOCKS
+          // ACTIVITY BLOCKS
           ...todayActivities.map((a) {
             final startOffset =
                 a.start.hour * CalendarGridController.rowHeight +
@@ -175,7 +191,7 @@ class _ScrollableDayHours extends StatelessWidget {
             );
           }).toList(),
 
-          /// CURRENT TIME INDICATOR
+          // CURRENT TIME INDICATOR
           AnimatedBuilder(
             animation: controller,
             builder: (context, _) {
@@ -194,17 +210,20 @@ class _ScrollableDayHours extends StatelessWidget {
   }
 }
 
+// =============================================================
+// 🔵 ACTIVITY BLOCK
+// =============================================================
+
 class _ActivityBlock extends StatelessWidget {
   final CalendarActivity activity;
 
   const _ActivityBlock({required this.activity});
 
-  /// NEW COLOR LOGIC — requested
   Color _getColor() {
     if (activity.isCouple) {
       return const Color(0xFFFFF0D5);
     }
-    return const Color(0xFFBBF7D0); // Verde claro
+    return const Color(0xFFBBF7D0); // verde claro
   }
 
   @override
@@ -226,14 +245,20 @@ class _ActivityBlock extends StatelessWidget {
       child: Text(
         activity.name,
         style: const TextStyle(
+          fontFamily: "Poppins",
           fontSize: 12.5,
           fontWeight: FontWeight.w700,
           color: Colors.black87,
+          decoration: TextDecoration.none,
         ),
       ),
     );
   }
 }
+
+// =============================================================
+// 🔵 CURRENT TIME INDICATOR
+// =============================================================
 
 class _CurrentTimeIndicator extends StatelessWidget {
   const _CurrentTimeIndicator();
@@ -264,3 +289,56 @@ class _CurrentTimeIndicator extends StatelessWidget {
     );
   }
 }
+
+// =============================================================
+// 🔵 LEGENDA (Individual / Couple)
+// =============================================================
+
+class _DayLegend extends StatelessWidget {
+  const _DayLegend();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _legendItem(
+          label: "Individual",
+          color: const Color(0xFFBBF7D0),
+        ),
+        const SizedBox(width: 14),
+        _legendItem(
+          label: "Couple",
+          color: const Color(0xFFFFF0D5),
+        ),
+      ],
+    );
+  }
+
+  Widget _legendItem({required String label, required Color color}) {
+    return Row(
+      children: [
+        Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: const TextStyle(
+            fontFamily: "Poppins",
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: Colors.black87,
+            decoration: TextDecoration.none,
+          ),
+        ),
+      ],
+    );
+  }
+}
+

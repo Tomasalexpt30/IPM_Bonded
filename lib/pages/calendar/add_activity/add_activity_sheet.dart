@@ -8,6 +8,10 @@ import 'calendar_activity_controller.dart';
 import '../add_activity/calendar_time_picker.dart';
 import '../add_activity/calendar_date_picker.dart';
 
+// 🔥 FEEDBACK VISUAL
+import '../feedback/calendar_feedback.dart';
+
+
 class AddActivitySheet extends StatefulWidget {
   const AddActivitySheet({super.key});
 
@@ -106,7 +110,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
               ],
             ),
 
-            // Errors for date/start/end:
             Row(
               children: [
                 Expanded(child: _errorText(errors["date"])),
@@ -209,7 +212,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
       }
     });
 
-    // If any error exists → do not save
     if (errors.values.any((e) => e != null)) return;
 
     final activity = CalendarActivity(
@@ -233,6 +235,9 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
       ),
       note: noteController.text.trim(),
     );
+
+    // ⬇️ FEEDBACK BONDED
+    CalendarFeedback.show(context, "Activity added!");
 
     Navigator.pop(context, activity);
   }

@@ -8,6 +8,9 @@ import '../add_activity/calendar_activity_controller.dart';
 import '../add_activity/calendar_time_picker.dart';
 import '../add_activity/calendar_date_picker.dart';
 
+// Feedback popup Bonded
+import '../feedback/calendar_feedback.dart';
+
 class EditActivitySheet extends StatefulWidget {
   final CalendarActivity activity;
   final CalendarActivityController controller;
@@ -202,6 +205,13 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
                     onTap: () {
                       widget.controller.deleteActivity(widget.activity);
                       Navigator.pop(context);
+
+                      // FEEDBACK DELETE
+                      CalendarFeedback.show(
+                        context,
+                        "Activity deleted",
+                        icon: Icons.delete_rounded,
+                      );
                     },
                   ),
                 ),
@@ -268,6 +278,13 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
 
     widget.controller.updateActivity(updated);
     Navigator.pop(context);
+
+    // FEEDBACK UPDATE (LÁPIS)
+    CalendarFeedback.show(
+      context,
+      "Activity updated!",
+      icon: Icons.edit_rounded,
+    );
   }
 
   // ======================================================
@@ -328,7 +345,7 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
     );
   }
 
-  // DATE PICKER (Bonded)
+  // DATE PICKER
   Widget _datePicker() {
     return GestureDetector(
       onTap: () async {
@@ -346,7 +363,7 @@ class _EditActivitySheetState extends State<EditActivitySheet> {
     );
   }
 
-  // TIME PICKER (Bonded)
+  // TIME PICKER
   Widget _timePicker(String label, TimeOfDay time, bool isStart) {
     return GestureDetector(
       onTap: () async {

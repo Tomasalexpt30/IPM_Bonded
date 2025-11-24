@@ -74,7 +74,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
                   // Header (Day / Week / Month / Year)
                   CalendarHeader(controller: headerController),
-                  const SizedBox(height: 22),
+                  const SizedBox(height: 20),
 
                   // Grid 🔥 — agora recebe as atividades
                   CalendarGrid(
@@ -82,7 +82,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     headerController: headerController,
                     activityController: activityController,
                   ),
-                  const SizedBox(height: 22),
+                  const SizedBox(height: 18),
 
                   // Footer 🔥 — agora recebe o controller para guardar atividades
                   CalendarFooter(controller: activityController),
