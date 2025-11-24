@@ -2,31 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // Activity model/controller
-import 'calendar_activity_controller.dart';
+import '../add_activity/calendar_activity_controller.dart';
 
-// Custom Bonded pickers
+// Bonded pickers
 import '../add_activity/calendar_time_picker.dart';
 import '../add_activity/calendar_date_picker.dart';
 
-class AddActivitySheet extends StatefulWidget {
-  const AddActivitySheet({super.key});
+class EditActivitySheet extends StatefulWidget {
+  final CalendarActivity activity;
+  final CalendarActivityController controller;
+
+  const EditActivitySheet({
+    super.key,
+    required this.activity,
+    required this.controller,
+  });
 
   @override
-  State<AddActivitySheet> createState() => _AddActivitySheetState();
+  State<EditActivitySheet> createState() => _EditActivitySheetState();
 }
 
-class _AddActivitySheetState extends State<AddActivitySheet> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController noteController = TextEditingController();
+class _EditActivitySheetState extends State<EditActivitySheet> {
+  late TextEditingController nameController;
+  late TextEditingController noteController;
 
-  DateTime? selectedDate;
-  TimeOfDay? startTime;
-  TimeOfDay? endTime;
+  late DateTime selectedDate;
+  late TimeOfDay startTime;
+  late TimeOfDay endTime;
 
-  String? selectedCategory;
-  bool isCouple = false;
+  late String selectedCategory;
+  late bool isCouple;
 
-  // ERROR STATE MAP
+  // validation errors
   Map<String, String?> errors = {
     "name": null,
     "category": null,
@@ -36,8 +43,30 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
   };
 
   final List<String> categories = [
-    "Date", "Gym", "Spa", "Work", "Study", "Travel", "Other"
+    "Date",
+    "Gym",
+    "Spa",
+    "Work",
+    "Study",
+    "Travel",
+    "Other",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    final a = widget.activity;
+
+    nameController = TextEditingController(text: a.name);
+    noteController = TextEditingController(text: a.note ?? "");
+
+    selectedDate = a.start;
+    startTime = TimeOfDay(hour: a.start.hour, minute: a.start.minute);
+    endTime = TimeOfDay(hour: a.end.hour, minute: a.end.minute);
+
+    selectedCategory = a.category;
+    isCouple = a.isCouple;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +76,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
-
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,17 +93,26 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
               ),
             ),
 
-            const Text(
-              "Add Activity",
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.black87),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Activity Details",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(Icons.close_rounded, size: 26),
+                )
+              ],
             ),
 
             const SizedBox(height: 22),
 
-            // NAME ===============================================
+            // NAME
             const Text("Activity Name",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
@@ -83,7 +120,7 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
             _errorText(errors["name"]),
             const SizedBox(height: 18),
 
-            // CATEGORY ==========================================
+            // CATEGORY
             const Text("Category",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
@@ -91,7 +128,7 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
             _errorText(errors["category"]),
             const SizedBox(height: 18),
 
-            // DATE & TIME =======================================
+            // DATE & TIMES
             const Text("Date & Time",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
@@ -106,7 +143,6 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
               ],
             ),
 
-            // Errors for date/start/end:
             Row(
               children: [
                 Expanded(child: _errorText(errors["date"])),
@@ -119,7 +155,7 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
 
             const SizedBox(height: 20),
 
-            // PARTICIPANT ========================================
+            // PARTICIPANTS
             const Text("Participant",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
@@ -129,8 +165,8 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
                 Expanded(
                   child: _participantButton(
                     selected: !isCouple,
-                    icon: Icons.person_outline_rounded,
                     label: "Individual",
+                    icon: Icons.person_outline_rounded,
                     onTap: () => setState(() => isCouple = false),
                   ),
                 ),
@@ -138,8 +174,8 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
                 Expanded(
                   child: _participantButton(
                     selected: isCouple,
-                    icon: Icons.people_alt_rounded,
                     label: "Couple",
+                    icon: Icons.people_alt_rounded,
                     onTap: () => setState(() => isCouple = true),
                   ),
                 ),
@@ -148,98 +184,95 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
 
             const SizedBox(height: 20),
 
-            // NOTE ===============================================
+            // NOTE
             const Text("Note",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             _input(noteController, "Add Note", maxLines: 3),
+
             const SizedBox(height: 26),
 
-            // BUTTONS ============================================
+            // BUTTONS: DELETE + SAVE CHANGES
             Row(
               children: [
                 Expanded(
-                  child: _button(
-                    label: "Cancel",
-                    background: Colors.white,
-                    textColor: Colors.black87,
-                    border: BorderSide(color: Colors.black.withOpacity(0.25)),
-                    onTap: () => Navigator.pop(context),
+                  child: _dangerButton(
+                    label: "Delete",
+                    color: Colors.redAccent,
+                    onTap: () {
+                      widget.controller.deleteActivity(widget.activity);
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: _button(
-                    label: "Save",
-                    background: const Color(0xFF2563EB),
-                    textColor: Colors.white,
+                  child: _saveButton(
+                    label: "Save Changes",
                     onTap: _validateAndSave,
                   ),
                 ),
               ],
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
           ],
         ),
       ),
     );
   }
 
-  // ===========================================================
-  // VALIDATION + CREATION
-  // ===========================================================
+  // ======================================================
+  // VALIDATION + SAVE
+  // ======================================================
 
   void _validateAndSave() {
     setState(() {
-      errors["name"] = nameController.text.isEmpty ? "Required field" : null;
+      errors["name"] =
+      nameController.text.trim().isEmpty ? "Required field" : null;
       errors["category"] =
-      selectedCategory == null ? "Select a category" : null;
-      errors["date"] = selectedDate == null ? "Select a date" : null;
-      errors["start"] = startTime == null ? "Select start time" : null;
-      errors["end"] = endTime == null ? "Select end time" : null;
+      selectedCategory.isEmpty ? "Select category" : null;
+      errors["date"] = selectedDate == null ? "Select date" : null;
+      errors["start"] = startTime == null ? "Select start" : null;
+      errors["end"] = endTime == null ? "Select end" : null;
 
       if (startTime != null && endTime != null) {
-        final startDT = DateTime(0, 1, 1, startTime!.hour, startTime!.minute);
-        final endDT = DateTime(0, 1, 1, endTime!.hour, endTime!.minute);
-
-        if (endDT.isBefore(startDT)) {
-          errors["end"] = "End must be after start";
-        }
+        final s = DateTime(0, 1, 1, startTime.hour, startTime.minute);
+        final e = DateTime(0, 1, 1, endTime.hour, endTime.minute);
+        if (e.isBefore(s)) errors["end"] = "End must be after start";
       }
     });
 
-    // If any error exists → do not save
-    if (errors.values.any((e) => e != null)) return;
+    if (errors.values.any((x) => x != null)) return;
 
-    final activity = CalendarActivity(
-      id: DateTime.now().microsecondsSinceEpoch.toString(),
+    final updated = widget.activity.copyWith(
       name: nameController.text.trim(),
-      category: selectedCategory!,
+      note: noteController.text.trim(),
+      category: selectedCategory,
       isCouple: isCouple,
       start: DateTime(
-        selectedDate!.year,
-        selectedDate!.month,
-        selectedDate!.day,
-        startTime!.hour,
-        startTime!.minute,
+        selectedDate.year,
+        selectedDate.month,
+        selectedDate.day,
+        startTime.hour,
+        startTime.minute,
       ),
       end: DateTime(
-        selectedDate!.year,
-        selectedDate!.month,
-        selectedDate!.day,
-        endTime!.hour,
-        endTime!.minute,
+        selectedDate.year,
+        selectedDate.month,
+        selectedDate.day,
+        endTime.hour,
+        endTime.minute,
       ),
-      note: noteController.text.trim(),
     );
 
-    Navigator.pop(context, activity);
+    widget.controller.updateActivity(updated);
+    Navigator.pop(context);
   }
 
-  // ===========================================================
-  // COMPONENTS
-  // ===========================================================
+  // ======================================================
+  // UI COMPONENTS
+  // ======================================================
 
   Widget _errorText(String? text) {
     if (text == null) return const SizedBox(height: 18);
@@ -286,17 +319,16 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: selectedCategory,
-          hint: const Text("Select Category"),
           items: categories
               .map((c) => DropdownMenuItem(value: c, child: Text(c)))
               .toList(),
-          onChanged: (value) => setState(() => selectedCategory = value),
+          onChanged: (v) => setState(() => selectedCategory = v!),
         ),
       ),
     );
   }
 
-  // ========== DATE PICKER ===============================
+  // DATE PICKER (Bonded)
   Widget _datePicker() {
     return GestureDetector(
       onTap: () async {
@@ -310,16 +342,12 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
 
         if (picked != null) setState(() => selectedDate = picked);
       },
-      child: _pickerBox(
-        selectedDate != null
-            ? DateFormat("dd/MM/yyyy").format(selectedDate!)
-            : "dd/mm/yyyy",
-      ),
+      child: _pickerBox(DateFormat("dd/MM/yyyy").format(selectedDate)),
     );
   }
 
-  // ========== TIME PICKER ===============================
-  Widget _timePicker(String label, TimeOfDay? time, bool isStart) {
+  // TIME PICKER (Bonded)
+  Widget _timePicker(String label, TimeOfDay time, bool isStart) {
     return GestureDetector(
       onTap: () async {
         final picked = await showModalBottomSheet<TimeOfDay>(
@@ -339,23 +367,24 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
           });
         }
       },
-      child: _pickerBox(
-          time != null ? time.format(context) : label),
+      child: _pickerBox(time.format(context)),
     );
   }
 
   Widget _pickerBox(String text) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14),
-      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: const Color(0xFFF4F6FA),
         borderRadius: BorderRadius.circular(14),
       ),
+      alignment: Alignment.center,
       child: Text(
         text,
-        style:
-        const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+        style: const TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
@@ -375,17 +404,8 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
           color: selected ? const Color(0xFF2563EB) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: selected ? Colors.transparent : Colors.black26,
+            color: selected ? Colors.transparent : Colors.black.withOpacity(0.2),
           ),
-          boxShadow: selected
-              ? [
-            BoxShadow(
-              color: Colors.blueAccent.withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 3),
-            )
-          ]
-              : [],
         ),
         child: Column(
           children: [
@@ -394,9 +414,10 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
             Text(
               label,
               style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: selected ? Colors.white : Colors.black87),
+                fontSize: 13,
+                color: selected ? Colors.white : Colors.black87,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -404,31 +425,47 @@ class _AddActivitySheetState extends State<AddActivitySheet> {
     );
   }
 
-  Widget _button({
+  Widget _dangerButton({
     required String label,
-    required Color background,
-    required Color textColor,
-    VoidCallback? onTap,
-    BorderSide? border,
+    required Color color,
+    required VoidCallback onTap,
   }) {
     return SizedBox(
       height: 52,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: background,
-          foregroundColor: textColor,
+          backgroundColor: color,
+          foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: border ?? BorderSide.none,
           ),
           elevation: 0,
         ),
-        child: Text(
-          label,
-          style: const TextStyle(
-              fontWeight: FontWeight.w700, fontSize: 15),
+        child: Text(label,
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+      ),
+    );
+  }
+
+  Widget _saveButton({
+    required String label,
+    required VoidCallback onTap,
+  }) {
+    return SizedBox(
+      height: 52,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF2563EB),
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 0,
         ),
+        child: Text(label,
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
       ),
     );
   }

@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+
+// 🔥 ADICIONADO — controller das atividades
+import '../add_activity/calendar_activity_controller.dart';
+
+// Bottom sheet para adicionar atividade
 import '../add_activity/add_activity_sheet.dart';
 
 class CalendarFooter extends StatelessWidget {
-  const CalendarFooter({super.key});
+  final CalendarActivityController controller;
+
+  const CalendarFooter({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        _AddActivityButton(),
+      children: [
+        _AddActivityButton(activityController: controller),
       ],
     );
   }
 }
 
 class _AddActivityButton extends StatelessWidget {
-  const _AddActivityButton();
+  final CalendarActivityController activityController;
+
+  const _AddActivityButton({required this.activityController});
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +51,18 @@ class _AddActivityButton extends StatelessWidget {
         ),
 
         child: ElevatedButton.icon(
-          onPressed: () {
-            showModalBottomSheet(
+          onPressed: () async {
+            final activity = await showModalBottomSheet<CalendarActivity>(
               context: context,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
               builder: (context) => const AddActivitySheet(),
             );
+
+            // 🔥 Se o utilizador carregou "Save"
+            if (activity != null) {
+              activityController.addActivity(activity);
+            }
           },
 
           icon: const Icon(Icons.add_rounded, size: 22),

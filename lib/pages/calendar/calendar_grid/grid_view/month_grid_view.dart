@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// 🔥 ADICIONADO — atividades
+import '../../add_activity/calendar_activity_controller.dart';
+
 class MonthGridView extends StatelessWidget {
   final DateTime date;
+
+  // 🔥 ADICIONADO
+  final CalendarActivityController activities;
 
   const MonthGridView({
     super.key,
     required this.date,
+    required this.activities,
   });
 
   @override
@@ -65,6 +72,7 @@ class MonthGridView extends StatelessWidget {
           ),
           const SizedBox(height: 18),
 
+          // DAYS OF WEEK HEADER
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -87,6 +95,7 @@ class MonthGridView extends StatelessWidget {
 
           const SizedBox(height: 12),
 
+          // GRID
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -97,41 +106,50 @@ class MonthGridView extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               final day = cells[index];
-              final bool isToday = day != null &&
+
+              if (day == null) {
+                return const SizedBox();
+              }
+
+              final bool isToday =
                   DateTime.now().year == year &&
-                  DateTime.now().month == month &&
-                  DateTime.now().day == day;
+                      DateTime.now().month == month &&
+                      DateTime.now().day == day;
+
+              // 🔥 TEM ATIVIDADES? ENTÃO DESTACAR
+              final bool hasActivity =
+                  activities.getActivitiesForDay(DateTime(year, month, day))
+                      .isNotEmpty;
 
               return Padding(
                 padding: const EdgeInsets.all(4),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: day == null
-                        ? Colors.transparent
-                        : isToday
-                        ? Color(0xFF2563EB)
+                    color: isToday
+                        ? const Color(0xFF2563EB)
+                        : hasActivity
+                        ? const Color(0xFF2563EB).withOpacity(0.25)
                         : Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: day != null
-                        ? [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.07),
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ]
-                        : [],
+                    boxShadow: [
+                      if (!isToday)
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.07),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                    ],
                   ),
-                  child: day == null
-                      ? null
-                      : Center(
+                  child: Center(
                     child: Text(
                       "$day",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight:
                         isToday ? FontWeight.w700 : FontWeight.w600,
-                        color: isToday ? Colors.white : Colors.black87,
+                        color: isToday
+                            ? Colors.white
+                            : Colors.black87,
                       ),
                     ),
                   ),

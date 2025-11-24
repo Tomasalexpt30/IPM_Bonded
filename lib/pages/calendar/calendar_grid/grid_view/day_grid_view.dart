@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import '../calendar_grid_controller.dart';
+import '../../add_activity/calendar_activity_controller.dart';
+import '../../edit_activity/edit_activity_sheet.dart';
 
 class DayGridView extends StatelessWidget {
   final CalendarGridController controller;
   final DateTime date;
+  final CalendarActivityController activities;
 
   const DayGridView({
     super.key,
     required this.controller,
     required this.date,
+    required this.activities,
   });
 
   @override
   Widget build(BuildContext context) {
-    final hours =
-    List.generate(24, (i) => "${i.toString().padLeft(2, '0')}:00");
+    final hours = List.generate(24, (i) => "${i.toString().padLeft(2, '0')}:00");
 
     return Container(
       width: double.infinity,
@@ -45,6 +48,8 @@ class DayGridView extends StatelessWidget {
             child: _ScrollableDayHours(
               controller: controller,
               hours: hours,
+              date: date,
+              activities: activities,
             ),
           ),
         ],
@@ -53,9 +58,6 @@ class DayGridView extends StatelessWidget {
   }
 }
 
-// -------------------------------------------------------------------------
-// HEADER DO DIA (NOME DO DIA + DATA)
-// -------------------------------------------------------------------------
 class _DayHeader extends StatelessWidget {
   final DateTime date;
 
@@ -63,10 +65,7 @@ class _DayHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weekdayNames = [
-      "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
-    ];
-
+    final weekdayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     final weekday = weekdayNames[date.weekday - 1];
 
     return Padding(
@@ -83,35 +82,100 @@ class _DayHeader extends StatelessWidget {
   }
 }
 
-// -------------------------------------------------------------------------
-// SCROLL DOS HORÁRIOS + LINHA VERMELHA
-// -------------------------------------------------------------------------
 class _ScrollableDayHours extends StatelessWidget {
   final CalendarGridController controller;
   final List<String> hours;
+  final DateTime date;
+  final CalendarActivityController activities;
 
   const _ScrollableDayHours({
     required this.controller,
     required this.hours,
+    required this.date,
+    required this.activities,
   });
 
   @override
   Widget build(BuildContext context) {
+    final todayActivities = activities.getActivitiesForDay(date);
+
     return SingleChildScrollView(
       controller: controller.scrollController,
       physics: const BouncingScrollPhysics(),
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
+          /// GRID DRAWING
           Column(
-            children: hours.map((hour) {
-              return _DayHourRow(
-                hourLabel: hour,
-                isLastRow: hour == hours.last,
+            children: hours.map((hourLabel) {
+              return SizedBox(
+                height: CalendarGridController.rowHeight,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 48,
+                      child: Text(
+                        hourLabel,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black.withOpacity(0.75),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.white.withOpacity(0.55),
+                              width: 1.2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               );
             }).toList(),
           ),
 
-          // 🔥 Linha da hora atual
+          /// ACTIVITY BLOCKS
+          ...todayActivities.map((a) {
+            final startOffset =
+                a.start.hour * CalendarGridController.rowHeight +
+                    (a.start.minute / 60) * CalendarGridController.rowHeight;
+
+            final endOffset =
+                a.end.hour * CalendarGridController.rowHeight +
+                    (a.end.minute / 60) * CalendarGridController.rowHeight;
+
+            final height = endOffset - startOffset;
+
+            return Positioned(
+              top: startOffset,
+              left: 48,
+              right: 0,
+              height: height,
+              child: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) => EditActivitySheet(
+                      activity: a,
+                      controller: activities,
+                    ),
+                  );
+                },
+                child: _ActivityBlock(activity: a),
+              ),
+            );
+          }).toList(),
+
+          /// CURRENT TIME INDICATOR
           AnimatedBuilder(
             animation: controller,
             builder: (context, _) {
@@ -130,63 +194,47 @@ class _ScrollableDayHours extends StatelessWidget {
   }
 }
 
-// -------------------------------------------------------------------------
-// UMA LINHA DE HORA (APENAS 1 COLUNA, UM DIA)
-// -------------------------------------------------------------------------
-class _DayHourRow extends StatelessWidget {
-  final String hourLabel;
-  final bool isLastRow;
+class _ActivityBlock extends StatelessWidget {
+  final CalendarActivity activity;
 
-  const _DayHourRow({
-    super.key,
-    required this.hourLabel,
-    required this.isLastRow,
-  });
+  const _ActivityBlock({required this.activity});
+
+  /// NEW COLOR LOGIC — requested
+  Color _getColor() {
+    if (activity.isCouple) {
+      return const Color(0xFFFFF0D5);
+    }
+    return const Color(0xFFBBF7D0); // Verde claro
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: CalendarGridController.rowHeight,
-      child: Row(
-        children: [
-          // LABEL DA HORA
-          SizedBox(
-            width: 48,
-            child: Text(
-              hourLabel,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: Colors.black.withOpacity(0.75),
-              ),
-            ),
-          ),
-
-          // LINHA (GRID)
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: isLastRow
-                      ? BorderSide.none
-                      : BorderSide(
-                    color: Colors.white.withOpacity(0.55),
-                    width: 1.2,
-                  ),
-                ),
-              ),
-              child: null,
-            ),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: _getColor(),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blueGrey.withOpacity(0.25),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
           ),
         ],
+      ),
+      child: Text(
+        activity.name,
+        style: const TextStyle(
+          fontSize: 12.5,
+          fontWeight: FontWeight.w700,
+          color: Colors.black87,
+        ),
       ),
     );
   }
 }
 
-// -------------------------------------------------------------------------
-// LINHA VERMELHA (HORA ATUAL)
-// -------------------------------------------------------------------------
 class _CurrentTimeIndicator extends StatelessWidget {
   const _CurrentTimeIndicator();
 

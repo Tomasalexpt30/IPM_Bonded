@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// 🔥 ADICIONADO — actividades
+import '../../add_activity/calendar_activity_controller.dart';
+
 class YearGridView extends StatelessWidget {
   final DateTime date;
 
-  const YearGridView({super.key, required this.date});
+  // 🔥 ADICIONADO
+  final CalendarActivityController activities;
+
+  const YearGridView({
+    super.key,
+    required this.date,
+    required this.activities,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +59,13 @@ class YearGridView extends StatelessWidget {
               childAspectRatio: 0.95,
             ),
             itemBuilder: (context, index) {
+              final monthDate = DateTime(date.year, index + 1, 1);
+
               return _MonthCard(
-                date: DateTime(date.year, index + 1, 1),
+                date: monthDate,
+
+                // 🔥 ADICIONADO
+                activities: activities,
               );
             },
           ),
@@ -62,7 +77,14 @@ class YearGridView extends StatelessWidget {
 
 class _MonthCard extends StatelessWidget {
   final DateTime date;
-  const _MonthCard({required this.date});
+
+  // 🔥 ADICIONADO
+  final CalendarActivityController activities;
+
+  const _MonthCard({
+    required this.date,
+    required this.activities,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +92,20 @@ class _MonthCard extends StatelessWidget {
     final int month = date.month;
 
     final String title = DateFormat("MMMM").format(date);
+
     final int daysInMonth = DateUtils.getDaysInMonth(year, month);
 
-    // 🔹 Monday=1 → 0; ...; Sunday=7 → 6
+    // 🔥 TEM ALGUMA ATIVIDADE NO MÊS?
+    final bool hasAnyActivity = List.generate(
+      daysInMonth,
+          (i) => activities.getActivitiesForDay(DateTime(year, month, i + 1)),
+    ).any((list) => list.isNotEmpty);
+
+    // 🔥 MÊS ATUAL?
+    final bool isCurrentMonth =
+        DateTime.now().month == month && DateTime.now().year == year;
+
+    // Gere estrutura dos dias
     final int firstWeekday = DateTime(year, month, 1).weekday - 1;
 
     List<int?> days = List<int?>.filled(firstWeekday, null, growable: true);
@@ -85,6 +118,12 @@ class _MonthCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
+
+        // 🔥 DESTACAR MESES COM ATIVIDADE
+        border: hasAnyActivity
+            ? Border.all(color: const Color(0xFF2563EB), width: 2)
+            : null,
+
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.06),
@@ -97,16 +136,21 @@ class _MonthCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // TÍTULO DO MÊS
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w800,
-              color: Colors.black87,
+              color: isCurrentMonth
+                  ? const Color(0xFF2563EB)
+                  : Colors.black87,
             ),
           ),
+
           const SizedBox(height: 14),
 
+          // LETRAS DOS DIAS
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: weekLetters
@@ -126,8 +170,10 @@ class _MonthCard extends StatelessWidget {
             )
                 .toList(),
           ),
+
           const SizedBox(height: 10),
 
+          // GRID DE DIAS
           Expanded(
             child: GridView.builder(
               padding: EdgeInsets.zero,
@@ -140,20 +186,28 @@ class _MonthCard extends StatelessWidget {
               itemBuilder: (context, index) {
                 final day = days[index];
 
-                final bool isToday = day != null &&
+                if (day == null) {
+                  return const SizedBox();
+                }
+
+                final bool isToday =
                     DateTime.now().year == year &&
-                    DateTime.now().month == month &&
-                    DateTime.now().day == day;
+                        DateTime.now().month == month &&
+                        DateTime.now().day == day;
+
+                final bool hasActivity =
+                    activities.getActivitiesForDay(DateTime(year, month, day))
+                        .isNotEmpty;
 
                 return Center(
-                  child: day == null
-                      ? const SizedBox()
-                      : Container(
+                  child: Container(
                     width: 28,
                     height: 28,
                     decoration: BoxDecoration(
                       color: isToday
-                          ? Color(0xFF2563EB).withOpacity(0.85)
+                          ? const Color(0xFF2563EB)
+                          : hasActivity
+                          ? const Color(0xFF2563EB).withOpacity(0.25)
                           : null,
                       shape: BoxShape.circle,
                     ),
@@ -162,9 +216,8 @@ class _MonthCard extends StatelessWidget {
                         "$day",
                         style: TextStyle(
                           fontSize: 11,
-                          fontWeight: isToday
-                              ? FontWeight.w700
-                              : FontWeight.w600,
+                          fontWeight:
+                          isToday ? FontWeight.w700 : FontWeight.w600,
                           color: isToday
                               ? Colors.white
                               : Colors.black87,

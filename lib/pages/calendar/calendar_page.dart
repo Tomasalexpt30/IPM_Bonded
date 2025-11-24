@@ -9,6 +9,9 @@ import 'calendar_grid/calendar_grid_controller.dart';
 
 import 'calendar_footer/calendar_footer.dart';
 
+// 🔥 ADICIONADO — controller das atividades
+import 'add_activity/calendar_activity_controller.dart';
+
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
@@ -20,12 +23,18 @@ class _CalendarPageState extends State<CalendarPage> {
   late final CalendarHeaderController headerController;
   late final CalendarGridController gridController;
 
+  // 🔥 ADICIONADO — controlador das atividades
+  late final CalendarActivityController activityController;
+
   @override
   void initState() {
     super.initState();
 
     headerController = CalendarHeaderController();
     gridController = CalendarGridController();
+
+    // 🔥 ADICIONADO
+    activityController = CalendarActivityController();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       gridController.scrollToCurrentHour();
@@ -67,15 +76,16 @@ class _CalendarPageState extends State<CalendarPage> {
                   CalendarHeader(controller: headerController),
                   const SizedBox(height: 22),
 
-                  // Grid
+                  // Grid 🔥 — agora recebe as atividades
                   CalendarGrid(
                     controller: gridController,
                     headerController: headerController,
+                    activityController: activityController,
                   ),
                   const SizedBox(height: 22),
 
-                  // Footer
-                  const CalendarFooter(),
+                  // Footer 🔥 — agora recebe o controller para guardar atividades
+                  CalendarFooter(controller: activityController),
                 ],
               ),
             ),
