@@ -61,12 +61,12 @@ flutter:
     - assets/images/bondie_time_capsule/time_capsule_submission.png
 
     # Recommendations
-    - assets/images/recommendations/real_world_dates/zero_latency_logo.webp
-    - assets/images/recommendations/real_world_dates/game_over_logo.png
-    - assets/images/recommendations/real_world_dates/gulbenkian_garden.jpg
-    - assets/images/recommendations/real_world_dates/lisbon_christmas_lights.jpg
-    - assets/images/recommendations/real_world_dates/omakase_wa.jpeg
-    - assets/images/recommendations/real_world_dates/tile_museum.jpg
+    - assets/images/recommendations/zero_latency_logo.webp
+    - assets/images/recommendations/game_over_logo.png
+    - assets/images/recommendations/gulbenkian_garden.jpg
+    - assets/images/recommendations/lisbon_christmas_lights.jpg
+    - assets/images/recommendations/omakase_wa.jpeg
+    - assets/images/recommendations/tile_museum.jpg
 
     # Bruno Submissions
     - assets/images/submissions/bruno/bruno_submission_1.png
