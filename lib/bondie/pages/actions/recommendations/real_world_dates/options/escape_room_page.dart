@@ -115,7 +115,7 @@ class EscapeRoomPage extends StatelessWidget {
           const Text(
             "Escape Rooms are thrilling and fun date activities where you solve puzzles, "
                 "follow clues, and escape before time runs out. It’s teamwork and excitement in one!\n\n"
-                "We recommend the Escape Rooms from GAME OVER — they’re known for great themes "
+                "We recommend the Escape Rooms from GAME OVER, they’re known for great themes "
                 "and high-quality immersive experiences.",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -231,7 +231,7 @@ class EscapeRoomPage extends StatelessWidget {
           _tipCard(
             number: "1",
             title: "Communicate clearly",
-            subtitle: "Share every clue you notice — teamwork is key!",
+            subtitle: "Share every clue you notice, teamwork is key!",
           ),
           const SizedBox(height: 10),
 
@@ -245,7 +245,7 @@ class EscapeRoomPage extends StatelessWidget {
           _tipCard(
             number: "3",
             title: "Don't panic",
-            subtitle: "Stay calm and enjoy the challenge — it's meant to be fun.",
+            subtitle: "Stay calm and enjoy the challenge, it's meant to be fun.",
           ),
         ],
       ),
@@ -337,7 +337,7 @@ class EscapeRoomPage extends StatelessWidget {
               "Escape Rooms are great for connection!"
                   " You must collaborate, solve problems together,"
                   " and trust each other under pressure."
-                  " It strengthens communication — and it's incredibly fun!",
+                  " It strengthens communication, and it's incredibly fun!",
               style: TextStyle(
                 fontSize: 14,
                 height: 1.45,

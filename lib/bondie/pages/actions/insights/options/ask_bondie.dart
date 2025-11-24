@@ -5,7 +5,7 @@ class AskBondieOption {
     "Give us a gentle reminder": [
       "A calm reminder: the tone you choose can change everything.",
       "Gentleness is powerful. Try choosing softer words today.",
-      "Pause once today before reacting — it creates room for love.",
+      "Pause once today before reacting, it creates room for love.",
     ],
     "Share a bonding insight": [
       "Connection grows in tiny moments, not big events.",
@@ -15,21 +15,21 @@ class AskBondieOption {
     "How can we communicate better?": [
       "Start with: “I want to understand you better.” It changes the whole tone.",
       "Speak to be understood, listen to understand.",
-      "Tell each other one thing you need today — clarity is connection.",
+      "Tell each other one thing you need today, clarity is connection.",
     ],
     "What can we do as a team today?": [
       "Solve one tiny thing together. Small teamwork builds big unity.",
-      "Share one goal for today — even a simple one.",
+      "Share one goal for today, even a simple one.",
       "Choose one task to do side by side. It strengthens the ‘we’.",
     ],
     "Share something deep": [
-      "Your relationship is a story — add a meaningful sentence today.",
+      "Your relationship is a story, add a meaningful sentence today.",
       "Intimacy starts when you share what’s beneath the surface.",
       "Say something you feel but rarely express.",
     ],
     "Surprise us with wisdom": [
       "Gratitude spoken out loud multiplies closeness.",
-      "Kindness is never wasted — especially in relationships.",
+      "Kindness is never wasted, especially in relationships.",
       "Softness during a hard moment is a superpower.",
     ],
   };

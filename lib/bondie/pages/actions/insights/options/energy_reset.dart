@@ -9,7 +9,7 @@ class EnergyResetOption {
     "Step outside for a minute of fresh air together, even if it's just the balcony.",
     "Sit close for a moment without speaking and let the quiet settle.",
     "Release tension by stretching your shoulders together for a few seconds.",
-    "Look at each other and share a small smile — it resets the mood instantly.",
+    "Look at each other and share a small smile, it resets the mood instantly.",
   ];
 
   static void show(BuildContext context) {

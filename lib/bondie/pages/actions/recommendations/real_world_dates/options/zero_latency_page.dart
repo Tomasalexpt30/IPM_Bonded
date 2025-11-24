@@ -114,7 +114,7 @@ class ZeroLatencyPage extends StatelessWidget {
           const SizedBox(height: 0),
 
           const Text(
-            "Zero Latency is a next-generation virtual reality experience — "
+            "Zero Latency is a next-generation virtual reality experience,"
                 "completely wireless and full-scale. You walk freely in a large physical space "
                 "while exploring highly immersive virtual worlds. "
                 "It’s one of the most intense, cooperative, and memorable date activities you can do!",
@@ -232,7 +232,7 @@ class ZeroLatencyPage extends StatelessWidget {
           _tipCard(
             number: "1",
             title: "Wear comfortable clothes",
-            subtitle: "You'll move a lot — comfort makes a big difference.",
+            subtitle: "You'll move a lot, comfort makes a big difference.",
           ),
           const SizedBox(height: 10),
 

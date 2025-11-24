@@ -230,14 +230,14 @@ class OmakaseWaPage extends StatelessWidget {
           _tipCard(
             number: "1",
             title: "Let the chef guide you",
-            subtitle: "Omakase means 'I leave it up to you' — trust the flow.",
+            subtitle: "Omakase means 'I leave it up to you': trust the flow.",
           ),
           const SizedBox(height: 10),
 
           _tipCard(
             number: "2",
             title: "Go slow and appreciate each bite",
-            subtitle: "The tasting sequence is intentional — savor it.",
+            subtitle: "The tasting sequence is intentional, savor it.",
           ),
           const SizedBox(height: 10),
 

@@ -229,7 +229,7 @@ class TileMuseumPage extends StatelessWidget {
           _tipCard(
             number: "1",
             title: "Take your time",
-            subtitle: "There are centuries of history — don’t rush it.",
+            subtitle: "There are centuries of history, don’t rush it.",
           ),
           const SizedBox(height: 10),
 
