@@ -31,9 +31,7 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
-
       bottomNavigationBar: _buildBottomNavBar(context),
-
       body: AppBackground(
         child: SafeArea(
           child: Stack(
@@ -56,6 +54,8 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                         ),
                       ),
                     ),
+
+                    // SECRET THEME CARD
                     Align(
                       alignment: Alignment.center,
                       child: GestureDetector(
@@ -83,9 +83,7 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                             ],
                           ),
                           child: Column(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              // Linha principal + seta
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -108,20 +106,18 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                                     _showExplanation
                                         ? Icons.keyboard_arrow_up_rounded
                                         : Icons.keyboard_arrow_down_rounded,
-                                    size: 22,
                                     color: Colors.black54,
                                   ),
                                 ],
                               ),
-
                               const SizedBox(height: 10),
-
                               Container(
-                                padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 9),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 6, horizontal: 9),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(18),
                                   border: Border.all(
-                                    color: Color(0xFF2563EB), // cor do cadeado
+                                    color: const Color(0xFF2563EB),
                                     width: 1.8,
                                   ),
                                 ),
@@ -132,22 +128,17 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                                     fontSize: 14.5,
                                     fontWeight: FontWeight.w700,
                                     fontStyle: FontStyle.italic,
-                                    color: Colors.black87,
                                   ),
                                 ),
                               ),
-
                               AnimatedSize(
                                 duration: const Duration(milliseconds: 220),
-                                curve: Curves.easeInOut,
                                 child: _showExplanation
                                     ? Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 10,
-                                  ),
+                                  padding:
+                                  const EdgeInsets.only(top: 10),
                                   child: Text(
-                                    "Each of you adds a memory that fits this secret theme. "
-                                        "All entries stay hidden until the capsule opens at the end of the month. Good Luck!",
+                                    "Each of you adds a memory that fits this secret theme. All entries stay hidden until the capsule opens at the end of the month.",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 13.5,
@@ -164,7 +155,7 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                       ),
                     ),
 
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 28),
 
                     // IMAGE
                     Center(
@@ -188,35 +179,41 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                       ),
                     ),
 
+                    const SizedBox(height: 36),
 
-                    const SizedBox(height: 32),
-
+                    // UPLOAD BUTTONS
                     _submissionButton(
                       label: "UPLOAD NOTE",
-                      icon: Icons.message_rounded,
+                      subtitle: "Write a personal note",
+                      icon: Icons.edit_note_rounded,
+                      accentColor: const Color(0xFF2563EB),
                       onTap: () {},
                     ),
                     const SizedBox(height: 16),
 
                     _submissionButton(
                       label: "UPLOAD PHOTO",
+                      subtitle: "Choose a photo from your gallery",
                       icon: Icons.photo_camera_rounded,
+                      accentColor: const Color(0xFF16A34A),
                       onTap: () {},
                     ),
                     const SizedBox(height: 16),
 
                     _submissionButton(
                       label: "UPLOAD VIDEO",
-                      icon: Icons.videocam,
+                      subtitle: "Upload a short video",
+                      icon: Icons.videocam_rounded,
+                      accentColor: const Color(0xFF7C3AED),
                       onTap: () {},
                     ),
-
 
                     const SizedBox(height: 40),
                   ],
                 ),
               ),
 
+              // BONDIE FLOATING
               Positioned(
                 right: 12,
                 top: 10,
@@ -225,12 +222,14 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => BondiePage(statsController: widget.controller),
+                        builder: (_) =>
+                            BondiePage(statsController: widget.controller),
                       ),
                     );
                     setState(() {});
                   },
-                  child: AnimatedBondieWidget(controller: widget.controller),
+                  child: AnimatedBondieWidget(
+                      controller: widget.controller),
                 ),
               ),
             ],
@@ -240,15 +239,19 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
     );
   }
 
+  // IMPROVED BUTTON
   Widget _submissionButton({
     required String label,
+    required String subtitle,
     required IconData icon,
+    required Color accentColor,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
+    return InkWell(
+      borderRadius: BorderRadius.circular(22),
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 18),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 18),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(22),
@@ -261,27 +264,47 @@ class _TimeCapsuleSubmissionPageState extends State<TimeCapsuleSubmissionPage>
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(width: 4),
-            const Icon(
-              Icons.circle,
-              size: 0,
-              color: Colors.transparent,
-            ),
-            Icon(
-              icon,
-              size: 24,
-              color: const Color(0xFF2563EB),
-            ),
-            const SizedBox(width: 12),
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-                color: Colors.black87,
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: accentColor.withOpacity(0.12),
+                borderRadius: BorderRadius.circular(16),
               ),
+              child: Icon(
+                icon,
+                size: 26,
+                color: accentColor,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      fontSize: 16.5,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.chevron_right_rounded,
+              size: 26,
+              color: Colors.black38,
             ),
           ],
         ),
