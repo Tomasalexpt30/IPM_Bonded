@@ -91,7 +91,7 @@ class _MoodQuestPageState extends State<MoodQuestPage> {
                   children: [
                     _questionPage(
                       title:
-                      "If your connection with your boyfriend were the moon tonight, how would it look?",
+                      "If your connection with your girlfriend were the moon tonight, how would it look?",
                       options: [
                         MoodItem("Low", "🌑"),
                         MoodItem("Growing", "🌒"),
