@@ -17,51 +17,62 @@ class DayGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hours = List.generate(24, (i) => "${i.toString().padLeft(2, '0')}:00");
+    final hours =
+    List.generate(24, (i) => "${i.toString().padLeft(2, '0')}:00");
 
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFDBEAFE), Color(0xFF96D5FD)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.25),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _DayHeader(date: date),
-          const SizedBox(height: 10),
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (_, __) {
+        return GestureDetector(
+          onScaleUpdate: (details) {
+            controller.updateRowHeight(details.scale);
+          },
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFFDBEAFE), Color(0xFF96D5FD)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(22),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blueGrey.withOpacity(0.25),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            padding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _DayHeader(date: date),
+                const SizedBox(height: 10),
 
-          SizedBox(
-            height: 360,
-            child: _ScrollableDayHours(
-              controller: controller,
-              hours: hours,
-              date: date,
-              activities: activities,
+                SizedBox(
+                  height: 400, // área visível
+                  child: _ScrollableDayHours(
+                    controller: controller,
+                    hours: hours,
+                    date: date,
+                    activities: activities,
+                  ),
+                ),
+
+                const SizedBox(height: 18),
+                const _DayLegend(),
+              ],
             ),
           ),
-
-          const SizedBox(height: 18),
-
-          // 🔥 LEGENDA AQUI
-          const _DayLegend(),
-        ],
-      ),
+        );
+      },
     );
   }
 }
+
+/* ---------- HEADER ---------- */
 
 class _DayHeader extends StatelessWidget {
   final DateTime date;
@@ -88,6 +99,8 @@ class _DayHeader extends StatelessWidget {
   }
 }
 
+/* ---------- SCROLLABLE HOURS ---------- */
+
 class _ScrollableDayHours extends StatelessWidget {
   final CalendarGridController controller;
   final List<String> hours;
@@ -104,100 +117,102 @@ class _ScrollableDayHours extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todayActivities = activities.getActivitiesForDay(date);
+    final totalHeight = controller.rowHeight * 24;
 
     return SingleChildScrollView(
       controller: controller.scrollController,
       physics: const BouncingScrollPhysics(),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Column(
-            children: hours.map((hourLabel) {
-              return SizedBox(
-                height: CalendarGridController.rowHeight,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 48,
-                      child: Text(
-                        hourLabel,
-                        style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black.withOpacity(0.75),
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: Colors.white.withOpacity(0.55),
-                              width: 1.2,
-                            ),
+      child: SizedBox(
+        height: totalHeight,
+        child: Stack(
+          children: [
+            /// Background grid
+            Column(
+              children: hours.map((hourLabel) {
+                return SizedBox(
+                  height: controller.rowHeight,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 48,
+                        child: Text(
+                          hourLabel,
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black.withOpacity(0.75),
+                            decoration: TextDecoration.none,
                           ),
                         ),
                       ),
-                    )
-                  ],
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.white.withOpacity(0.55),
+                                width: 1.2,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+
+            /// Activities
+            ...todayActivities.map((a) {
+              final startOffset =
+                  (a.start.hour + a.start.minute / 60) *
+                      controller.rowHeight;
+
+              final endOffset =
+                  (a.end.hour + a.end.minute / 60) *
+                      controller.rowHeight;
+
+              final height = endOffset - startOffset;
+
+              return Positioned(
+                top: startOffset,
+                left: 48,
+                right: 0,
+                height: height,
+                child: GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (_) => EditActivitySheet(
+                        activity: a,
+                        controller: activities,
+                      ),
+                    );
+                  },
+                  child: _ActivityBlock(activity: a),
                 ),
               );
             }).toList(),
-          ),
 
-          ...todayActivities.map((a) {
-            final startOffset =
-                a.start.hour * CalendarGridController.rowHeight +
-                    (a.start.minute / 60) * CalendarGridController.rowHeight;
-
-            final endOffset =
-                a.end.hour * CalendarGridController.rowHeight +
-                    (a.end.minute / 60) * CalendarGridController.rowHeight;
-
-            final height = endOffset - startOffset;
-
-            return Positioned(
-              top: startOffset,
-              left: 48,
+            /// Current time indicator
+            Positioned(
+              top: controller.getCurrentHourOffset(),
+              left: 0,
               right: 0,
-              height: height,
-              child: GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    builder: (_) => EditActivitySheet(
-                      activity: a,
-                      controller: activities,
-                    ),
-                  );
-                },
-                child: _ActivityBlock(activity: a),
-              ),
-            );
-          }).toList(),
-
-          AnimatedBuilder(
-            animation: controller,
-            builder: (context, _) {
-              final offset = controller.getCurrentHourOffset();
-              return Positioned(
-                top: offset,
-                left: 0,
-                right: 0,
-                child: const _CurrentTimeIndicator(),
-              );
-            },
-          ),
-        ],
+              child: const _CurrentTimeIndicator(),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+/* ---------- ACTIVITY BLOCK ---------- */
 
 class _ActivityBlock extends StatelessWidget {
   final CalendarActivity activity;
@@ -205,10 +220,9 @@ class _ActivityBlock extends StatelessWidget {
   const _ActivityBlock({required this.activity});
 
   Color _getColor() {
-    if (activity.isCouple) {
-      return const Color(0xFFFFF0D5);
-    }
-    return const Color(0xFFBBF7D0); // verde claro
+    return activity.isCouple
+        ? const Color(0xFFFFF0D5)
+        : const Color(0xFFBBF7D0);
   }
 
   @override
@@ -241,6 +255,8 @@ class _ActivityBlock extends StatelessWidget {
   }
 }
 
+/* ---------- CURRENT TIME ---------- */
+
 class _CurrentTimeIndicator extends StatelessWidget {
   const _CurrentTimeIndicator();
 
@@ -270,6 +286,8 @@ class _CurrentTimeIndicator extends StatelessWidget {
     );
   }
 }
+
+/* ---------- LEGEND ---------- */
 
 class _DayLegend extends StatelessWidget {
   const _DayLegend();
@@ -318,4 +336,3 @@ class _DayLegend extends StatelessWidget {
     );
   }
 }
-

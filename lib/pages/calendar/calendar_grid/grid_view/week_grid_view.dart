@@ -7,7 +7,6 @@ import '../../edit_activity/edit_activity_sheet.dart';
 class WeekGridView extends StatelessWidget {
   final CalendarGridController controller;
   final DateTime date;
-
   final CalendarActivityController activities;
 
   const WeekGridView({
@@ -19,53 +18,60 @@ class WeekGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int weekday = date.weekday;
-    final DateTime monday = date.subtract(Duration(days: weekday - 1));
+    final monday =
+    date.subtract(Duration(days: date.weekday - 1));
 
-    final List<DateTime> weekDays =
+    final weekDays =
     List.generate(7, (i) => monday.add(Duration(days: i)));
 
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFDBEAFE), Color(0xFF96D5FD)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.25),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _DaysHeader(weekDays: weekDays),
-          const SizedBox(height: 10),
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (_, __) {
+        return GestureDetector(
+          onScaleUpdate: (details) {
+            controller.updateRowHeight(details.scale);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFFDBEAFE), Color(0xFF96D5FD)],
+              ),
+              borderRadius: BorderRadius.circular(22),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blueGrey.withOpacity(0.25),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: [
+                _DaysHeader(weekDays: weekDays),
+                const SizedBox(height: 10),
 
-          SizedBox(
-            height: 360,
-            child: _WeekScrollableHours(
-              controller: controller,
-              weekDays: weekDays,
-              activities: activities,
+                SizedBox(
+                  height: 400,
+                  child: _WeekScrollableHours(
+                    controller: controller,
+                    weekDays: weekDays,
+                    activities: activities,
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+                const _WeekLegendRow(),
+              ],
             ),
           ),
-
-          const SizedBox(height: 16),
-
-          const Center(child: _WeekLegendRow()),
-        ],
-      ),
+        );
+      },
     );
   }
 }
+
+/* ---------- DAYS HEADER ---------- */
 
 class _DaysHeader extends StatelessWidget {
   final List<DateTime> weekDays;
@@ -79,33 +85,34 @@ class _DaysHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: weekDays.map((day) {
-          final bool isToday = DateUtils.isSameDay(day, DateTime.now());
-
+          final isToday =
+          DateUtils.isSameDay(day, DateTime.now());
           return Column(
             children: [
               Text(
                 DateFormat("E").format(day),
                 style: const TextStyle(
-                  fontSize: 13,
                   fontWeight: FontWeight.w700,
-                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 3),
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: isToday ? const Color(0xFF2563EB) : Colors.transparent,
+                  color: isToday
+                      ? const Color(0xFF2563EB)
+                      : Colors.transparent,
                   shape: BoxShape.circle,
                 ),
                 child: Text(
                   "${day.day}",
                   style: TextStyle(
-                    color: isToday ? Colors.white : Colors.black87,
+                    color:
+                    isToday ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-              )
+              ),
             ],
           );
         }).toList(),
@@ -114,10 +121,11 @@ class _DaysHeader extends StatelessWidget {
   }
 }
 
+/* ---------- SCROLLABLE HOURS ---------- */
+
 class _WeekScrollableHours extends StatelessWidget {
   final CalendarGridController controller;
   final List<DateTime> weekDays;
-
   final CalendarActivityController activities;
 
   const _WeekScrollableHours({
@@ -128,7 +136,7 @@ class _WeekScrollableHours extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double totalHeight = CalendarGridController.rowHeight * 24;
+    final totalHeight = controller.rowHeight * 24;
 
     return SingleChildScrollView(
       controller: controller.scrollController,
@@ -137,59 +145,49 @@ class _WeekScrollableHours extends StatelessWidget {
         height: totalHeight,
         child: Stack(
           children: [
-            const Positioned.fill(child: _WeekGridBackground()),
-            Positioned.fill(
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 48,
-                    child: Column(
-                      children: List.generate(24, (hour) {
-                        return SizedBox(
-                          height: CalendarGridController.rowHeight,
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "${hour.toString().padLeft(2, '0')}:00",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black.withOpacity(0.75),
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
+            _GridBackground(controller: controller),
 
-                  Expanded(
-                    child: Row(
-                      children: weekDays.map((day) {
-                        return Expanded(
-                          child: _WeekDayColumn(
-                            day: day,
-                            activities: activities,
+            Row(
+              children: [
+                SizedBox(
+                  width: 48,
+                  child: Column(
+                    children: List.generate(24, (hour) {
+                      return SizedBox(
+                        height: controller.rowHeight,
+                        child: Text(
+                          "${hour.toString().padLeft(2, '0')}:00",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black.withOpacity(0.7),
                           ),
-                        );
-                      }).toList(),
-                    ),
+                        ),
+                      );
+                    }),
                   ),
-                ],
-              ),
+                ),
+
+                Expanded(
+                  child: Row(
+                    children: weekDays.map((day) {
+                      return Expanded(
+                        child: _WeekDayColumn(
+                          day: day,
+                          activities: activities,
+                          controller: controller,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
             ),
 
-            AnimatedBuilder(
-              animation: controller,
-              builder: (context, _) {
-                final offset = controller.getCurrentHourOffset();
-                return Positioned(
-                  top: offset,
-                  left: 0,
-                  right: 0,
-                  child: const _CurrentTimeIndicator(),
-                );
-              },
+            Positioned(
+              top: controller.getCurrentHourOffset(),
+              left: 40,
+              right: 0,
+              child: const _CurrentTimeIndicator(),
             ),
           ],
         ),
@@ -198,39 +196,43 @@ class _WeekScrollableHours extends StatelessWidget {
   }
 }
 
+/* ---------- DAY COLUMN ---------- */
+
 class _WeekDayColumn extends StatelessWidget {
   final DateTime day;
   final CalendarActivityController activities;
+  final CalendarGridController controller;
 
   const _WeekDayColumn({
     required this.day,
     required this.activities,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    final dayActivities = activities.getActivitiesForDay(day);
+    final dayActivities =
+    activities.getActivitiesForDay(day);
 
     return Stack(
       children: dayActivities.map((activity) {
         final start = activity.start;
         final end = activity.end;
 
-        final double startOffset =
+        final top =
             (start.hour + start.minute / 60) *
-                CalendarGridController.rowHeight;
+                controller.rowHeight;
 
-        final double durationHours =
-            end.difference(start).inMinutes / 60.0;
-
-        final double blockHeight =
-            durationHours * CalendarGridController.rowHeight;
+        final height =
+            end.difference(start).inMinutes /
+                60 *
+                controller.rowHeight;
 
         return Positioned(
-          top: startOffset,
+          top: top,
           left: 4,
           right: 4,
-          height: blockHeight,
+          height: height,
           child: GestureDetector(
             onTap: () {
               showModalBottomSheet(
@@ -251,14 +253,19 @@ class _WeekDayColumn extends StatelessWidget {
   }
 }
 
-class _WeekGridBackground extends StatelessWidget {
-  const _WeekGridBackground();
+/* ---------- GRID BACKGROUND ---------- */
+
+class _GridBackground extends StatelessWidget {
+  final CalendarGridController controller;
+
+  const _GridBackground({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(24, (hour) {
-        return Expanded(
+      children: List.generate(24, (_) {
+        return SizedBox(
+          height: controller.rowHeight,
           child: Row(
             children: [
               const SizedBox(width: 48),
@@ -271,16 +278,8 @@ class _WeekGridBackground extends StatelessWidget {
                           border: Border(
                             right: i < 6
                                 ? BorderSide(
-                              color:
-                              Colors.white.withOpacity(0.55),
-                              width: 1.2,
-                            )
-                                : BorderSide.none,
-                            bottom: hour < 23
-                                ? BorderSide(
-                              color:
-                              Colors.white.withOpacity(0.55),
-                              width: 1.2,
+                              color: Colors.white
+                                  .withOpacity(0.5),
                             )
                                 : BorderSide.none,
                           ),
@@ -298,77 +297,63 @@ class _WeekGridBackground extends StatelessWidget {
   }
 }
 
+/* ---------- ACTIVITY BLOCK ---------- */
+
 class _ActivityBlock extends StatelessWidget {
-  final CalendarActivity activity;
+  final dynamic activity;
 
   const _ActivityBlock({required this.activity});
-
-  Color _getColor() {
-    if (activity.isCouple) {
-      return const Color(0xFFFFF0D5);
-    }
-    return const Color(0xFFBBF7D0);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: _getColor(),
+        color:
+        activity.isCouple ? const Color(0xFFFFF0D5) : const Color(0xFFBBF7D0),
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.25),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
       ),
       padding: const EdgeInsets.all(8),
       child: Center(
         child: Text(
           activity.name,
+          textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: Colors.black87,
           ),
-          textAlign: TextAlign.center,
         ),
       ),
     );
   }
 }
 
+/* ---------- CURRENT TIME ---------- */
+
 class _CurrentTimeIndicator extends StatelessWidget {
   const _CurrentTimeIndicator();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 40),
-      child: Row(
-        children: [
-          Container(
-            width: 10,
-            height: 10,
-            decoration: const BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-            ),
+    return Row(
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: const BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
           ),
-          const SizedBox(width: 6),
-          Expanded(
-            child: Container(
-              height: 2,
-              color: Colors.red.withOpacity(0.8),
-            ),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Container(height: 2, color: Colors.red),
+        ),
+      ],
     );
   }
 }
+
+/* ---------- LEGEND ---------- */
 
 class _WeekLegendRow extends StatelessWidget {
   const _WeekLegendRow();
@@ -380,23 +365,11 @@ class _WeekLegendRow extends StatelessWidget {
       children: const [
         _LegendDot(color: Color(0xFFBBF7D0)),
         SizedBox(width: 6),
-        Text(
-          "Individual",
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+        Text("Individual"),
         SizedBox(width: 24),
         _LegendDot(color: Color(0xFFFFF0D5)),
         SizedBox(width: 6),
-        Text(
-          "Couple",
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+        Text("Couple"),
       ],
     );
   }
@@ -413,15 +386,8 @@ class _LegendDot extends StatelessWidget {
       width: 14,
       height: 14,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
         color: color,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.12),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
-          )
-        ],
+        borderRadius: BorderRadius.circular(4),
       ),
     );
   }
