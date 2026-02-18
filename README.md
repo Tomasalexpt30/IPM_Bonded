@@ -236,8 +236,8 @@ General app settings include options for **theme preferences**, language configu
 
 ```mermaid
 flowchart TD
-    A["🚀 App Launch"] --> B["Mood Quest\n(Daily check-in)"]
-    B --> C["Home Page\n(Bondie)"]
+    A["App Launch"] --> B["Mood Quest"]
+    B --> C["Home Page"]
     C --> D["Bondie Features"]
     C --> E["Couple Calendar"]
     C --> F["Daily Activities"]
