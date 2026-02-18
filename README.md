@@ -290,7 +290,7 @@ flutter run
 
 ## Links
 
-- **GitHub Repository:** [https://github.com/Tomasalexpt30/bonded_app.git](https://github.com/Tomasalexpt30/IPM_Bonded.git)
+- **GitHub Repository:** [https://github.com/Tomasalexpt30/bonded_app.git](https://github.com/Tomasalexpt30/IPM_Bonded)
 - **Android Studio:** [https://developer.android.com/studio](https://developer.android.com/studio)
 - **Flutter SDK:** [https://flutter.dev/docs/get-started/install](https://flutter.dev/docs/get-started/install)
 
