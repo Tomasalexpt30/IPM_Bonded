@@ -47,7 +47,11 @@ Bonded is a mobile application built with **Flutter & Dart** that helps couples 
 
 ## Pages & Functionality
 
-### 🎭 Mood Quest
+### 1. Mood Quest
+
+<p align="center">
+  <img src="assets/images/panels_readme/1.png" width="180">
+</p>
 
 The Mood Quest is the **first interaction the user has every day** when opening Bonded. It is a short but meaningful guided questionnaire that captures the user's current emotional state before they dive into the rest of the app.
 
@@ -57,23 +61,25 @@ The screen is visually calm and welcoming, using smooth transitions between ques
 
 > 💡 *To complete the Mood Quest again during testing, simply restart the application.*
 
-📸 *[Screenshot — Mood Quest]*
-
 ---
 
-### 🐝 Bondie
+### 2. Bondie
 
-Bondie is the **emotional core of the Bonded experience** — a virtual companion who lives within the app and accompanies the couple throughout their journey. He is not just a mascot; his visual appearance, mood, and energy directly reflect the **health of the couple's bond**. When the couple is active, engaged, and completing activities together, Bondie thrives. If the couple becomes less engaged, Bondie's state visually deteriorates, acting as a gentle reminder to reconnect.
+<p align="center">
+  <img src="assets/images/panels_readme/3.png" width="180">
+</p>
+
+Bondie is the **emotional core of the Bonded experience**, a virtual companion who lives within the app and accompanies the couple throughout their journey. He is not just a mascot; his visual appearance, mood, and energy directly reflect the **health of the couple's bond**. When the couple is active, engaged, and completing activities together, Bondie thrives. If the couple becomes less engaged, Bondie's state visually deteriorates, acting as a gentle reminder to reconnect.
 
 Bondie is present across most sections of the app and serves as the primary interface for three major feature areas:
 
-#### 💡 Insights
+#### 2.1. Recommendations
 
-The Insights section is where Bondie shares **personalized tips, reflections, and emotional guidance** tailored to the couple's current state. These insights are not generic advice — they are informed by the couple's Mood Quest responses, their activity history, and their overall engagement patterns within the app.
-
-Examples of insights include suggestions on how to communicate more effectively, prompts to reflect on recent shared moments, reminders about emotional patterns, and encouragement during periods of lower engagement. Bondie presents each insight in a conversational, warm tone, making the guidance feel personal rather than prescriptive. Users can scroll through multiple insights and revisit them at any time.
-
-#### 🗺️ Recommendations
+<p align="center">
+  <img src="assets/images/panels_readme/7.png" width="180">
+  <img src="assets/images/panels_readme/5.png" width="180">
+  <img src="assets/images/panels_readme/6.png" width="180">
+</p>
 
 The Recommendations section is where Bondie acts as the couple's **personal date and activity planner**. It is divided into four categories, each targeting a different kind of shared experience:
 
@@ -84,23 +90,37 @@ The Recommendations section is where Bondie acts as the couple's **personal date
 
 > 💡 *In this prototype, only the Real-World Dates category is fully interactive. The other categories are visible but not yet navigable.*
 
-#### 🛍️ Shop
+#### 2.2. Insights
+
+<p align="center">
+  <img src="assets/images/panels_readme/8.png" width="180">
+  <img src="assets/images/panels_readme/9.png" width="180">
+</p>
+
+The Insights section is where Bondie shares **personalized tips, reflections, and emotional guidance** tailored to the couple's current state. These insights are not generic advice — they are informed by the couple's Mood Quest responses, their activity history, and their overall engagement patterns within the app.
+
+Examples of insights include suggestions on how to communicate more effectively, prompts to reflect on recent shared moments, reminders about emotional patterns, and encouragement during periods of lower engagement. Bondie presents each insight in a conversational, warm tone, making the guidance feel personal rather than prescriptive. Users can scroll through multiple insights and revisit them at any time.
+
+#### 2.3. Shop
+
+<p align="center">
+  <img src="assets/images/panels_readme/10.png" width="180">
+  <img src="assets/images/panels_readme/11.png" width="180">
+</p>
 
 The Bondie Shop allows users to **personalize their virtual companion** using coins earned through completing daily activities, games, questions, and other interactions within the app. The shop offers a variety of cosmetic outfits and themed skins for Bondie, each with its own unique visual style.
 
 Purchasing outfits is a rewarding loop that incentivizes daily engagement — the more active the couple is within the app, the more coins they accumulate, and the more they can customize Bondie to reflect their personality and preferences. The selected outfit is applied immediately and persists across the entire app experience.
 
-📸 *[Screenshot — Bondie Home]*
 
-📸 *[Screenshot — Bondie Insights]*
-
-📸 *[Screenshot — Bondie Recommendations]*
-
-📸 *[Screenshot — Bondie Shop]*
 
 ---
 
 ### 📅 Couple Calendar
+
+<p align="center">
+  <img src="assets/images/panels_readme/20.png" width="180">
+</p>
 
 The Couple Calendar is the **shared organizational hub** of the Bonded app, giving both partners a unified space to plan, schedule, and track their activities together. It is built on top of the `table_calendar` package and features a fully custom header, footer, and controller system tailored to the app's design language.
 
@@ -108,13 +128,9 @@ The calendar supports **four different view modes** — day, week, month, and ye
 
 Adding a new activity is straightforward: users tap on a date, fill in the activity details (name, time, type, and optional notes), and confirm. Activities can be marked as individual or shared, and both partners can see each other's entries in real time. Editing and deleting events is equally intuitive — tapping an existing event opens a contextual sheet with all edit options readily available.
 
-The calendar also integrates directly with the **Bondie Recommendations** feature. After browsing real-world date suggestions in the Bondie section, users can schedule the chosen outing directly into the calendar with a single tap, pre-filling the event details automatically. This creates a natural flow from discovery to planning without any friction.
-
 Over time, the calendar becomes a **visual record of the couple's shared history** — a timeline of dates, events, and milestones that both partners can look back on to celebrate how far they've come together.
 
-📸 *[Screenshot — Calendar Month View]*
 
-📸 *[Screenshot — Add Activity]*
 
 ---
 
